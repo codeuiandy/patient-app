@@ -10,7 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { SocketDataProvider } from "./context/socket";
 import Dashboard from "./components/pages/dashboard/Dashboard";
-import Orders from './components/pages/orders/orders.jsx'
+import Orders from "./components/pages/orders/orders.jsx";
+import Users from "./components/pages/users/users.jsx";
+import Riders from "./components/pages/riders/riders.jsx";
+import Payment from "./components/pages/payments/payments";
 const SiteRouter = () => {
   return (
     <BrowserRouter>
@@ -30,11 +33,32 @@ const SiteRouter = () => {
                 component={Dashboard}
               />
 
-<DefaultLayoutRoute
+              <DefaultLayoutRoute
                 exact
                 path="/orders"
                 pageName="Orders"
                 component={Orders}
+              />
+
+              <DefaultLayoutRoute
+                exact
+                path="/users"
+                pageName="Users"
+                component={Users}
+              />
+
+              <DefaultLayoutRoute
+                exact
+                path="/riders"
+                pageName="Riders"
+                component={Riders}
+              />
+
+              <DefaultLayoutRoute
+                exact
+                path="/payments"
+                pageName="Payment"
+                component={Payment}
               />
             </SocketDataProvider>
           </LayoutProvider>

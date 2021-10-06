@@ -106,3 +106,249 @@
   height: 25px;
   cursor: pointer;
 }
+
+.order-details-modal {
+  width: 1000px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  overflow: hidden;
+  /* width: 100%; */
+  box-sizing: border-box;
+}
+
+.rder-details-modalMain {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rder-details-modalMain .order-details-modalCol1 {
+  width: 30%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.rder-details-modalMain .order-details-modalCol2 {
+  width: 40%;
+  height: 100%;
+  background: #f5faff;
+  padding: 10px 20px 10px 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.rder-details-modalMain .order-details-modalCol3 {
+  width: 30%;
+  height: 100%;
+  padding: 10px 20px 10px 20px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.orderStatus {
+  display: flex;
+  justify-content: space-between;
+  background: #ffefd3;
+  border-radius: 5px;
+  padding: 10px;
+  align-items: center;
+  height: 90px;
+}
+
+.orderStatusCol1 p:nth-of-type(1) {
+  margin-bottom: 20px;
+  color: #00101d;
+}
+
+.orderStatusCol2 p:nth-of-type(1) {
+  margin-bottom: 20px;
+  color: #00101d;
+}
+
+.orderStatusCol1 p:nth-of-type(2) {
+  color: #8c9399;
+}
+
+.orderStatusCol2 p:nth-of-type(2) {
+  color: #8c9399;
+}
+.orderStatus p {
+  margin: 0;
+  padding: 0;
+}
+.senderInfomdwe {
+  background-color: #e5e5e526;
+  padding-top: 20px;
+  margin-top: 10px;
+}
+
+.senderInfomdwe h2 {
+  font-size: 13px;
+  text-align: center;
+  color: #00101d;
+  padding-bottom: 15px;
+}
+
+.senderInfoDetailsdf {
+  display: flex;
+  align-items: center;
+}
+
+.senderInfoDetailsdf p {
+  margin: 0;
+  margin-left: 10px;
+  font-size: 13px;
+  color: #00101d;
+}
+
+.senderInfoDetailsdf p:nth-of-type(1) {
+  margin-bottom: 4px;
+}
+
+.senderInfoDetailsdf .senderInfoDetailsdfImg img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.order-details-modalCol2Header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-details-modalCol2Header p:nth-of-type(2) {
+  font-size: 15px;
+  font-weight: 600;
+  color: #00101d;
+}
+
+.order-details-modalCol2Header p:nth-of-type(3) {
+  font-size: 13px;
+  color: #00101d;
+}
+
+.listcol2jduedqd {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.listcol2jduedqdCol1 p:nth-of-type(1) {
+  color: #59636b;
+  margin-bottom: 0;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.listcol2jduedqdCol1 p:nth-of-type(2) {
+  color: #00101d;
+  margin-bottom: 0;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.listcol2jduedqdCol2 p:nth-of-type(1) {
+  color: #59636b;
+  margin-bottom: 0;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.listcol2jduedqdCol2 p:nth-of-type(2) {
+  color: #00101d;
+  margin-bottom: 0;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.listcol2jduedqdCol1 img {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  margin-right: 7px;
+}
+
+.riderInfoModal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.riderInfoModal p {
+  margin: 0;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.riderInfoModaImgP {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.riderInfoModaImgPHeader {
+  font-size: 16px;
+  padding-bottom: 10px;
+  color: #00101d;
+}
+
+.riderpriceModal {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border: 1.2px solid #707070;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.riderpriceModal p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.ordertracajdlHeader p {
+  margin: 0;
+  margin-bottom: 3px;
+  margin-top: 10px;
+  color: #59636b;
+  font-size: 13px;
+}
+
+.ordertracajdl {
+  background: #ffefd3;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.dashboardnotTrackMai {
+  display: flex;
+}
+
+.dashboardnotTrackMai img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.dashboardnotTrackMai p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.dashboardnsswotTrackColLine {
+  height: 30px;
+  width: 1px;
+  background-color: #afccff;
+  opacity: 0.5px;
+  margin-left: 6px;
+  margin-bottom: 6px;
+  margin-top: 0px;
+}

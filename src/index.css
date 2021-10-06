@@ -536,3 +536,10 @@ input[type="radio"]:after {
   margin: 0 !important;
   padding: 0 !important;
 } */
+
+.react-responsive-modal-modal {
+  overflow: hidden;
+  max-width: -webkit-fit-content !important;
+  max-width: -moz-fit-content !important;
+  max-width: fit-content !important;
+}
