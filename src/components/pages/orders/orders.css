@@ -129,6 +129,8 @@
   height: 100%;
   overflow: hidden;
   overflow-y: scroll;
+  padding-left: 10px;
+  padding-right: 20px;
 }
 
 .rder-details-modalMain .order-details-modalCol2 {
@@ -187,9 +189,9 @@
 
 .senderInfomdwe h2 {
   font-size: 13px;
-  text-align: center;
   color: #00101d;
   padding-bottom: 15px;
+  margin-top: 20px !important;
 }
 
 .senderInfoDetailsdf {

@@ -106,3 +106,124 @@
   height: 25px;
   cursor: pointer;
 }
+
+.viewUserModalWrap {
+  width: 600px;
+  height: auto;
+  background-color: white;
+  padding: 15px 20px 20px 20px;
+}
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.modalHeader img {
+  width: 20px;
+}
+
+.modalHeader p {
+  font-size: 19px;
+  margin: 0;
+  color: #00101d;
+}
+
+.viewUserModalInfod {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.viewUserModalInfodCol1 {
+  height: 356px;
+  background: #f5faff;
+  width: 35%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.userImgwrapViwp {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.userImgwrapViwp img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.viewUserModalInfodCol1 p {
+  margin: 0;
+  margin-bottom: 6px;
+  color: #59636b;
+  font-size: 14px;
+}
+
+.viewUserModalInfodCol1Status {
+  margin-top: 20px !important;
+}
+
+.viewUserModalInfodCol1Status span:nth-of-type(1) {
+  color: #59636b;
+  margin-right: 50px;
+}
+
+.viewUserModalInfodCol1Status span:nth-of-type(2) {
+  color: #499f68;
+}
+
+.viewUserModalInfodCol1 button {
+  color: #cc5148;
+  background: #cc514826;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  margin-top: 30px;
+  font-size: 12px;
+}
+
+.viewUserModalInfodCol2 {
+  width: 65%;
+}
+
+.userDetailsCol2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 17px 15px 17px 15px;
+  background: #f5faff;
+  border-radius: 5px;
+  margin: 5px;
+}
+.userDetailsCol2 p {
+  color: #00101d;
+  margin: 0;
+  font-size: 12px;
+}
+
+.userDetailsCol2 p:nth-of-type(1) {
+  margin-right: 50px;
+}
+
+.userDetailsCol2lasdf img {
+  width: 15px;
+}
+
+.userDetailsCol2lasdf span {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.userDetailsCol2lasdf a {
+  font-size: 12px;
+}

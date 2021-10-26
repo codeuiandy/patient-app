@@ -2,12 +2,19 @@ import React from "react";
 import "./orders.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
+import Modal from "react-responsive-modal";
+import pen from "../../../assets/imgF/pen.png";
 const Orders = () => {
+  const [open, setOpen] = React.useState(true);
+  const onCloseModal = () => {};
   return (
     <div>
       <div className="tableHeader1">
         <h2>Riders</h2>
         <p>List of riders</p>
+      </div>
+      <div className="createNewRyderBtn">
+        <button>Create new rider</button>
       </div>
 
       <div className="tableHeader2">
@@ -132,6 +139,23 @@ const Orders = () => {
           <img className="tabsdkshSt" src={arrowR} alt="" />
         </div>
       </div>
+
+      <Modal open={open} onClose={onCloseModal} center>
+        <div className="createRiderModal">
+          <div className="riderModalContainer">
+            <div className="col1Rider">x</div>
+            <div className="col2Rider">
+              <div className="addprofileRiderWrap">
+                <p>Add a profile picture</p>
+                <div className="profileImageRiderWrap">
+                  <div className="profileImageRiderWrapAvatar"></div>
+                  <img src={pen} alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

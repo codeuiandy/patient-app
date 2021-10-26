@@ -106,3 +106,42 @@
   height: 25px;
   cursor: pointer;
 }
+
+.createNewRyderBtn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.createNewRyderBtn button {
+  background: #0087ff;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+}
+
+.createRiderModal {
+  background-color: white;
+  width: 700px;
+  height: 200px;
+}
+
+.riderModalContainer {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.col1Rider {
+  height: 100%;
+  width: 30%;
+  background: #f5faff;
+}
+
+.col2Rider {
+  height: 100%;
+  width: 70%;
+  padding: 0 20px 20px 20px;
+}

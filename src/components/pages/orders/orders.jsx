@@ -10,7 +10,7 @@ import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import "../dashboard/dashboard.scss";
 import { Modal } from "react-responsive-modal";
 const Orders = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -47,7 +47,7 @@ const Orders = () => {
               <th>Date</th>
               <th>Rider name</th>
               <th>Delivery amount</th>
-              {/* <th></th> */}
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -63,6 +63,15 @@ const Orders = () => {
                 Nduka
               </td>
               <td>3,500</td>
+              <td>
+                {" "}
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
+              </td>
             </tr>
             <tr class="active-row">
               <td>
@@ -77,36 +86,14 @@ const Orders = () => {
                 Nduka
               </td>
               <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
               <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
             </tr>
 
             <tr class="active-row">
@@ -122,6 +109,63 @@ const Orders = () => {
                 Nduka
               </td>
               <td>3,500</td>
+              <td>
+                {" "}
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
+              </td>
+            </tr>
+
+            <tr class="active-row">
+              <td>
+                {" "}
+                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
+                Nduka
+              </td>
+              <td>Italian Bag</td>
+              <td>27/03/2021</td>
+              <td>
+                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
+                Nduka
+              </td>
+              <td>3,500</td>
+              <td>
+                {" "}
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
+              </td>
+            </tr>
+
+            <tr class="active-row">
+              <td>
+                {" "}
+                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
+                Nduka
+              </td>
+              <td>Italian Bag</td>
+              <td>27/03/2021</td>
+              <td>
+                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
+                Nduka
+              </td>
+              <td>3,500</td>
+              <td>
+                {" "}
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
+              </td>
             </tr>
           </tbody>
         </table>
