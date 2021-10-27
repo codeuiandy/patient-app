@@ -1,20 +1,21 @@
 .app-btn{
-    background-color: var(--lb-yellow);
+    background-color: #ffaf21;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    padding:15px 18px 15px 18px;
+    padding:13px 40px 13px 40px;
     display: flex;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     button{
         border: none;
-        background-color: var(--lb-yellow);
+        background-color: #ffaf21;
         margin-left: 7px;
         cursor: pointer;
         font-size: 0.8rem;
         font-weight: 500;
+        background-color: transparent;
     }
 
 }

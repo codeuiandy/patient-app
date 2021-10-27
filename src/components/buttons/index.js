@@ -28,7 +28,7 @@ export const Button = ({
       <button
         
         style={{
-          backgroundColor: background ? background : '',
+          // backgroundColor: background ? background : '',
           color: color ? color : '',
           fontSize: fontSize ? fontSize : '',
           fontWeight: fontWeight ? fontWeight : '',

@@ -12,21 +12,21 @@ export const Input = ({
       {label ? (
         <label
           style={{
-            fontSize: labelSize ? labelSize : '',
-            margin: labelMargin ? labelMargin : '',
+            fontSize: labelSize ? labelSize : "",
+            margin: labelMargin ? labelMargin : "",
           }}
           htmlFor=""
         >
           {label}
         </label>
       ) : (
-        ''
+        ""
       )}
       <input
-        type={type ? type : 'text'}
-        placeholder={placeholder ? placeholder : ''}
+        type={type ? type : "text"}
+        placeholder={placeholder ? placeholder : ""}
         onChange={onChange}
-        style={{ fontSize: inputSize ? inputSize : '' }}
+        style={{ fontSize: inputSize ? inputSize : "" }}
       />
     </div>
   );
@@ -46,17 +46,20 @@ export const Select = ({
       {label ? (
         <label
           style={{
-            fontSize: labelSize ? labelSize : '',
-            margin: labelMargin ? labelMargin : '',
+            fontSize: labelSize ? labelSize : "",
+            margin: labelMargin ? labelMargin : "",
           }}
           htmlFor=""
         >
           {label}
         </label>
       ) : (
-        ''
+        ""
       )}
-      <select onChange={onChange} style={{ fontSize: selectSize ? selectSize : '' }}>
+      <select
+        onChange={onChange}
+        style={{ fontSize: selectSize ? selectSize : "" }}
+      >
         <option value="">{`${defaultValue}`}</option>
         {options.map((data) => {
           return <option key={data}>{data}</option>;

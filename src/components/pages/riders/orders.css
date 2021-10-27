@@ -123,7 +123,9 @@
 .createRiderModal {
   background-color: white;
   width: 700px;
-  height: 200px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .riderModalContainer {
@@ -132,6 +134,7 @@
   height: 100%;
   justify-content: space-between;
   padding: 20px;
+  padding-top: 35px;
 }
 
 .col1Rider {
@@ -140,8 +143,161 @@
   background: #f5faff;
 }
 
+.col1Rider h2 {
+  font-size: 16px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.col1Rider ul li {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 65px;
+}
+
+.col1Rider ul li::before {
+  content: "";
+  height: 70px;
+  width: 1px;
+  background-color: rgba(128, 128, 128, 0.267);
+  display: block;
+  position: relative;
+  top: 65px;
+  left: 20px;
+}
+
+.col1Rider ul .activeBTab::before {
+  content: "";
+  height: 70px;
+  width: 1px;
+  background-color: orange;
+  display: block;
+  position: relative;
+  top: 65px;
+  left: 20px;
+}
+
+.col1Rider ul li:nth-of-type(4) {
+  margin-top: 80px;
+}
+
+.col1Rider ul li:nth-of-type(4)::before {
+  display: none;
+}
+
+.col1Rider ul .activeBTab:nth-of-type(4)::before {
+  display: none;
+}
+
+.tabPositionRider {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(128, 128, 128, 0.267);
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tabPositionRider img {
+  width: 50%;
+  height: 50%;
+}
 .col2Rider {
   height: 100%;
   width: 70%;
   padding: 0 20px 20px 20px;
+}
+
+.addprofileRiderWrap {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 0.5px solid #a3d4ff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 15px;
+  align-items: center;
+  border-radius: 5px;
+}
+.addprofileRiderWrap p {
+  margin: 0;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #00101d;
+  font-size: 14px;
+}
+.profileImageRiderWrap {
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.profileImageRiderWrap .profileImageRiderWrapAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #aaaaaa26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImageRiderWrapAvatar img {
+  width: 30px;
+  height: 30px;
+}
+
+.penEditRider {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 12px;
+  bottom: -2px;
+  cursor: pointer;
+}
+.inputWrapRider {
+  margin-top: 15px;
+}
+.riderInputWrapMain {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.getRiderGender p {
+  margin-bottom: 7px;
+  color: #00101d;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+.getRiderGender label {
+  margin-right: 15px;
+  margin-top: 7px;
+}
+
+.getRiderGender label span {
+  margin-left: 7px;
+  font-size: 15px;
+}
+
+.getRiderGender label input {
+  width: 16px;
+  height: 16px;
+}
+
+.subRiderBtnWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.subRiderBtnWrap div {
+  margin-right: 10px;
+}
+.subRiderBtnWrap div:last-child {
+  margin-right: 0;
 }
