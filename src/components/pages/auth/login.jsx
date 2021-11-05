@@ -26,10 +26,11 @@ export default function Login() {
     // }
     else {
       showLoader();
-      const res = await httpPost(`login?platform=web`, authDetails);
+      const res = await httpPost("auth/admin_login", authDetails);
       hideLoader();
-      if (res.status == false) {
-        NotificationManager.error(res.message);
+      console.log("RES>>>", res);
+      if (!res?.success) {
+        return NotificationManager.error(res.message);
       } else {
         NotificationManager.success("Login successful");
         localStorage.setItem("token", res.data.token);
