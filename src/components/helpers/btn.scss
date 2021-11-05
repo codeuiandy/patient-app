@@ -1,0 +1,25 @@
+.app-btn{
+    background: #006FC1;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding:15px 30px 15px 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    button{
+        border: none;
+        background: #006FC1;
+        margin-left: 7px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+    }
+
+}

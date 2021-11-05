@@ -1,10 +1,12 @@
+
+
 import axios from "axios";
 // import { hideLoader } from '../helpers/loader';
 import { NotificationManager } from "react-notifications";
 
-export let baseUrl = "https://kustormar-auth.herokuapp.com/v1";
+export let baseUrl = "https://e-rider-app.herokuapp.com/api";
 // export let baseUrlMain = "https://d3437b953f42.ngrok.io/v1";
-export let baseUrlMain = "https://kustormar-staging.herokuapp.com/v1";
+export let baseUrlMain = "https://e-rider-app.herokuapp.com/api";
 let token = localStorage.getItem("token");
 // const token = localStorage.getItem("DomainToken")
 

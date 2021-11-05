@@ -14,13 +14,14 @@ import Orders from "./components/pages/orders/orders.jsx";
 import Users from "./components/pages/users/users.jsx";
 import Riders from "./components/pages/riders/riders.jsx";
 import Payment from "./components/pages/payments/payments";
+import Login from './components/pages/auth/login'
 const SiteRouter = () => {
   return (
     <BrowserRouter>
       {/* Scroll Restoration */}
 
       <Switch>
-        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/" component={Login} />
 
         {/* help pages end */}
         <UserDataProvider>

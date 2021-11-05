@@ -1,217 +1,210 @@
-.auth-container {
+.authWrap {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #0d4166;
+  display: flex;
+}
+
+.authWrapCol1 {
+  background-image: url(../../../assets/imgF/authBackground.png);
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.authWrapCol1Container {
+  text-align: center;
+  padding-top: 130px;
+  color: white;
+}
+
+.authWrapCol1Container h2 {
+  font-size: 30px;
+}
+
+.authWrapCol1Container p {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 21px;
+  margin-top: 22px;
+}
+
+.authWrapCol1Container .downloadAppAuthP img {
+  width: 130px;
+  margin-right: 15px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.authWrapCol2 {
+  width: 50vw;
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: white;
+  padding: 60px 20px 30px 40px;
+}
+
+.logoContainerAuth {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  padding-top: 50px;
-  overflow-y: scroll;
-  position: relative;
-}
-
-.auth-container::-webkit-scrollbar {
-  width: 1px !important;
-}
-
-.auth-container::-webkit-scrollbar {
-  opacity: 0 !important;
-}
-
-.login-logo {
-}
-
-.login-logo img:first-child {
-  width: 100px;
-}
-
-.login-logo img:last-child {
-  width: 50px;
-}
-
-.login-container {
-  background: #ffffff;
-  border: 0.5px solid #c5c7cd;
-  box-sizing: border-box;
-  box-shadow: 0px 0px 24px rgba(11, 58, 92, 0.1);
-  border-radius: 10px;
-  width: 450px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-top: 30px;
-  padding: 40px 30px 30px 40px;
-  position: relative;
-  z-index: 3;
+  justify-content: center;
   margin-bottom: 30px;
 }
 
-.Auth-header {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 12px;
+.logoContainerAuth img {
+  width: 150px;
 }
 
-.Auth-header h3 {
-  letter-spacing: 0.03em;
-  color: #595959;
-  font-weight: 600;
-  font-size: 24px;
+.authHeaderCol2 {
+  padding-left: 30px;
+  padding-top: 20px;
 }
 
-.Auth-header p {
-  color: rgba(89, 89, 89, 0.6);
-  font-size: 15px;
-  padding-top: 7px;
+.authHeaderCol2 h2 {
+  font-size: 28px;
+  color: #212121;
 }
 
-.input-main-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  margin-top: 10px;
-}
-.input-wrap:first-child {
-  padding-top: 0;
-}
-.input-wrap {
-  padding-top: 15px;
-}
-
-.input-wrap {
-  position: relative;
-}
-.input-wrap input {
-  width: 100%;
-  background: rgba(214, 214, 214, 0.3);
-  border: 0.5px solid #d6d6d6;
-  border-radius: 5px;
-  height: 45px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 5px !important;
-  font-size: 13px;
-  outline: none;
-  padding-left: 8px;
-}
-.input-wrap-with-two-inputes {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 6px;
-}
-
-.inputWrapTwo {
-  width: 100%;
-}
-
-.inputWrapTwo input {
-  width: 96%;
-  background: rgba(214, 214, 214, 0.3);
-  border: 0.5px solid #d6d6d6;
-  border-radius: 5px;
-  height: 45px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 5px !important;
-  font-size: 13px;
-  padding-left: 7px;
-  outline: none;
-}
-.input-wrap label {
+.authHeaderCol2 p {
   font-size: 14px;
-  line-height: 19px;
-  padding-bottom: 10px;
-  color: rgba(0, 0, 0, 0.5);
+  color: #939393;
+  padding-top: 6px;
 }
 
-.inputWrapTwo label {
-  font-size: 14px;
-  line-height: 19px;
-  padding-bottom: 10px;
-  color: rgba(0, 0, 0, 0.5);
+.authForm {
+  width: 100%;
+  padding-left: 30px;
+  margin-top: 50px;
 }
 
-.passworEye {
+.authForm .inputWrap {
+  width: 100%;
+  margin-bottom: 50px;
   position: relative;
 }
 
-.passworEye img {
-  width: 15px;
-  position: absolute;
-  right: 0;
-  top: -30px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.haveAnAccou {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-top: 3px;
-  font-size: 19px;
-}
-
-.haveAnAccou a {
-  color: #0067dd;
-  font-size: 11px;
-}
-
-.submit-auth-btn {
-  width: 100%;
-  padding-bottom: 20px;
-}
-
-.submit-auth-btn button {
-  width: 100%;
-  background: #0796f7;
-  border-radius: 5px;
-  height: 45.8px;
-  color: white;
-  font-size: 18px;
-  margin-top: 40px;
-  cursor: pointer;
+.authForm .inputWrap input {
+  width: 90%;
   border: none;
+  background: #aaaaaa26 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  outline: none;
+  position: relative;
+  height: 45px;
+  padding-left: 10px;
 }
 
-.symbol-wrap {
-  position: fixed;
-  bottom: 0;
-  right: 0px;
-  z-index: 1;
+.passwordIcon {
+  position: relative;
 }
 
-.symbol-wrap2 {
-  position: fixed;
-  top: 0;
-  left: 0px;
-  z-index: 1;
+.passwordIcon img {
+  position: absolute;
+  right: calc(100% - 79%);
+  top: -30px;
+  width: 25px;
+  cursor: pointer;
 }
 
-.symbol-wrap2 img {
-  width: 200px;
-}
-.symbol-wrap img {
-  width: 300px;
+.forgotaassa {
+  font-size: 13px;
+  color: #212121;
+  text-decoration: underline !important;
+  text-align: right;
+  width: 90%;
+  /* margin-top: -24
+px
+; */
+  position: relative;
+  top: -33px;
 }
 
-@media (max-width: 526px) {
-  .login-container {
-    width: 90vw;
+.authActionBtn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.authActionBtn button {
+  width: 90%;
+  background: #0087ff;
+  border-radius: 3px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dontHavvAccAuth {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.dontHavvAccAuth p {
+  font-size: 13px;
+  color: #212121;
+}
+
+.dontHavvAccAuth p a {
+  text-decoration: underline !important;
+  color: green !important;
+}
+
+@media (max-width: 810px) {
+  .authWrapCol1Container h2 {
+    font-size: 25px;
   }
-  .input-wrap-with-two-inputes {
-    flex-direction: column;
+
+  .authWrapCol1Container p br {
+    display: none;
   }
 
-  .inputWrapTwo {
-    padding-bottom: 8px;
+  .authWrapCol1Container {
+    padding-left: 50px;
+    padding-right: 50px;
   }
 
-  .inputWrapTwo input {
+  .authWrapCol2 {
+    padding-left: 10px;
+  }
+
+  .authForm .inputWrap input {
     width: 100%;
   }
-  .login-container {
-    padding: 40px 25px 30px 25px;
+
+  .passwordIcon img {
+    position: absolute;
+    right: 0;
+    top: -30px;
+    width: 25px;
+    cursor: pointer;
+  }
+
+  .authActionBtn button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .authWrapCol1 {
+    display: none !important;
+  }
+
+  .authWrapCol2 {
+    width: 100%;
+    padding-right: 30px;
+    padding-top: 50px;
+  }
+  .authForm,
+  .authHeaderCol2 {
+    padding-left: 20px;
+  }
+
+  .logoContainerAuth img {
+    position: relative;
+    left: -6px;
+  }
+  .authHeaderCol2 h2 {
+    font-size: 24px;
   }
 }

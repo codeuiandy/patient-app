@@ -1,150 +1,100 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./login.css";
-import AlphaLogo from "../../../assets/imgF/alpha.png";
+// import GoogleImg from "../../../assets/imgF/BadgeAndroid.png";
+// import IosImg from "../../../assets/imgF/BadgeiOS.png";
 import Logo from "../../../assets/imgF/logo.png";
-import showPasswordImg from "../../../assets/imgF/Show.png";
-import Symbol1 from "../../../assets/imgF/symbolAuth.png";
-import Symbol2 from "../../../assets/imgF/symbolAuth2.png";
+// import check from "../../../assets/imgF/check.png";
+import Validatepassword from "../../helpers/validatePassword";
+import EmailAuth from "../../helpers/emailAuth";
+import { httpPost } from "../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
-import swal from "sweetalert";
-import {
-  ValidateEmail,
-  validatePassword,
-} from "../../../helpers/validateInput";
-import { httpPostMain } from "../../../helpers/httpMethods";
-import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
-const override = css``;
-
-const Login = ({ match, history }) => {
-  const [userInput, setUserInput] = useState({
+import { hideLoader, showLoader } from "../../helpers/loader";
+export default function Login() {
+  const [authDetails, setAuthDetails] = useState({
     email: "",
     password: "",
-    domain: "",
   });
-
   const [showPassword, setShowPassword] = useState(false);
-  let [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("#ffffff");
-  useEffect(() => {}, []);
 
-  const handleChange = (e) => {
-    setUserInput({ ...userInput, [e.target.name]: e.target.value });
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validateEmail = ValidateEmail(userInput.email);
-    if (validateEmail == false) {
-      return NotificationManager.warning(
-        "Invalid email address",
-        "Validation Warning",
-        4000
-      );
+    if (EmailAuth(authDetails.email) == false) {
+      return;
     }
-
-    const validatepassword = validatePassword(userInput.password);
-    if (validatepassword != "Looks Good!") {
-      return NotificationManager.warning(
-        validatepassword,
-        "Validation Warning",
-        4000
-      );
-    }
-    const data = {
-      email: userInput.email,
-      password: userInput.password,
-      domain: match.params.domain,
-    };
-
-    setLoading(true);
-    const res = await httpPostMain("auth/login", data);
-    if (res.status == "success") {
-      setLoading(false);
-      console.log(res?.status);
-      localStorage.setItem("user", JSON.stringify(res.data));
-      localStorage.setItem("token", res.data.token);
-
-      NotificationManager.success(res.data.message, "Success", 4000);
-
-      window.location.href = `/home`;
-    } else {
+    // if (Validatepassword(authDetails.password) == false) {
+    //   return;
+    // }
+    else {
+      showLoader();
+      const res = await httpPost(`login?platform=web`, authDetails);
+      hideLoader();
+      if (res.status == false) {
+        NotificationManager.error(res.message);
+      } else {
+        NotificationManager.success("Login successful");
+        localStorage.setItem("token", res.data.token);
+        window.location.href = "/home";
+      }
       console.log(res);
-      setLoading(false);
-      NotificationManager.error(res?.er?.message, "Error", 4000);
     }
   };
-
   return (
-    <div className="auth-container codei-ui-andy-setDefaults">
-      <div className="symbol-wrap2">
-        <img src={Symbol2} alt="" />
-      </div>
-      <div className="login-logo">
-        <img src={AlphaLogo} alt="" /> <img src={Logo} alt="" />
-      </div>
+    <div className="authWrap">
+      <div className="authWrapCol2">
+        <div className="logoContainerAuth">
+          <img src={Logo} alt="" />
+        </div>
 
-      <div className="login-container">
-        <form>
-          <div className="Auth-header" style={{ marginBottom: "30px" }}>
-            <h3>Welcome Back</h3>
-            <p>Sign in to get started</p>
+        <div className="authHeaderCol2">
+          <h2>Login into your Account</h2>
+          <p>Enter your credentials to gain access into the admin portal</p>
+        </div>
+
+        <form className="authForm">
+          <div className="inputWrap">
+            <input
+              type="text"
+              placeholder="example@gmail.coom"
+              value={authDetails.email}
+              onChange={({ target }) =>
+                setAuthDetails({ ...authDetails, email: target.value })
+              }
+            />
           </div>
 
-          <div className="input-main-wrap">
-            <div className="input-wrap">
-              <label htmlFor="">Email Address</label>
-              <input
-                type="text"
-                onChange={handleChange}
-                name="email"
-                value={userInput.email}
-              />
-            </div>
-          </div>
-
-          <div className="input-wrap">
-            <label htmlFor="">Password</label>
+          <div className="inputWrap">
             <input
               type={`${showPassword ? "text" : "password"}`}
-              onChange={handleChange}
-              name="password"
-              value={userInput.password}
+              placeholder="Password"
+              value={authDetails.password}
+              onChange={({ target }) =>
+                setAuthDetails({ ...authDetails, password: target.value })
+              }
             />
-            <div className="passworEye">
-              <img
-                src={showPasswordImg}
-                alt=""
+            <div className="passwordIcon">
+              {/* <img
                 onClick={() => setShowPassword(!showPassword)}
-              />
+                src={check}
+                alt=""
+              /> */}
             </div>
           </div>
 
-          <div className="haveAnAccou">
-            <a href="/register">First time user? Sign up</a>
+          <a className="forgotaassa">Forgot Password ?</a>
+
+          <div className="authActionBtn">
+            <button onClick={handleSubmit}>Login into Account</button>
           </div>
 
-          <div className="submit-auth-btn">
-            <button disabled={loading} onClick={handleSubmit}>
-              {" "}
-              {loading ? (
-                <ClipLoader
-                  color={color}
-                  loading={loading}
-                  css={override}
-                  size={30}
-                />
-              ) : (
-                "Login"
-              )}
-            </button>
+          <div className="dontHavvAccAuth">
+            <p>
+              Dont have an account? <a> Register for one now</a>
+            </p>
           </div>
         </form>
       </div>
-      <div className="symbol-wrap">
-        <img src={Symbol1} alt="" />
-      </div>
+
+      <div className="authWrapCol1"></div>
     </div>
   );
-};
-
-export default Login;
+}

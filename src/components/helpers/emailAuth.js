@@ -1,19 +1,13 @@
-import React from 'react'
+import React from "react";
 import { NotificationManager } from "react-notifications";
 
-export function ValidateEmail (email) {
- 
-  if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
-  {
-    return (true)
-  } 
-  // NotificationManager.error(
-  //     "You have entered an invalid email address!",
-  //     "Opps!",
-  //     3000
-  //   );
+export default function EmailAuth(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    return (false)
-   
+  if (re.test(String(email).toLowerCase()) == false) {
+    NotificationManager.error("Invalid email format");
+    return false;
+  } else {
+    return true;
+  }
 }
-
