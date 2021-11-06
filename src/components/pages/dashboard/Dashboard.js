@@ -8,6 +8,9 @@ import clock from "../../../assets/imgF/notifications_active_black_24dp@2x.png";
 import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
 import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
+import UpdatedProfileModal from "../../modals/UpdatedProfileModal";
+import CreatedNewRider from "../../modals/CreatedNewRider";
+
 const DashboardTwo = () => {
   return (
     <div className="dashboard-main">
@@ -205,6 +208,8 @@ const DashboardTwo = () => {
           <button>See all scheduled orders</button>
         </div>
       </div>
+      <UpdatedProfileModal />
+      <CreatedNewRider />
     </div>
   );
 };
