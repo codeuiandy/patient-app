@@ -1,0 +1,56 @@
+.modal {
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    backdrop-filter: blur(5px);
+  }
+
+  &-container {
+    width: 100%;
+    height: fit-content;
+    padding: 2rem;
+    border-radius: 0.625rem;
+    background: white;
+  }
+
+  &-info {
+    display: flex;
+    width: 20rem;
+    height: fit-content;
+  }
+}
+
+.success {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0.2rem;
+
+  & > * + * {
+    margin-top: 1em;
+  }
+
+  &__heading {
+    font-size: 1.4rem;
+    color: #00101d;
+  }
+
+  &__note {
+    font-size: 0.9rem;
+    color: #00101d;
+  }
+
+  &__img--wrapper {
+    display: flex;
+    align-items: center;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
