@@ -8,11 +8,11 @@ import styles from "./modal.scss";
 const CreatedNewRider = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = () => setShowModal(!showModal);
+  const closeModal = () => setShowModal(!openModal);
 
   return (
-    <Modal open={showModal} onClose={closeModal} center>
+    <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success">

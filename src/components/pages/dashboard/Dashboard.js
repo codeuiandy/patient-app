@@ -10,6 +10,7 @@ import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import UpdatedProfileModal from "../../modals/UpdatedProfileModal";
 import CreatedNewRider from "../../modals/CreatedNewRider";
+import AddNewBike from "../../modals/AddNewBike";
 
 const DashboardTwo = () => {
   return (
@@ -210,6 +211,7 @@ const DashboardTwo = () => {
       </div>
       <UpdatedProfileModal />
       <CreatedNewRider />
+      <AddNewBike />
     </div>
   );
 };

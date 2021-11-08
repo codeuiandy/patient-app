@@ -1,27 +1,28 @@
 import { useState } from "react";
 import Modal from "react-responsive-modal";
-import successImg from "../../assets/imgF/update_profile_success.png";
+import successImg from "../../assets/imgF/update_rider_success.png";
 import "./modal.scss";
+import { Button } from "../../components/buttons";
 import styles from "./modal.scss";
-
-const UpdatedProfileModal = () => {
+ 
+const AddNewBike = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(!showModal);
   const closeModal = () => setShowModal(!openModal);
 
   return (
-    <Modal open={!openModal} onClose={closeModal} center>
+    <Modal open={openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success">
-            <h3 className="success__heading">Successfully updated profile</h3>
-            <div className="success__img--wrapper">
-              <img
-                src={successImg}
-                alt="profile update success"
-                className="success__img"
-              />
+            <div className="left-div">
+              <h3 className="success__heading">Add new bike</h3>
+              <span>info</span>
+              <span>Assign a bike</span>
+            </div>
+            <div className="right-div">
+           
             </div>
           </section>
         </div>
@@ -30,4 +31,4 @@ const UpdatedProfileModal = () => {
   );
 };
 
-export default UpdatedProfileModal;
+export default AddNewBike;
