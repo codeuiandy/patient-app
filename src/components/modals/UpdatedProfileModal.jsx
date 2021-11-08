@@ -11,17 +11,11 @@ const UpdatedProfileModal = () => {
   const closeModal = () => setShowModal(false);
 
   return (
-    <Modal
-      open={!openModal}
-      onClose={closeModal}
-      center
-    >
+    <Modal open={showModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success">
-            <h3 className="success__heading">
-              Successfully updated profile
-            </h3>
+            <h3 className="success__heading">Successfully updated profile</h3>
             <div className="success__img--wrapper">
               <img
                 src={successImg}

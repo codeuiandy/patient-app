@@ -19,11 +19,6 @@
     width: 20rem;
     height: fit-content;
   }
-
-  &-btn {
-    align-self: flex-start;
-    flex: 1;
-  }
 }
 
 .success {
@@ -31,6 +26,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  padding: 0.2rem;
 
   & > * + * {
     margin-top: 1em;
@@ -38,7 +34,12 @@
 
   &__heading {
     font-size: 1.4rem;
-    color: black;
+    color: #00101d;
+  }
+
+  &__note {
+    font-size: 0.9rem;
+    color: #00101d;
   }
 
   &__img--wrapper {

@@ -22,6 +22,10 @@ export const Button = ({
         backgroundColor: background ? background : "",
         borderRadius: borderRadius ? borderRadius : "",
         padding: padding ? padding : "",
+        width: width ? width : "",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       {Icon ? <Icon /> : ""}
@@ -31,8 +35,8 @@ export const Button = ({
           color: color ? color : "",
           fontSize: fontSize ? fontSize : "",
           fontWeight: fontWeight ? fontWeight : "",
-          width: width ? width : "",
-          height: height ? height : "",
+          outline: "none",
+          border: "none",
         }}
       >{`${text}`}</button>
     </div>
