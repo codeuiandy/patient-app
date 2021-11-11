@@ -13,6 +13,9 @@ import CreatedNewRider from "../../modals/CreatedNewRider";
 import AddNewBike from "../../modals/AddNewBike";
 import UpdatedRefundReciept from "../../modals/UpdatedRefundReciept";
 import ChangedBikeRider from "../../modals/ChangedBikeRider";
+import AddedNewBike from "../../modals/AddedNewBike";
+import CreatedDiscount from "../../modals/CreatedDiscount";
+import UpdatePassword from "../../modals/UpdatePassword";
 
 const DashboardTwo = () => {
   return (
@@ -216,6 +219,9 @@ const DashboardTwo = () => {
       <AddNewBike />
       <UpdatedRefundReciept />
       <ChangedBikeRider />
+      <AddedNewBike />
+      <CreatedDiscount />
+      <UpdatePassword />
     </div>
   );
 };
