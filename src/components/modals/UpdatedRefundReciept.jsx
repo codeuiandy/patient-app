@@ -15,7 +15,7 @@ const UpdatedRefundReceipt = () => {
     <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
-          <section className="modal-info success update-refund">
+          <section className="modal-info success ta-c">
             <h3 className="success__heading">
               Successfully updated refund receipt
             </h3>

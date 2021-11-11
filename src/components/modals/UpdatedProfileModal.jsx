@@ -14,7 +14,7 @@ const UpdatedProfileModal = () => {
     <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
-          <section className="modal-info success">
+          <section className="modal-info success ta-c">
             <h3 className="success__heading">Successfully updated profile</h3>
             <div className="success__img--wrapper">
               <img

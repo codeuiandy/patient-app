@@ -15,7 +15,7 @@ const CreatedNewRider = () => {
     <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
-          <section className="modal-info success">
+          <section className="modal-info success ta-c">
             <h3 className="success__heading">Successfully created new rider</h3>
             <p className="success__note">
               An email will be sent to update them

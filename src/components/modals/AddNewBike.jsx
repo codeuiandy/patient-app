@@ -15,7 +15,7 @@ const AddNewBike = () => {
     <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
-          <section className="modal-info success">
+          <section className="modal-info success ta-c">
             <div className="left-div">
               <h3 className="success__heading">Add new bike</h3>
               <span>info</span>
