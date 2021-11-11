@@ -12,7 +12,7 @@ const AddNewBike = () => {
   const closeModal = () => setShowModal(!openModal);
 
   return (
-    <Modal open={openModal} onClose={closeModal} center>
+    <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success">

@@ -2,10 +2,10 @@ import { useState } from "react";
 import Modal from "react-responsive-modal";
 import successImg from "../../assets/imgF/update_rider_success.png";
 import "./modal.scss";
-import { Button } from "../../components/buttons";
+import { Button } from "../buttons";
 import styles from "./modal.scss";
 
-const CreatedNewRider = () => {
+const UpdatedRefundReceipt = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(!showModal);
@@ -15,21 +15,24 @@ const CreatedNewRider = () => {
     <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
-          <section className="modal-info success">
-            <h3 className="success__heading">Successfully created new rider</h3>
+          <section className="modal-info success update-refund">
+            <h3 className="success__heading">
+              Successfully updated refund receipt
+            </h3>
             <p className="success__note">
-              An email will be sent to update them
+              An email has been sent to the accounting department for further
+              processing
             </p>
             <div className="success__img--wrapper">
               <img
                 src={successImg}
-                alt="create new rider success"
+                alt="new rider added"
                 className="success__img"
               />
             </div>
             <Button
               width="100%"
-              text="Create another rider"
+              text="Create another refund receipt"
               background="#0087ff"
               fontSize="14px"
               color="white"
@@ -48,4 +51,4 @@ const CreatedNewRider = () => {
   );
 };
 
-export default CreatedNewRider;
+export default UpdatedRefundReceipt;

@@ -5,7 +5,7 @@ import "./modal.scss";
 import { Button } from "../../components/buttons";
 import styles from "./modal.scss";
 
-const CreatedNewRider = () => {
+const ChangedBikeRider = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(!showModal);
@@ -16,27 +16,26 @@ const CreatedNewRider = () => {
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success">
-            <h3 className="success__heading">Successfully created new rider</h3>
-            <p className="success__note">
-              An email will be sent to update them
-            </p>
+            <h3 className="success__heading">
+              Successfully changed bike rider
+            </h3>
             <div className="success__img--wrapper">
               <img
                 src={successImg}
-                alt="create new rider success"
+                alt="change rider success"
                 className="success__img"
               />
             </div>
             <Button
               width="100%"
-              text="Create another rider"
+              text="Back to bike details"
               background="#0087ff"
               fontSize="14px"
               color="white"
             />
             <Button
               width="100%"
-              text="Cancel"
+              text="Close"
               background="#61696F26"
               fontSize="14px"
               color="#00101d"
@@ -48,4 +47,4 @@ const CreatedNewRider = () => {
   );
 };
 
-export default CreatedNewRider;
+export default ChangedBikeRider;

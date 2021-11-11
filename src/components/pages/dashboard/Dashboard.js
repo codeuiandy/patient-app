@@ -11,6 +11,8 @@ import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import UpdatedProfileModal from "../../modals/UpdatedProfileModal";
 import CreatedNewRider from "../../modals/CreatedNewRider";
 import AddNewBike from "../../modals/AddNewBike";
+import UpdatedRefundReciept from "../../modals/UpdatedRefundReciept";
+import ChangedBikeRider from "../../modals/ChangedBikeRider";
 
 const DashboardTwo = () => {
   return (
@@ -212,6 +214,8 @@ const DashboardTwo = () => {
       <UpdatedProfileModal />
       <CreatedNewRider />
       <AddNewBike />
+      <UpdatedRefundReciept />
+      <ChangedBikeRider />
     </div>
   );
 };
