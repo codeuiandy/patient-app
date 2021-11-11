@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-responsive-modal";
-import successImg from "../../assets/imgF/update_rider_success.png";
+import img from "../../assets/imgF/update_rider_success.png";
 import "./modal.scss";
 import { Button } from "../../components/buttons";
 import styles from "./modal.scss";
@@ -11,14 +11,14 @@ const AddedNewBike = () => {
   const closeModal = () => setShowModal(!openModal);
 
   return (
-    <Modal open={openModal} onClose={closeModal} center>
+    <Modal open={!openModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success ta-c">
             <h3 className="success__heading">Successfully added new bike</h3>
             <div className="success__img--wrapper">
               <img
-                src={successImg}
+                src={img}
                 alt="add new bike success"
                 className="success__img"
               />

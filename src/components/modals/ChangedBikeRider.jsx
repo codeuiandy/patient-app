@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-responsive-modal";
-import successImg from "../../assets/imgF/update_rider_success.png";
+import img from "../../assets/imgF/update_rider_success.png";
 import "./modal.scss";
 import { Button } from "../../components/buttons";
 import styles from "./modal.scss";
@@ -21,7 +21,7 @@ const ChangedBikeRider = () => {
             </h3>
             <div className="success__img--wrapper">
               <img
-                src={successImg}
+                src={img}
                 alt="change rider success"
                 className="success__img"
               />

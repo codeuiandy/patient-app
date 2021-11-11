@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-responsive-modal";
-import successImg from "../../assets/imgF/update_profile_success.png";
+import img from "../../assets/imgF/update_profile_success.png";
 import "./modal.scss";
 import styles from "./modal.scss";
 
@@ -18,7 +18,7 @@ const UpdatedProfileModal = () => {
             <h3 className="success__heading">Successfully updated profile</h3>
             <div className="success__img--wrapper">
               <img
-                src={successImg}
+                src={img}
                 alt="profile update success"
                 className="success__img"
               />

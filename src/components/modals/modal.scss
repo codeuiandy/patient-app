@@ -29,7 +29,8 @@
   padding: 0.2rem;
 
   & > * + * {
-    margin-top: 1em;
+    --flow: 1em;
+    margin-top: var(--flow, 1em);
   }
 
   &__heading {
@@ -55,6 +56,22 @@
   }
 }
 
+.update-password {
+  color: #00101d;
+
+  & > .success__heading {
+    align-self: flex-start;
+  }
+  & > .cta,
+  & > .proceed {
+    font-size: 0.8rem;
+  }
+
+  & > .proceed {
+    --flow: 0;
+    font-weight: bold;
+  }
+}
 .ta-c {
   text-align: center;
 }

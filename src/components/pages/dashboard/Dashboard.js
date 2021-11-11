@@ -13,6 +13,11 @@ import CreatedNewRider from "../../modals/CreatedNewRider";
 import AddNewBike from "../../modals/AddNewBike";
 import UpdatedRefundReciept from "../../modals/UpdatedRefundReciept";
 import ChangedBikeRider from "../../modals/ChangedBikeRider";
+import AddedNewBike from "../../modals/AddedNewBike";
+import CreatedDiscount from "../../modals/CreatedDiscount";
+import UpdatePassword from "../../modals/UpdatePassword";
+import UpdatedPassword from "./../../modals/UpdatedPassword";
+import UpdatedAdminProfile from "./../../modals/UpdatedAdminProfile";
 
 const DashboardTwo = () => {
   return (
@@ -211,11 +216,16 @@ const DashboardTwo = () => {
           <button>See all scheduled orders</button>
         </div>
       </div>
-      <UpdatedProfileModal />
-      <CreatedNewRider />
       <AddNewBike />
-      <UpdatedRefundReciept />
+      <AddedNewBike />
       <ChangedBikeRider />
+      <CreatedDiscount />
+      <CreatedNewRider />
+      <UpdatePassword />
+      <UpdatedAdminProfile />
+      <UpdatedPassword />
+      <UpdatedProfileModal />
+      <UpdatedRefundReciept />
     </div>
   );
 };
