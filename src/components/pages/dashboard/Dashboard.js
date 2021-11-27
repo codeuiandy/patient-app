@@ -11,13 +11,14 @@ import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import UpdatedProfileModal from "../../modals/UpdatedProfileModal";
 import CreatedNewRider from "../../modals/CreatedNewRider";
 import AddNewBike from "../../modals/AddNewBike";
-import UpdatedRefundReciept from "../../modals/UpdatedRefundReciept";
+import UpdatedRefundReceipt from "../../modals/UpdatedRefundReceipt";
 import ChangedBikeRider from "../../modals/ChangedBikeRider";
 import AddedNewBike from "../../modals/AddedNewBike";
 import CreatedDiscount from "../../modals/CreatedDiscount";
 import UpdatePassword from "../../modals/UpdatePassword";
 import UpdatedPassword from "./../../modals/UpdatedPassword";
 import UpdatedAdminProfile from "./../../modals/UpdatedAdminProfile";
+import ActivateUser from "../../modals/ActivateUser";
 
 const DashboardTwo = () => {
   return (
@@ -225,7 +226,8 @@ const DashboardTwo = () => {
       <UpdatedAdminProfile />
       <UpdatedPassword />
       <UpdatedProfileModal />
-      <UpdatedRefundReciept />
+      <UpdatedRefundReceipt />
+      <ActivateUser/>
     </div>
   );
 };
