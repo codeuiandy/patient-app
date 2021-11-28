@@ -144,6 +144,15 @@
     justify-content: space-between;
     gap: 1rem;
   }
+
+  &--isActive {
+    position: absolute;
+    right: 0.8rem;
+    bottom: -2px;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 5px solid #fcfcfc;
+  }
 }
 
 .img {
@@ -163,13 +172,14 @@
   }
 
   &--ellipse {
-    position: absolute;
-    width: 1.8rem;
-    height: 1.8rem;
-    right: 0.8rem;
-    bottom: -2px;
-    border: 5px solid #fcfcfc;
     border-radius: 50%;
     cursor: pointer;
+  }
+}
+
+.rider {
+  &--isOnline {
+    width: 0.8rem;
+    height: 0.8rem;
   }
 }

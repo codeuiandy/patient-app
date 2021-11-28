@@ -8,15 +8,14 @@ import { Button } from "../buttons";
 import styles from "./modal.scss";
 
 const ActivateUser = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
-  const openModal = () => setShowModal(!showModal);
-  const closeModal = () => setShowModal(false);
+  const closeModal = () => setShowModal(!showModal);
 
   const isActivated = true;
 
   return (
-    <Modal open={openModal} onClose={closeModal} center>
+    <Modal open={showModal} onClose={closeModal} center>
       <div className="activate-user__modal">
         <div className="activate-user__modal-wrapper">
           <section className="activate-user">
@@ -28,7 +27,7 @@ const ActivateUser = () => {
                 <img
                   src={isActivated ? greenEllipse : redEllipse}
                   alt={""}
-                  className="img--ellipse"
+                  className="activate-user--isActive img--ellipse"
                 />
               </div>
               <h6 className="activate-user__name">Andrew Dubai</h6>
