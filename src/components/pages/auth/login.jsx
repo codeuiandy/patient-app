@@ -39,6 +39,7 @@ export default function Login() {
       console.log(res);
     }
   };
+  
   return (
     <div className="authWrap">
       <div className="authWrapCol2">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./orders.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
@@ -7,9 +7,50 @@ import pen from "../../../assets/imgF/pen.png";
 import Image from "../../../assets/getImageUrl";
 import { Input, Select } from "../../input/Input";
 import { Button } from "../../buttons/index";
+import ValidatePassword from "../../helpers/validatePassword";
+import EmailAuth from "./../../helpers/emailAuth";
+import { httpPost, httpGet } from "./../../../helpers/httpMethods";
+import { NotificationManager } from "react-notifications";
+import { hideLoader, showLoader } from "./../../helpers/loader";
+import { useHistory } from "react-router-dom";
+import redEllipse from "./../../../assets/imgF/red_ellipse.png";
+import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
+
 const Orders = () => {
-  const [open, setOpen] = React.useState(true);
-  const [tab, setTab] = React.useState("tab1");
+  const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState("tab1");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [countryCode, setCountryCode] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [state, setState] = useState("");
+  // const [lga, setLga] = useState("");
+  // const [fireToken, setFireToken] = useState("");
+  // const [emailOpt, setEmailOpt] = useState("");
+  // const [plateNumber, setPlateNumber] = useState("");
+
+  const [rider, setRider] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+    phoneNumber: "",
+    countryCode: "234",
+    address: "",
+    country: "",
+    state: "",
+    lga: "",
+    fireToken: null,
+    emailOpt: true,
+    plateNumber: "7bws63ser",
+  });
+  const [riders, setRiders] = useState([]);
+
+  const history = useHistory();
   const handleTabSwitch = (index) => {
     if (index == "tab1") {
       setTab("tab2");
@@ -27,9 +68,97 @@ const Orders = () => {
       setTab("tab4");
     }
   };
-  const onCloseModal = () => {
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
     setOpen(!open);
   };
+
+  const onChange = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    setRider({ ...rider, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!EmailAuth(rider.email)) {
+      return;
+    }
+    if (!ValidatePassword(rider.password)) {
+      return;
+    } else {
+      // if (
+      //   rider.firstName &&
+      //   rider.lastName &&
+      //   rider.password &&
+      //   rider.email &&
+      //   rider.phoneNumber &&
+      //   rider.countryCode &&
+      //   rider.address &&
+      //   rider.country &&
+      //   rider.state &&
+      //   rider.lga &&
+      //   rider.plateNumber
+      // ) {
+
+      // }
+      closeModal();
+      showLoader();
+      const response = await httpPost(`admin/create_rider`, rider);
+      hideLoader();
+      console.log("RESPONSE>>>", response);
+      if (!response?.success) {
+        return NotificationManager.error(response.message);
+      } else {
+        NotificationManager.success("Rider Added Succesfully");
+        const newRider = rider;
+        setRiders([...riders, newRider]);
+        setRider({
+          firstName: "",
+          lastName: "",
+          password: "",
+          email: "",
+          phoneNumber: "",
+          countryCode: "",
+          address: "",
+          country: "",
+          state: "",
+          lga: "",
+          fireToken: null,
+          emailOpt: true,
+          plateNumber: "",
+        });
+        // // localStorage.setItem("token", response.data.token);
+        history.push("/riders");
+      }
+      console.log(response);
+    }
+  };
+
+  const getAllRiders = async (type) => {
+    showLoader();
+    const response = await httpGet(`admin/all_users?type=${type}`);
+    hideLoader();
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      setRiders(response.data);
+    }
+    console.log(response);
+  };
+
+  useEffect(() => {
+    getAllRiders("rider");
+  }, []);
+
   return (
     <div>
       <div className="tableHeader1">
@@ -37,7 +166,7 @@ const Orders = () => {
         <p>List of riders</p>
       </div>
       <div className="createNewRyderBtn">
-        <button>Create new rider</button>
+        <button onClick={openModal}>Create new rider</button>
       </div>
 
       <div className="tableHeader2">
@@ -59,87 +188,53 @@ const Orders = () => {
         <table class="styled-table">
           <thead>
             <tr>
-              <th>Sender name info</th>
-              <th>Item name</th>
-              <th>Date</th>
-              <th>Rider name</th>
-              <th>Delivery amount</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Deliveries</th>
+              <th>Status</th>
               {/* <th></th> */}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-            </tr>
+            {riders.length ? (
+              riders.map((rider) => {
+                const {
+                  id,
+                  avatar,
+                  firstName,
+                  lastName,
+                  phoneNumber,
+                  email,
+                  status,
+                  countryCode,
+                } = rider;
+                return (
+                  <tr key={id}>
+                    <td>
+                      <img
+                        class="userProfileImg"
+                        src={avatar || codeuiandy}
+                        alt=""
+                      />
+                      {`${firstName} ${lastName}`}
+                    </td>
+                    <td>{`${countryCode} ${phoneNumber}`}</td>
+                    <td>{email}</td>
+                    <td>{`50`}</td>
+                    <td>
+                      <img
+                        src={status === "active" ? greenEllipse : redEllipse}
+                        alt="online status"
+                        className="rider--isOnline img--ellipse"
+                      />
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <p>No rider found</p>
+            )}
           </tbody>
         </table>
         <div className="tableControls">
@@ -163,7 +258,7 @@ const Orders = () => {
         </div>
       </div>
 
-      <Modal open={open} onClose={onCloseModal} center>
+      <Modal open={open} onClose={closeModal} center>
         <div className="createRiderModal">
           <div className="riderModalContainer">
             <div className="col1Rider">
@@ -254,18 +349,30 @@ const Orders = () => {
                   </div>
                 </div>
 
-                <form action="" className="inputWrapRider">
+                <form className="inputWrapRider">
                   <div className="riderInputWrapMain">
-                    <Input label="First name" placeholder="Andrew" />
+                    <Input
+                      label="First name"
+                      name="firstName"
+                      value={rider.firstName}
+                      onChange={onChange}
+                      placeholder="Andrew"
+                    />
                   </div>
 
                   <div className="riderInputWrapMain">
-                    <Input label="Last name" placeholder="Okeke" />
+                    <Input
+                      label="Last name"
+                      name="lastName"
+                      value={rider.lastName}
+                      onChange={onChange}
+                      placeholder="Okeke"
+                    />
                   </div>
 
-                  <div className="riderInputWrapMain">
-                    <Input label="Middle name" placeholder="Miracle" />
-                  </div>
+                  {/* <div className="riderInputWrapMain">
+                    <Input label="Middle name"  placeholder="Miracle" />
+                  </div> */}
 
                   <div className="getRiderGender">
                     <p>Gender</p>
@@ -326,23 +433,64 @@ const Orders = () => {
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
-                    <Input label="Phone number" placeholder="08115659965" />
-                  </div>
-
-                  <div className="riderInputWrapMain">
-                    <Input label="Email" placeholder="frostandy41@gmail.com" />
-                  </div>
-
-                  <div className="riderInputWrapMain">
-                    <Select
-                      options={[]}
-                      defaultValue="Select Country"
-                      label="Select Country"
+                    <Input
+                      name="phoneNumber"
+                      value={rider.phoneNumber}
+                      onChange={onChange}
+                      label="Phone number"
+                      placeholder="08115659965"
                     />
                   </div>
 
                   <div className="riderInputWrapMain">
-                    <Input label="Address" placeholder="Lagos street" />
+                    <Input
+                      name="email"
+                      value={rider.email}
+                      onChange={onChange}
+                      label="Email"
+                      placeholder="frostandy41@gmail.com"
+                    />
+                  </div>
+
+                  <div className="riderInputWrapMain">
+                    <Select
+                      name="country"
+                      value={rider.country}
+                      options={["Nigeria", "England"]}
+                      defaultValue="Select Country"
+                      label="Select Country"
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className="riderInputWrapMain">
+                    <Select
+                      name="state"
+                      value={rider.state}
+                      options={["Lagos", "Abuja"]}
+                      defaultValue="Select State"
+                      label="Select State"
+                      onChange={onChange}
+                    />
+                  </div>
+                  <div className="riderInputWrapMain">
+                    <Select
+                      name="lga"
+                      value={rider.lga}
+                      options={["Ikeja", "Surulere"]}
+                      defaultValue="Select LGA"
+                      label="Select LGA"
+                      onChange={onChange}
+                    />
+                  </div>
+
+                  <div className="riderInputWrapMain">
+                    <Input
+                      name="address"
+                      value={rider.address}
+                      onChange={onChange}
+                      label="Address"
+                      placeholder="Lagos street"
+                    />
                   </div>
 
                   <div className="subRiderBtnWrap">
@@ -372,6 +520,9 @@ const Orders = () => {
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
                     <Input
+                      name="password"
+                      value={rider.password}
+                      onChange={onChange}
                       label="Password"
                       placeholder="********"
                       type="password"
@@ -380,6 +531,9 @@ const Orders = () => {
 
                   <div className="riderInputWrapMain">
                     <Input
+                      name="password"
+                      value={rider.password}
+                      onChange={onChange}
                       label="Confirm password"
                       placeholder="********"
                       type="password"
@@ -413,7 +567,7 @@ const Orders = () => {
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
                     <Select
-                      options={[]}
+                      options={["Okada", "Moto"]}
                       defaultValue="Select bike"
                       label="Select bike"
                     />
@@ -427,9 +581,7 @@ const Orders = () => {
                       color="black"
                     />
                     <Button
-                      onClick={() => {
-                        handleTabSwitch("tab2");
-                      }}
+                      onClick={handleSubmit}
                       text="Create rider"
                       color="white"
                       fontSize="14px"

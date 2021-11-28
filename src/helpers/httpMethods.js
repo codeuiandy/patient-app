@@ -157,7 +157,7 @@ export const httpGet = async (url) => {
     );
   }
   try {
-    const res = await axios.get(`${baseUrl}/api/${url}`, {
+    const res = await axios.get(`${baseUrl}/${url}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data;

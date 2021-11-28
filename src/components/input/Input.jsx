@@ -1,4 +1,6 @@
 export const Input = ({
+  name,
+  value,
   type,
   placeholder,
   onChange,
@@ -23,6 +25,8 @@ export const Input = ({
         ""
       )}
       <input
+        name={name || ""}
+        value={value || ""}
         type={type ? type : "text"}
         placeholder={placeholder ? placeholder : ""}
         onChange={onChange}
@@ -33,6 +37,8 @@ export const Input = ({
 };
 
 export const Select = ({
+  name,
+  value,
   onChange,
   label,
   labelSize,
@@ -57,12 +63,17 @@ export const Select = ({
         ""
       )}
       <select
+        name={name ? name : ""}
         onChange={onChange}
         style={{ fontSize: selectSize ? selectSize : "" }}
       >
         <option value="">{`${defaultValue}`}</option>
         {options.map((data) => {
-          return <option key={data}>{data}</option>;
+          return (
+            <option value={data} key={data}>
+              {data}
+            </option>
+          );
         })}
       </select>
     </div>

@@ -75,3 +75,111 @@
 .ta-c {
   text-align: center;
 }
+
+.activate-user {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+
+  &__modal {
+    width: 35rem;
+    height: fit-content;
+    padding: 2rem;
+    background-color: white;
+
+    &-wrapper {
+      width: 100%;
+    }
+  }
+
+  &__col--left {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0.6rem;
+    border-radius: 4px;
+    background-color: #f5faff;
+
+    & > * {
+      margin-bottom: 1.5em;
+    }
+  }
+
+  &__col--right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & > * {
+      margin-bottom: 1.5em;
+    }
+  }
+
+  &--activated {
+    color: #499f68;
+  }
+
+  &--deactivated {
+    color: #cc5148;
+  }
+
+  &__heading {
+    margin-bottom: 1.5em !important; //to overide the margin: 0 !important on headings;
+  }
+
+  &__name {
+    margin-bottom: 1.5em !important; //to overide the margin: 0 !important on headings;
+  }
+
+  &__img {
+    border-radius: 50%;
+  }
+
+  &__status {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &--isActive {
+    position: absolute;
+    right: 0.8rem;
+    bottom: -2px;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 5px solid #fcfcfc;
+  }
+}
+
+.img {
+  &--container {
+    position: relative;
+  }
+
+  &--wrapper {
+    width: 7rem;
+    height: 7rem;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &--ellipse {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+.rider {
+  &--isOnline {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}

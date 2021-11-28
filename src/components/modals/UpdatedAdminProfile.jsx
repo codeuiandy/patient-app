@@ -8,11 +8,11 @@ const UpdatedAdminProfile = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(!showModal);
-  const closeModal = () => setShowModal(!openModal);
+  const closeModal = () => setShowModal(false);
 
   return (
-    <Modal open={openModal} onClose={closeModal} center>
-      <div className="modal-wrapper">
+    <Modal open={!openModal} onClose={closeModal} center>
+      <div className="modal-wrapper">  
         <div className="modal-container">
           <section className="modal-info success ta-c">
             <h3 className="success__heading">Admin profile updated</h3>

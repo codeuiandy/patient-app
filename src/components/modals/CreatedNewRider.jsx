@@ -9,7 +9,7 @@ const CreatedNewRider = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(!showModal);
-  const closeModal = () => setShowModal(!openModal);
+  const closeModal = () => setShowModal(false);
 
   return (
     <Modal open={!openModal} onClose={closeModal} center>
