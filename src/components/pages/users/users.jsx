@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./users.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
@@ -10,12 +10,36 @@ import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import { Modal } from "react-responsive-modal";
 import redEllipse from "./../../../assets/imgF/red_ellipse.png";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
+import { httpPost, httpGet } from "./../../../helpers/httpMethods";
+import { NotificationManager } from "react-notifications";
+import { hideLoader, showLoader } from "./../../helpers/loader";
+import { useHistory } from "react-router-dom";
+
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
+  const [users, setUsers] = useState([]);
+  console.log(users);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  useEffect(() => {
+    (async () => {
+      showLoader();
+      const response = await httpGet(`admin/all_users?type=user`);
+      hideLoader();
+      console.log("RESPONSE>>>", response);
+      if (!response?.success) {
+        return NotificationManager.error(response.message);
+      }
+      if (response.code === 200) {
+        setUsers(response.data);
+      }
+      console.log(response);
+    })();
+  }, []);
+
   return (
     <div>
       <div className="tableHeader1">
@@ -51,92 +75,44 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>+234 8167850379</td>
-              <td>lolajesu@gmail.com</td>
-              <td>50</td>{" "}
-              <td onClick={onOpenModal}>
-                <img
-                  src={isOnline ? greenEllipse : redEllipse}
-                  alt="online status"
-                  className="user--isOnline img--ellipse"
-                />
-              </td>
-            </tr>
-            <tr class="active-row">
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>+234 567850379</td>
-              <td>lolajesu@gmail.com</td>
-              <td>50</td>{" "}
-              <td onClick={onOpenModal}>
-                <img
-                  src={isOnline ? greenEllipse : redEllipse}
-                  alt="online status"
-                  className="user--isOnline img--ellipse"
-                />
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>+234 567850379</td>
-              <td>lolajesu@gmail.com</td>
-              <td>50</td>{" "}
-              <td onClick={onOpenModal}>
-                <img
-                  src={isOnline ? greenEllipse : redEllipse}
-                  alt="online status"
-                  className="user--isOnline img--ellipse"
-                />
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>+234 567850379</td>
-              <td>lolajesu@gmail.com</td>
-              <td>50</td>{" "}
-              <td onClick={onOpenModal}>
-                <img
-                  src={isOnline ? greenEllipse : redEllipse}
-                  alt="online status"
-                  className="user--isOnline img--ellipse"
-                />
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>+234 567850379</td>
-              <td>lolajesu@gmail.com</td>
-              <td>50</td>{" "}
-              <td onClick={onOpenModal}>
-                <img
-                  src={isOnline ? greenEllipse : redEllipse}
-                  alt="online status"
-                  className="user--isOnline img--ellipse"
-                />
-              </td>
-            </tr>
+            {users.length ? (
+              users.map((user) => {
+                const {
+                  id,
+                  avatar,
+                  firstName,
+                  lastName,
+                  phoneNumber,
+                  email,
+                  isOnline,
+                  countryCode,
+                } = user;
+                return (
+                  <tr>
+                    <td>
+                      <img
+                        class="userProfileImg"
+                        src={avatar || codeuiandy}
+                        alt=""
+                      />
+                      {`${firstName} ${lastName}`}
+                    </td>
+                    <td>{`${countryCode} ${phoneNumber}`}</td>
+                    <td>{email}</td>
+                    <td>{`50`}</td>
+                    <td onClick={onOpenModal}>
+                      <img
+                        src={isOnline ? greenEllipse : redEllipse}
+                        alt="online status"
+                        className="user--isOnline img--ellipse"
+                      />
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <p>No user found</p>
+            )}
           </tbody>
         </table>
         <div className="tableControls">

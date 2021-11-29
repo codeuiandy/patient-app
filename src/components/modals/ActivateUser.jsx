@@ -9,6 +9,7 @@ import styles from "./modal.scss";
 
 const ActivateUser = () => {
   const [showModal, setShowModal] = useState(false);
+  const [isActivated, setIsActivated] = useState(true);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
