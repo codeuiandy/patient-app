@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./orders.css";
+import "./riders.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import Modal from "react-responsive-modal";

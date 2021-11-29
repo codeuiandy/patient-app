@@ -42,8 +42,8 @@ const Orders = () => {
         <table class="styled-table">
           <thead>
             <tr>
-              <th>Sender name info</th>
               <th>Item name</th>
+              <th>Sender name</th>
               <th>Date</th>
               <th>Rider name</th>
               <th>Delivery amount</th>
@@ -51,63 +51,27 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
+            <tr class="active-row">
+              <td>Jollof Rice</td>
+              <td>Lola Jesu</td>
+              <td>27/03/2021</td>
+              <td>Chuka Nduka</td>
+              <td>3,500</td>
+              <td>
+                {" "}
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
+              </td>
+            </tr>
             <tr>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+              <td>Jollof Rice</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={onOpenModal}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>
-            </tr>
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
-              <td>
-                <img
-                  onClick={onOpenModal}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
+              <td>Chuka Nduka</td>
               <td>3,500</td>
               <td>
                 {" "}
@@ -120,18 +84,11 @@ const Orders = () => {
               </td>
             </tr>
 
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+            <tr>
+              <td>Jollof Rice</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
+              <td>Chuka Nduka</td>
               <td>3,500</td>
               <td>
                 {" "}
@@ -144,18 +101,27 @@ const Orders = () => {
               </td>
             </tr>
 
-            <tr class="active-row">
+            <tr>
+              <td>Jollof Rice</td>
+              <td>Lola Jesu</td>
+              <td>27/03/2021</td>
+              <td>Chuka Nduka</td>
+              <td>3,500</td>
               <td>
                 {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+                <img
+                  onClick={onOpenModal}
+                  style={{ width: "20px" }}
+                  src={checkImg}
+                  alt=""
+                />
               </td>
-              <td>Italian Bag</td>
+            </tr>
+            <tr>
+              <td>Jollof Rice</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
+              <td>Chuka Nduka</td>
               <td>3,500</td>
               <td>
                 {" "}

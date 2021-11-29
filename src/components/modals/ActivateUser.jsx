@@ -15,7 +15,7 @@ const ActivateUser = () => {
   const isActivated = true;
 
   return (
-    <Modal open={showModal} onClose={closeModal} center>
+    <Modal open={!showModal} onClose={closeModal} center>
       <div className="activate-user__modal">
         <div className="activate-user__modal-wrapper">
           <section className="activate-user">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./orders.css";
+import "./users.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import userImg from "../../../assets/imgF/codeuiandyimg.png";
@@ -8,8 +8,11 @@ import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
 import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import { Modal } from "react-responsive-modal";
+import redEllipse from "./../../../assets/imgF/red_ellipse.png";
+import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
 const Orders = () => {
   const [open, setOpen] = useState(false);
+  const [isOnline, setIsOnline] = useState(false);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -39,41 +42,46 @@ const Orders = () => {
         <table class="styled-table">
           <thead>
             <tr>
-              <th>Sender name info</th>
-              <th>Item name</th>
-              <th>Date</th>
-              <th>Rider name</th>
-              <th>Delivery amount</th>
+              <th>Name</th>
+              <th>Phone number</th>
+              <th>Email</th>
+              <th>Orders</th>
+              <th>Status</th>
               {/* <th></th> */}
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>
+                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
+                Nduka
+              </td>
+              <td>+234 8167850379</td>
+              <td>lolajesu@gmail.com</td>
+              <td>50</td>{" "}
               <td onClick={onOpenModal}>
+                <img
+                  src={isOnline ? greenEllipse : redEllipse}
+                  alt="online status"
+                  className="user--isOnline img--ellipse"
+                />
+              </td>
+            </tr>
+            <tr class="active-row">
+              <td>
                 <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
                 Nduka
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
+              <td>+234 567850379</td>
+              <td>lolajesu@gmail.com</td>
+              <td>50</td>{" "}
               <td onClick={onOpenModal}>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Okeke
-                Andrew
+                <img
+                  src={isOnline ? greenEllipse : redEllipse}
+                  alt="online status"
+                  className="user--isOnline img--ellipse"
+                />
               </td>
-              <td>3,500</td>
-            </tr>
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
             </tr>
 
             <tr class="active-row">
@@ -82,13 +90,16 @@ const Orders = () => {
                 <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
                 Nduka
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+              <td>+234 567850379</td>
+              <td>lolajesu@gmail.com</td>
+              <td>50</td>{" "}
+              <td onClick={onOpenModal}>
+                <img
+                  src={isOnline ? greenEllipse : redEllipse}
+                  alt="online status"
+                  className="user--isOnline img--ellipse"
+                />
               </td>
-              <td>3,500</td>
             </tr>
 
             <tr class="active-row">
@@ -97,13 +108,16 @@ const Orders = () => {
                 <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
                 Nduka
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+              <td>+234 567850379</td>
+              <td>lolajesu@gmail.com</td>
+              <td>50</td>{" "}
+              <td onClick={onOpenModal}>
+                <img
+                  src={isOnline ? greenEllipse : redEllipse}
+                  alt="online status"
+                  className="user--isOnline img--ellipse"
+                />
               </td>
-              <td>3,500</td>
             </tr>
 
             <tr class="active-row">
@@ -112,13 +126,16 @@ const Orders = () => {
                 <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
                 Nduka
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+              <td>+234 567850379</td>
+              <td>lolajesu@gmail.com</td>
+              <td>50</td>{" "}
+              <td onClick={onOpenModal}>
+                <img
+                  src={isOnline ? greenEllipse : redEllipse}
+                  alt="online status"
+                  className="user--isOnline img--ellipse"
+                />
               </td>
-              <td>3,500</td>
             </tr>
           </tbody>
         </table>

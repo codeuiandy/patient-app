@@ -227,3 +227,8 @@
 .userDetailsCol2lasdf a {
   font-size: 12px;
 }
+
+.user--isOnline {
+  width: 0.8rem;
+  height: 0.8rem;
+}

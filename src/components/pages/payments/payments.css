@@ -106,3 +106,8 @@
   height: 25px;
   cursor: pointer;
 }
+
+.payment--isSuccess {
+  width: 0.8rem;
+  height: 0.8rem;
+}

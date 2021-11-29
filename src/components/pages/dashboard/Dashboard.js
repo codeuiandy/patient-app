@@ -77,7 +77,7 @@ const DashboardTwo = () => {
             <tr>
               <th>Name</th>
               <th>Item name</th>
-              <th>Amount</th>
+              <th>Amount (N)</th>
             </tr>
           </thead>
           <tbody>
@@ -227,7 +227,7 @@ const DashboardTwo = () => {
       <UpdatedPassword />
       <UpdatedProfileModal />
       <UpdatedRefundReceipt />
-      <ActivateUser/>
+      <ActivateUser />
     </div>
   );
 };
