@@ -83,7 +83,7 @@ export default function Navbar({
                 <form>
                   <div>
                     <input
-                      placeholder="Enter here to search"
+                      placeholder="Enter here to search the table"
                       type="text"
                       style={{
                         borderRadius: 3,

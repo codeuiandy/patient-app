@@ -8,11 +8,11 @@ import { Button } from "../buttons";
 import styles from "./modal.scss";
 
 const ActivateUser = () => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [isActivated, setIsActivated] = useState(true);
 
-  const closeModal = () => setShowModal(!showModal);
-
-  const isActivated = true;
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   return (
     <Modal open={showModal} onClose={closeModal} center>

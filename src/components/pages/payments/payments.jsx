@@ -1,6 +1,8 @@
 import React from "react";
-import "./orders.css";
+import "./payments.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
+import checkCancel from "./../../../assets/imgF/cancel_black_24dp@2x.png";
+import checkSuccess from "./../../../assets/imgF/check_circle_black_24dp@2x.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 const Orders = () => {
   return (
@@ -29,86 +31,86 @@ const Orders = () => {
         <table class="styled-table">
           <thead>
             <tr>
-              <th>Sender name info</th>
-              <th>Item name</th>
+              <th>Name</th>
+              <th>User</th>
               <th>Date</th>
-              <th>Rider name</th>
               <th>Delivery amount</th>
-              {/* <th></th> */}
+              <th>Delivery status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+              <td>Reciept_03jan2021</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
               <td>3,500</td>
+              <td>
+                <img
+                  src={checkCancel}
+                  className="payment--isSuccess img-ellipse"
+                  alt=""
+                />
+                Completed
+              </td>
             </tr>
             <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+              <td>Reciept_03jan2021</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
               <td>3,500</td>
-            </tr>
-
-            <tr class="active-row">
               <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
+                <img
+                  src={checkCancel}
+                  className="payment--isSuccess img-ellipse"
+                  alt=""
+                />
+                Completed
               </td>
-              <td>Italian Bag</td>
-              <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>3,500</td>
             </tr>
 
             <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+              <td>Reciept_03jan2021</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
               <td>3,500</td>
+              <td>
+                <img
+                  src={checkCancel}
+                  className="payment--isSuccess img-ellipse"
+                  alt=""
+                />
+                Completed
+              </td>
             </tr>
 
             <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
+              <td>Reciept_03jan2021</td>
+              <td>Lola Jesu</td>
               <td>27/03/2021</td>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
               <td>3,500</td>
+              <td>
+                <img
+                  src={checkCancel}
+                  className="payment--isSuccess img-ellipse"
+                  alt=""
+                />
+                Completed
+              </td>
+            </tr>
+
+            <tr class="active-row">
+              <td>Reciept_03jan2021</td>
+              <td>Lola Jesu</td>
+              <td>27/03/2021</td>
+              <td>3,500</td>
+              <td>
+                <img
+                  src={checkCancel}
+                  className="payment--isSuccess img-ellipse"
+                  alt=""
+                />
+                Completed
+              </td>
             </tr>
           </tbody>
         </table>

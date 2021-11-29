@@ -567,3 +567,8 @@ select {
   margin-bottom: 3px;
   font-size: 13px;
 }
+
+.img--ellipse {
+  border-radius: 50%;
+  cursor: pointer;
+}

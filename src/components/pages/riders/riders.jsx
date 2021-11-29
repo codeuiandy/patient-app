@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./orders.css";
+import "./riders.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import Modal from "react-responsive-modal";
@@ -141,22 +141,20 @@ const Orders = () => {
     }
   };
 
-  const getAllRiders = async (type) => {
-    showLoader();
-    const response = await httpGet(`admin/all_users?type=${type}`);
-    hideLoader();
-    console.log("RESPONSE>>>", response);
-    if (!response?.success) {
-      return NotificationManager.error(response.message);
-    }
-    if (response.code === 200) {
-      setRiders(response.data);
-    }
-    console.log(response);
-  };
-
   useEffect(() => {
-    getAllRiders("rider");
+    (async () => {
+      showLoader();
+      const response = await httpGet(`admin/all_users?type=rider`);
+      hideLoader();
+      console.log("RESPONSE>>>", response);
+      if (!response?.success) {
+        return NotificationManager.error(response.message);
+      }
+      if (response.code === 200) {
+        setRiders(response.data);
+      }
+      console.log(response);
+    })();
   }, []);
 
   return (
@@ -206,7 +204,7 @@ const Orders = () => {
                   lastName,
                   phoneNumber,
                   email,
-                  status,
+                  isOnline,
                   countryCode,
                 } = rider;
                 return (
@@ -224,7 +222,7 @@ const Orders = () => {
                     <td>{`50`}</td>
                     <td>
                       <img
-                        src={status === "active" ? greenEllipse : redEllipse}
+                        src={isOnline ? greenEllipse : redEllipse}
                         alt="online status"
                         className="rider--isOnline img--ellipse"
                       />

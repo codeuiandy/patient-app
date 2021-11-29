@@ -19,8 +19,46 @@ import UpdatePassword from "../../modals/UpdatePassword";
 import UpdatedPassword from "./../../modals/UpdatedPassword";
 import UpdatedAdminProfile from "./../../modals/UpdatedAdminProfile";
 import ActivateUser from "../../modals/ActivateUser";
+import { useEffect, useState } from "react";
+import { httpPost, httpGet } from "./../../../helpers/httpMethods";
+import { NotificationManager } from "react-notifications";
+import { hideLoader, showLoader } from "./../../helpers/loader";
+import { useHistory } from "react-router-dom";
 
 const DashboardTwo = () => {
+  const [stats, setStats] = useState({});
+  const [deliveredOrders, setDeliveredOrders] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      showLoader();
+      const response = await httpGet(`admin/orders?status=delivered`);
+      hideLoader();
+      console.log("RESPONSE>>>", response);
+      if (!response?.success) {
+        return NotificationManager.error(response.message);
+      }
+      if (response.code === 200) {
+        setStats(response.data);
+      }
+      console.log(response);
+    })();
+
+    (async () => {
+      showLoader();
+      const response = await httpGet(`admin/recent/orders`);
+      hideLoader();
+      console.log("RESPONSE>>>", response);
+      if (!response?.success) {
+        return NotificationManager.error(response.message);
+      }
+      if (response.code === 200) {
+        setDeliveredOrders(response.data);
+      }
+      console.log(response);
+    })();
+  }, []);
+
   return (
     <div className="dashboard-main">
       <div className="dashboardCo1">
@@ -41,14 +79,14 @@ const DashboardTwo = () => {
 
         <div className="dashboardCards">
           <div className="dashboardCardsMain">
-            <h2>18</h2>
+            <h2>{stats?.pendingOrder || 0}</h2>
             <p>
               <img src={clipBoardImg} alt="" /> Scheduled Deliveries
             </p>
           </div>
 
           <div className="dashboardCardsMain skdypdashb">
-            <h2>100</h2>
+            <h2>{stats?.completedOrder || 0}</h2>
             <p>
               <img src={checkImg} alt="" /> Completed Deliveries
             </p>
@@ -56,7 +94,7 @@ const DashboardTwo = () => {
 
           <div className="dashboardCardsMain">
             <h2>
-              N50K <span>10%</span>
+              {stats?.profit || 0} <span>10%</span>
             </h2>
             <p>
               <img src={walletImg} alt="" /> Profit
@@ -68,8 +106,8 @@ const DashboardTwo = () => {
           className="dashboardHeadingnn"
           style={{ marginTop: "30px", marginBottom: "0" }}
         >
-          <h2>On going delivery</h2>
-          <p>Orders currently delivered</p>
+          <h2>On going deliveries</h2>
+          <p>Recent Orders</p>
         </div>
 
         <table class="styled-table">
@@ -77,57 +115,32 @@ const DashboardTwo = () => {
             <tr>
               <th>Name</th>
               <th>Item name</th>
-              <th>Amount</th>
+              <th>Amount (N)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>6000</td>
-            </tr>
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>5150</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>5150</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>5150</td>
-            </tr>
-
-            <tr class="active-row">
-              <td>
-                {" "}
-                <img class="userProfileImg" src={codeuiandy} alt="" /> Chuka
-                Nduka
-              </td>
-              <td>Italian Bag</td>
-              <td>5150</td>
-            </tr>
+            {deliveredOrders.length ? (
+              deliveredOrders.map((order) => {
+                return (
+                  <tr key={order?.id} className="active-row">
+                    <td>
+                      <img
+                        class="userProfileImg"
+                        src={order?.avatar || codeuiandy}
+                        alt=""
+                      />{" "}
+                      {`${order?.firstName || "Chuka"} ${
+                        order?.lastName || "Nduka"
+                      }`}
+                    </td>
+                    <td>{order?.itemName}</td>
+                    <td>{order?.cost}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <p>No delivered orders</p>
+            )}
           </tbody>
         </table>
 
@@ -151,43 +164,32 @@ const DashboardTwo = () => {
           </p>
         </div>
 
-        <div className="notifcardDashboard">
-          <div className="notifcardDashboardHeader">
-            <p>Item Name</p>
-            <img src={checkImg} alt="" />
-          </div>
+        {deliveredOrders.length ? (
+          deliveredOrders.map((order) => {
+            return (
+              <div className="notifcardDashboard" key={order?.id}>
+                <div className="notifcardDashboardHeader">
+                  <p>{order?.itemName}</p>
+                  <img src={checkImg} alt="" />
+                </div>
 
-          <div className="dashboardnotTrack">
-            <div className="dashboardnotTrackCol">
-              <img src={tripStart} alt="" />
-              <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
-            </div>
-            <div className="dashboardnotTrackColLine"></div>
-            <div className="dashboardnotTrackCol">
-              <img src={locationIcon} alt="" />
-              <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="notifcardDashboard">
-          <div className="notifcardDashboardHeader">
-            <p>Item Name</p>
-            <img src={checkImg} alt="" />
-          </div>
-
-          <div className="dashboardnotTrack">
-            <div className="dashboardnotTrackCol">
-              <img src={tripStart} alt="" />
-              <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
-            </div>
-            <div className="dashboardnotTrackColLine"></div>
-            <div className="dashboardnotTrackCol">
-              <img src={locationIcon} alt="" />
-              <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
-            </div>
-          </div>
-        </div>
+                <div className="dashboardnotTrack">
+                  <div className="dashboardnotTrackCol">
+                    <img src={tripStart} alt="" />
+                    <p>{order?.senderAddress}</p>
+                  </div>
+                  <div className="dashboardnotTrackColLine"></div>
+                  <div className="dashboardnotTrackCol">
+                    <img src={locationIcon} alt="" />
+                    <p>{order?.receiverAddress}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p>No data found</p>
+        )}
 
         <div className="notdatesjhd" style={{ marginTop: "50px" }}>
           <p className="notdatesjhdHeader">
@@ -227,7 +229,7 @@ const DashboardTwo = () => {
       <UpdatedPassword />
       <UpdatedProfileModal />
       <UpdatedRefundReceipt />
-      <ActivateUser/>
+      <ActivateUser />
     </div>
   );
 };
