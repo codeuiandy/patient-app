@@ -8,11 +8,11 @@ import styles from "./modal.scss";
 const UpdatedRefundReceipt = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => setShowModal(!showModal);
+  const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
   return (
-    <Modal open={!openModal} onClose={closeModal} center>
+    <Modal open={showModal} onClose={closeModal} center>
       <div className="modal-wrapper">
         <div className="modal-container">
           <section className="modal-info success ta-c">
