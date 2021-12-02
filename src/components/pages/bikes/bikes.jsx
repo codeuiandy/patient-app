@@ -21,7 +21,7 @@ import { hideLoader, showLoader } from "../../helpers/loader";
 import { useHistory } from "react-router-dom";
 import redEllipse from "./../../../assets/imgF/red_ellipse.png";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
-import { swal } from "sweetalert";
+import swal from "sweetalert";
 import Select from "react-select";
 
 const Bikes = () => {
@@ -91,13 +91,22 @@ const Bikes = () => {
       if (!response?.success) {
         return NotificationManager.error(response.message);
       } else {
-        NotificationManager.success("Rider Added Succesfully");
+        if (selectedRider.riderId !== "") {
+          assignBikeToRider(
+            "fromCreateBike",
+            response.data.id,
+            selectedRider.riderId
+          );
+        }
+
+        // NotificationManager.success("Rider Added Succesfully");
         const newBike = bike;
         setBikes([...bikes, newBike]);
         setBike({
           brand: "",
           license: "",
         });
+        setTab("tab1");
         // // localStorage.setItem("token", response.data.token);
         history.push("/bikes");
       }
@@ -129,21 +138,27 @@ const Bikes = () => {
     console.log(riderResponse);
   };
 
-  const assignBikeToRider = async () => {
+  const assignBikeToRider = async (from, bikeId, riderId) => {
     if (selectedRider.riderId == "") {
       return NotificationManager.error("Please select a rider");
     }
     showLoader();
-    const response = await httpPost(`bike/assign`, selectedRider);
+    const response =
+      from == "fromCreateBike"
+        ? await httpPost(`bike/assign?bikeId=${bikeId}&riderId=${riderId}`)
+        : await httpPost(
+            `bike/assign?bikeId=${selectedRider.bikeId}&riderId=${selectedRider.riderId}`
+          );
     hideLoader();
-    console.log("RESPONSE>>>", response);
-    if (!response?.success) {
-      return NotificationManager.error(response.message);
+    console.log("RESPONSE>>>>>>CD>>>", response);
+    if (!response.success) {
+      console.log(response);
+      return;
     }
     if (response.code === 200) {
       closeModal2();
       getRidersAndBikes();
-      swal("success", "Bike assigned successfully");
+      swal("success", "Bike assigned successfully", "success");
     }
     console.log(response);
   };
@@ -239,7 +254,7 @@ const Bikes = () => {
       <Modal open={showModal1} onClose={closeModal1} center>
         <div className="createRiderModal">
           <div className="riderModalContainer">
-            <div className="col1Rider">
+            <div className="col1Rider col1RiderBike">
               <h2>Add new bike</h2>
               <ul>
                 <li
@@ -316,11 +331,17 @@ const Bikes = () => {
               ""
             )}
 
-             {tab == "tab2" ? (
+            {tab == "tab2" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
-                   
+                    <Select
+                      name="rider"
+                      value={selectedOption}
+                      placeholder="Enter rider name"
+                      onChange={handleSelect}
+                      options={riders}
+                    />
                   </div>
 
                   <div className="subRiderBtnWrap">
@@ -329,6 +350,7 @@ const Bikes = () => {
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
+                      onClick={() => setTab("tab1")}
                     />
                     <Button
                       onClick={handleSubmit}
@@ -389,7 +411,7 @@ const Bikes = () => {
                 fontSize="14px"
                 color="white"
                 disabled={selectedRider.riderId == "" ? true : false}
-                onClick={assignBikeToRider}
+                onClick={() => assignBikeToRider("fromAssign", null, null)}
               />
             </div>
           </section>

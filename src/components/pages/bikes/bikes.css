@@ -182,7 +182,11 @@
   margin-top: 80px;
 }
 
-.col1Rider ul li:nth-of-type(4)::before {
+.col1Rider ul li:nth-of-type(3)::before {
+  display: none;
+}
+
+.col1RiderBike ul li:nth-of-type(2)::before {
   display: none;
 }
 
@@ -301,5 +305,3 @@
 .subRiderBtnWrap div:last-child {
   margin-right: 0;
 }
-
-

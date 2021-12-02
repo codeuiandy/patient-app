@@ -76,7 +76,6 @@ export const httpPost = async (url, postBody) => {
       NotificationManager.error(
         Object.values(error.response.data.data).join("  ")
       );
-      return;
     }
     return { er: error.response.data };
   }
