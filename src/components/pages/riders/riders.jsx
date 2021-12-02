@@ -17,7 +17,7 @@ import redEllipse from "./../../../assets/imgF/red_ellipse.png";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
 
 const Orders = () => {
-  const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [tab, setTab] = useState("tab1");
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
@@ -70,11 +70,11 @@ const Orders = () => {
   };
 
   const openModal = () => {
-    setOpen(true);
+    setShowModal(true);
   };
 
   const closeModal = () => {
-    setOpen(!open);
+    setShowModal(false);
   };
 
   const onChange = (e) => {
@@ -256,7 +256,7 @@ const Orders = () => {
         </div>
       </div>
 
-      <Modal open={open} onClose={closeModal} center>
+      <Modal open={showModal} onClose={closeModal} center>
         <div className="createRiderModal">
           <div className="riderModalContainer">
             <div className="col1Rider">

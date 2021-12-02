@@ -22,6 +22,7 @@ import personImgIcon from "../../assets/imgF/person_black_24dp-2@2x.png";
 import dashboardImgIcon from "../../assets/imgF/dashboard_black_24dp@2x.png";
 import ridersImgIcon from "../../assets/imgF/sports_motorsports_black_24dp@2x.png";
 import paymentImgIcon from "../../assets/imgF/payments_black_24dp@2x.png";
+import bikeImageIcon from "../../assets/imgF/bikeImageIcon.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import UserImg from "../../assets/imgF/codeuiandyimg.png";
@@ -235,6 +236,28 @@ export default function Sidebar({ browserRouter, currentRoute }) {
               )}
             </span>
             Payments
+          </li>
+
+          <li
+            style={
+              currentRoute === "/more"
+                ? { color: "#e3b451" }
+                : { color: "#00101D" }
+            }
+            className={`${
+              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
+            }`}
+            onClick={() => browserRouter(`/bikes`)}
+          >
+            {" "}
+            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
+              {currentRoute !== "/orders" ? (
+                <img className="sidebarImgIcon" src={bikeImageIcon} alt="" />
+              ) : (
+                <img className="sidebarImgIcon" src={bikeImageIcon} alt="" />
+              )}
+            </span>
+            Bikes
           </li>
         </ul>
         <ul className="sidebar-list">
