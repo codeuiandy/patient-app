@@ -13,11 +13,11 @@ export const Button = ({
   padding,
   className,
   onClick,
-  disabled
+  disabled,
 }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={disabled == true ? () => {} : onClick}
       className={`app-btn ${className ? className : ""}`}
       style={{
         backgroundColor: background ? background : "",
@@ -31,7 +31,7 @@ export const Button = ({
     >
       {Icon ? <Icon /> : ""}
       <button
-       disabled={disabled == true ?true:false}
+        disabled={disabled == true ? true : false}
         style={{
           // backgroundColor: background ? background : '',
           color: color ? color : "",
@@ -39,7 +39,6 @@ export const Button = ({
           fontWeight: fontWeight ? fontWeight : "",
           outline: "none",
           border: "none",
-         
         }}
       >{`${text}`}</button>
     </div>

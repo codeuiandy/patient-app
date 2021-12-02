@@ -323,7 +323,7 @@ const Orders = () => {
                   </div>
                   <span>Password</span>
                 </li>{" "}
-                <li className={`${tab == "tab4" ? "activeBTab" : ""}`}>
+                {/* <li className={`${tab == "tab4" ? "activeBTab" : ""}`}>
                   <div
                     className="tabPositionRider"
                     style={tab == "tab4" ? { background: "orange" } : {}}
@@ -331,7 +331,7 @@ const Orders = () => {
                     <Image path="person.png" />
                   </div>
                   <span>Assign a bike</span>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -546,10 +546,8 @@ const Orders = () => {
                       color="black"
                     />
                     <Button
-                      onClick={() => {
-                        handleTabSwitch("tab4");
-                      }}
-                      text="Next"
+                      onClick={handleSubmit}
+                      text="Create rider"
                       color="white"
                       fontSize="14px"
                     />
@@ -560,7 +558,7 @@ const Orders = () => {
               ""
             )}
 
-            {tab == "tab4" ? (
+            {/* {tab == "tab4" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
@@ -589,7 +587,7 @@ const Orders = () => {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
       </Modal>
