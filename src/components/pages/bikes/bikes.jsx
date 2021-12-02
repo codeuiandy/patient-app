@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./bikes.css";
+import "./../../modals/modal.scss";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import arrowL from "../../../assets/imgF/arrow_back_ios_new_black_24dp-2@2x.png";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import userImg from "../../../assets/imgF/codeuiandyimg.png";
+import img from "../../../assets/imgF/update_rider_success.png";
+
 import checkImg from "../../../assets/imgF/check_circle_black_24dp@2x.png";
 import cancelImg from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
@@ -25,6 +28,7 @@ import swal from "sweetalert";
 import Select from "react-select";
 
 const Bikes = () => {
+  const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [tab, setTab] = useState("tab1");
@@ -42,17 +46,14 @@ const Bikes = () => {
   const history = useHistory();
 
   const handleTabSwitch = (index) => {
-    if (index == "tab1") {
-      setTab("tab2");
-    }
-    if (index == "tab2") {
-      setTab("tab2");
-    }
+    setTab(index);
   };
 
   const openModal1 = () => setShowModal1(true);
   const closeModal1 = () => setShowModal1(false);
-
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
   const openModal2 = (data) => {
     setShowModal2(true);
     console.log(data);
@@ -98,8 +99,7 @@ const Bikes = () => {
             selectedRider.riderId
           );
         }
-
-        // NotificationManager.success("Rider Added Succesfully");
+        toggleModal();
         const newBike = bike;
         setBikes([...bikes, newBike]);
         setBike({
@@ -107,7 +107,6 @@ const Bikes = () => {
           license: "",
         });
         setTab("tab1");
-        // // localStorage.setItem("token", response.data.token);
         history.push("/bikes");
       }
       console.log(response);
@@ -251,6 +250,41 @@ const Bikes = () => {
         </div>
       </div>
 
+      {/* MODAL: CREATE NEW BIKE SUCCESS */}
+      <Modal open={showModal} onClose={toggleModal} center>
+        <div className="modal-wrapper">
+          <div className="modal-container">
+            <section className="modal-info success ta-c">
+              <h3 className="success__heading">Successfully added new bike</h3>
+              <div className="success__img--wrapper">
+                <img
+                  src={img}
+                  alt="add new bike success"
+                  className="success__img"
+                />
+              </div>
+              <Button
+                width="100%"
+                text="Create another rider"
+                background="#0087ff"
+                fontSize="14px"
+                color="white"
+                onClick={openModal1}
+              />
+              <Button
+                width="100%"
+                text="Close"
+                background="#61696F26"
+                fontSize="14px"
+                color="#00101d"
+                onClick={toggleModal}
+              />
+            </section>
+          </div>
+        </div>
+      </Modal>
+
+      {/* MODAL: CREATE NEW BIKE */}
       <Modal open={showModal1} onClose={closeModal1} center>
         <div className="createRiderModal">
           <div className="riderModalContainer">
@@ -315,10 +349,11 @@ const Bikes = () => {
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
+                      disabled={tab == "tab1" ? true : false}
                     />
                     <Button
                       onClick={() => {
-                        handleTabSwitch("tab1");
+                        handleTabSwitch("tab2");
                       }}
                       text="Next"
                       color="white"
@@ -350,7 +385,7 @@ const Bikes = () => {
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
-                      onClick={() => setTab("tab1")}
+                      onClick={() => handleTabSwitch("tab1")}
                     />
                     <Button
                       onClick={handleSubmit}
@@ -368,6 +403,7 @@ const Bikes = () => {
         </div>
       </Modal>
 
+      {/* MODAL: ASSIGN BIKE TO RIDER   */}
       <Modal open={showModal2} onClose={closeModal2} center>
         <div className="assign-rider__modal-wrapper">
           <section className="assign-rider__modal">

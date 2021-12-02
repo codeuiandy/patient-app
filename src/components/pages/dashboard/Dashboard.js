@@ -8,17 +8,6 @@ import clock from "../../../assets/imgF/notifications_active_black_24dp@2x.png";
 import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
 import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
-import UpdatedProfileModal from "../../modals/UpdatedProfileModal";
-import CreatedNewRider from "../../modals/CreatedNewRider";
-import AddNewBike from "../../modals/AddNewBike";
-import UpdatedRefundReceipt from "../../modals/UpdatedRefundReceipt";
-import ChangedBikeRider from "../../modals/ChangedBikeRider";
-import AddedNewBike from "../../modals/AddedNewBike";
-import CreatedDiscount from "../../modals/CreatedDiscount";
-import UpdatePassword from "../../modals/UpdatePassword";
-import UpdatedPassword from "./../../modals/UpdatedPassword";
-import UpdatedAdminProfile from "./../../modals/UpdatedAdminProfile";
-import ActivateUser from "../../modals/ActivateUser";
 import { useEffect, useState } from "react";
 import { httpPost, httpGet } from "./../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
@@ -232,17 +221,6 @@ const DashboardTwo = () => {
         </Link>
         </div>
       </div>
-      <AddNewBike />
-      <AddedNewBike />
-      <ChangedBikeRider />
-      <CreatedDiscount />
-      <CreatedNewRider />
-      <UpdatePassword />
-      <UpdatedAdminProfile />
-      <UpdatedPassword />
-      <UpdatedProfileModal />
-      <UpdatedRefundReceipt />
-      <ActivateUser />
     </div>
   );
 };

@@ -52,21 +52,22 @@ const Orders = () => {
 
   const history = useHistory();
   const handleTabSwitch = (index) => {
-    if (index == "tab1") {
-      setTab("tab2");
-    }
+    setTab(index);
+    // if (index == "tab1") {
+    //   setTab("tab2");
+    // }
 
-    if (index == "tab2") {
-      setTab("tab3");
-    }
+    // if (index == "tab2") {
+    //   setTab("tab3");
+    // }
 
-    if (index == "tab3") {
-      setTab("tab4");
-    }
+    // if (index == "tab3") {
+    //   setTab("tab4");
+    // }
 
-    if (index == "tab4") {
-      setTab("tab4");
-    }
+    // if (index == "tab4") {
+    //   setTab("tab4");
+    // }
   };
 
   const openModal = () => {
@@ -323,7 +324,7 @@ const Orders = () => {
                   </div>
                   <span>Password</span>
                 </li>{" "}
-                <li className={`${tab == "tab4" ? "activeBTab" : ""}`}>
+                {/* <li className={`${tab == "tab4" ? "activeBTab" : ""}`}>
                   <div
                     className="tabPositionRider"
                     style={tab == "tab4" ? { background: "orange" } : {}}
@@ -331,7 +332,7 @@ const Orders = () => {
                     <Image path="person.png" />
                   </div>
                   <span>Assign a bike</span>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -414,7 +415,7 @@ const Orders = () => {
                     />
                     <Button
                       onClick={() => {
-                        handleTabSwitch("tab1");
+                        handleTabSwitch("tab2");
                       }}
                       text="Next"
                       color="white"
@@ -493,14 +494,17 @@ const Orders = () => {
 
                   <div className="subRiderBtnWrap">
                     <Button
-                      text="Cancel"
+                      onClick={() => {
+                        handleTabSwitch("tab1");
+                      }}
+                      text="Back"
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
                     />
                     <Button
                       onClick={() => {
-                        handleTabSwitch("tab2");
+                        handleTabSwitch("tab3");
                       }}
                       text="Next"
                       color="white"
@@ -540,16 +544,17 @@ const Orders = () => {
 
                   <div className="subRiderBtnWrap">
                     <Button
-                      text="Cancel"
+                      onClick={() => {
+                        handleTabSwitch("tab2");
+                      }}
+                      text="Back"
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
                     />
                     <Button
-                      onClick={() => {
-                        handleTabSwitch("tab4");
-                      }}
-                      text="Next"
+                      onClick={handleSubmit}
+                      text="Create rider"
                       color="white"
                       fontSize="14px"
                     />
@@ -560,7 +565,7 @@ const Orders = () => {
               ""
             )}
 
-            {tab == "tab4" ? (
+            {/* {tab == "tab4" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
@@ -589,7 +594,7 @@ const Orders = () => {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
       </Modal>
