@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./orders.css";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
@@ -13,6 +13,11 @@ import "../dashboard/dashboard.scss";
 import { Modal } from "react-responsive-modal";
 import { Button } from "../../buttons";
 import Select from "react-select";
+import { hideLoader, showLoader } from "../../helpers/loader";
+import { httpGet, httpPost } from "../../../helpers/httpMethods";
+import { NotificationManager } from "react-notifications";
+import moment from "moment";
+import { swal } from "sweetalert";
 
 const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -24,17 +29,72 @@ const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [riders, setRider] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [selectedRider, setSelectedRider] = useState({
+    orderId: "",
+    riderId: "",
+  });
+  useEffect(() => {
+    getRiderAndOrders();
+  }, []);
   console.log(selectedOption);
 
   const openModal1 = () => setShowModal1(true);
   const closeModal1 = () => setShowModal1(false);
 
-  const openModal2 = () => setShowModal2(true);
+  const openModal2 = (data) => {
+    console.log(data);
+    setSelectedRider({ ...selectedRider, orderId: data.id });
+    setShowModal2(true);
+  };
   const closeModal2 = () => setShowModal2(false);
 
   const handleSelect = (option) => {
-    console.log(`Option selected:`, option);
+    // console.log(`Option selected:`, option);
     setSelectedOption(option);
+    setSelectedRider({ ...selectedRider, riderId: option.value });
+  };
+
+  const getRiderAndOrders = async () => {
+    showLoader();
+    const riderRes = await httpGet(`admin/all_users?type=rider`);
+    const ordersRes = await httpGet(`admin/orders?status=all`);
+    hideLoader();
+    console.log("riderRes>>>", riderRes);
+    if (ordersRes?.success == false || riderRes?.success == false) {
+      return NotificationManager.error(riderRes.message);
+    }
+    if (riderRes.code === 200 && ordersRes.code == 200) {
+      const transformed = riderRes.data.map(({ id, firstName, lastName }) => ({
+        label: `${firstName} ${lastName}`,
+        value: id,
+      }));
+      alert("Got here");
+      setRider(transformed);
+      setOrders(ordersRes.data);
+      console.log(ordersRes);
+    }
+    console.log(riderRes);
+  };
+
+  const assignOrderToRyder = async () => {
+    if (selectedRider.riderId == "") {
+      return NotificationManager.error("Please select a rider");
+    }
+    showLoader();
+    const response = await httpPost(`admin/assign_order`, selectedRider);
+    hideLoader();
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      closeModal2();
+      getRiderAndOrders();
+      swal("success", "Order assinged successfully");
+    }
+    console.log(response);
   };
 
   return (
@@ -75,93 +135,33 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            <tr class="active-row">
-              <td>Jollof Rice</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>Chuka Nduka</td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={openModal1}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>{" "}
-              <td onClick={openModal2}>Pick Rider</td>
-            </tr>
-            <tr>
-              <td>Jollof Rice</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>Chuka Nduka</td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={openModal1}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>{" "}
-              <td onClick={openModal2}>Pick Rider</td>
-            </tr>
-
-            <tr>
-              <td>Jollof Rice</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>Chuka Nduka</td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={openModal1}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>{" "}
-              <td onClick={openModal2}>Pick Rider</td>
-            </tr>
-
-            <tr>
-              <td>Jollof Rice</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>Chuka Nduka</td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={openModal1}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>{" "}
-              <td onClick={openModal2}>Pick Rider</td>
-            </tr>
-            <tr>
-              <td>Jollof Rice</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>Chuka Nduka</td>
-              <td>3,500</td>
-              <td>
-                {" "}
-                <img
-                  onClick={openModal1}
-                  style={{ width: "20px" }}
-                  src={checkImg}
-                  alt=""
-                />
-              </td>{" "}
-              <td onClick={openModal2}>Pick Rider</td>
-            </tr>
+            {orders.length === 0 || orders === undefined ? (
+              <p style={{ fontSize: "18px", width: "100%", marginTop: "30px" }}>
+                No order found at the moment
+              </p>
+            ) : (
+              orders.map((data) => {
+                return (
+                  <tr class="active-row">
+                    <td>{data?.itemName}</td>
+                    <td>{data?.senderName}</td>
+                    <td>{moment(data?.createdAt).format("DD-MM-YYYY")}</td>
+                    <td>Chuka Nduka</td>
+                    <td>3,500</td>
+                    <td>
+                      {" "}
+                      <img
+                        onClick={openModal1}
+                        style={{ width: "20px" }}
+                        src={checkImg}
+                        alt=""
+                      />
+                    </td>{" "}
+                    <td onClick={() => openModal2(data)}>Pick Rider</td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
         <div className="tableControls">
@@ -335,7 +335,7 @@ const Orders = () => {
                 value={selectedOption}
                 placeholder="Enter rider name"
                 onChange={handleSelect}
-                options={options}
+                options={riders}
               />
             </div>
             <div className="assign-rider__cta">
@@ -349,10 +349,12 @@ const Orders = () => {
 
               <Button
                 width="100%"
-                text="Add"
+                text="Assign"
                 background="#FFAF21"
                 fontSize="14px"
                 color="white"
+                disabled={selectedRider.riderId == "" ? true : false}
+                onClick={assignOrderToRyder}
               />
             </div>
           </section>

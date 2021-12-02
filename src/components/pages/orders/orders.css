@@ -357,6 +357,8 @@
 
 .assign-rider__modal-wrapper {
   width: 30rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 2.5rem;
 }
@@ -429,4 +431,10 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1em;
+}
+
+.assign-rider__icon--cancel {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
 }
