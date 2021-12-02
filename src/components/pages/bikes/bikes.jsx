@@ -46,12 +46,7 @@ const Bikes = () => {
   const history = useHistory();
 
   const handleTabSwitch = (index) => {
-    if (index == "tab1") {
-      setTab("tab2");
-    }
-    if (index == "tab2") {
-      setTab("tab2");
-    }
+    setTab(index);
   };
 
   const openModal1 = () => setShowModal1(true);
@@ -354,7 +349,6 @@ const Bikes = () => {
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
-                      onClick={closeModal1}
                       disabled={tab == "tab1" ? true : false}
                     />
                     <Button
@@ -391,7 +385,7 @@ const Bikes = () => {
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
-                      onClick={() => setTab("tab1")}
+                      onClick={() => handleTabSwitch("tab1")}
                     />
                     <Button
                       onClick={handleSubmit}

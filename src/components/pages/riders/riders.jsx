@@ -52,21 +52,22 @@ const Orders = () => {
 
   const history = useHistory();
   const handleTabSwitch = (index) => {
-    if (index == "tab1") {
-      setTab("tab2");
-    }
+    setTab(index);
+    // if (index == "tab1") {
+    //   setTab("tab2");
+    // }
 
-    if (index == "tab2") {
-      setTab("tab3");
-    }
+    // if (index == "tab2") {
+    //   setTab("tab3");
+    // }
 
-    if (index == "tab3") {
-      setTab("tab4");
-    }
+    // if (index == "tab3") {
+    //   setTab("tab4");
+    // }
 
-    if (index == "tab4") {
-      setTab("tab4");
-    }
+    // if (index == "tab4") {
+    //   setTab("tab4");
+    // }
   };
 
   const openModal = () => {
@@ -414,7 +415,7 @@ const Orders = () => {
                     />
                     <Button
                       onClick={() => {
-                        handleTabSwitch("tab1");
+                        handleTabSwitch("tab2");
                       }}
                       text="Next"
                       color="white"
@@ -493,14 +494,17 @@ const Orders = () => {
 
                   <div className="subRiderBtnWrap">
                     <Button
-                      text="Cancel"
+                      onClick={() => {
+                        handleTabSwitch("tab1");
+                      }}
+                      text="Back"
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
                     />
                     <Button
                       onClick={() => {
-                        handleTabSwitch("tab2");
+                        handleTabSwitch("tab3");
                       }}
                       text="Next"
                       color="white"
@@ -540,7 +544,10 @@ const Orders = () => {
 
                   <div className="subRiderBtnWrap">
                     <Button
-                      text="Cancel"
+                      onClick={() => {
+                        handleTabSwitch("tab2");
+                      }}
+                      text="Back"
                       background="#61696F26"
                       fontSize="14px"
                       color="black"
