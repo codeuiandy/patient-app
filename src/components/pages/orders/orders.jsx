@@ -18,12 +18,7 @@ import { httpGet, httpPost } from "../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
 import moment from "moment";
 import { swal } from "sweetalert";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+ 
 
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
@@ -331,12 +326,12 @@ const Orders = () => {
             </header>
             <p className="assign-rider__text">Rider</p>
             <div className="assign-rider__select">
-              <Select
+              {/* <Select
                 value={selectedOption}
                 placeholder="Enter rider name"
                 onChange={handleSelect}
                 options={riders}
-              />
+              /> */}
             </div>
             <div className="assign-rider__cta">
               <Button

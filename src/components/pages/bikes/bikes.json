@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "code": 200,
+  "message": "Successful",
+  "data": [
+      {
+          "id": "a8dcdd0e-3fa3-43a9-9971-ccf92199d97b",
+          "brand": "Hyundai",
+          "license": "01923eisxnsj",
+          "createdAt": "2021-12-01T20:11:35.680Z",
+          "updatedAt": "2021-12-01T20:11:35.680Z",
+          "assigned": {
+              "id": "d4ba0f94-cab8-49c1-a151-510e4f374f8e",
+              "riderId": "667bd9c1-f660-42d7-bfbc-087fe103a6a6",
+              "rider": {
+                  "firstName": "Sam",
+                  "lastName": "Chuks",
+                  "avatar": null
+              }
+          }
+      },
+      {
+          "id": "c2b5e4ea-3033-41fe-bff1-e53fcae5a9ba",
+          "brand": "Honda",
+          "license": "LICENSE-123A",
+          "createdAt": "2021-12-02T14:53:11.954Z",
+          "updatedAt": "2021-12-02T14:53:11.954Z",
+          "assigned": null
+      },
+      {
+          "id": "c56ac977-d40c-4ca0-ad68-94ba75d9beed",
+          "brand": "Yamaha",
+          "license": "LICENSE-560P",
+          "createdAt": "2021-12-02T13:09:03.624Z",
+          "updatedAt": "2021-12-02T13:09:03.624Z",
+          "assigned": null
+      },
+      {
+          "id": "63ac4036-3767-452e-be31-db9bc5a52868",
+          "brand": "Mazda",
+          "license": "LICENSE-234VB",
+          "createdAt": "2021-12-02T14:54:42.726Z",
+          "updatedAt": "2021-12-02T14:54:42.726Z",
+          "assigned": null
+      },
+      {
+          "id": "05f21819-f3a0-4c13-b3a8-1583d68fc433",
+          "brand": "Yamaha",
+          "license": "jhjeieffeff",
+          "createdAt": "2021-12-02T14:48:09.100Z",
+          "updatedAt": "2021-12-02T14:48:09.100Z",
+          "assigned": null
+      },
+      {
+          "id": "32a62cc1-767d-49fb-8adc-0b246b58f130",
+          "brand": "Hyundai",
+          "license": "01923eisxnsj",
+          "createdAt": "2021-12-02T12:31:18.203Z",
+          "updatedAt": "2021-12-02T12:31:18.203Z",
+          "assigned": null
+      }
+  ]
+}

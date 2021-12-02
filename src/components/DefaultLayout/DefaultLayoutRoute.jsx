@@ -31,7 +31,7 @@ const DefaultLayout = ({ children, routeType, pageName, ...rest }) => {
   );
 };
 
-const DefaultLayoutRoute = ({
+const  DefaultLayoutRoute = ({
   component: Component,
   routeType,
   fullProps,

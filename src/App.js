@@ -14,7 +14,8 @@ import Orders from "./components/pages/orders/orders.jsx";
 import Users from "./components/pages/users/users.jsx";
 import Riders from "./components/pages/riders/riders.jsx";
 import Payment from "./components/pages/payments/payments";
-import Login from './components/pages/auth/login'
+import Bikes from "./components/pages/bikes/bikes.jsx";
+import Login from "./components/pages/auth/login";
 const SiteRouter = () => {
   return (
     <BrowserRouter>
@@ -60,6 +61,13 @@ const SiteRouter = () => {
                 path="/payments"
                 pageName="Payment"
                 component={Payment}
+              />
+
+              <DefaultLayoutRoute
+                exact
+                path="/bikes"
+                pageName="Bikes"
+                component={Bikes}
               />
             </SocketDataProvider>
           </LayoutProvider>
