@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import { httpPost, httpGet } from "./../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
 import { hideLoader, showLoader } from "./../../helpers/loader";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const DashboardTwo = () => {
   const [stats, setStats] = useState({});
@@ -110,6 +110,10 @@ const DashboardTwo = () => {
           <p>Recent Orders</p>
         </div>
 
+        <div style={{height:"400px",overflow:"hidden",overflowY:"scroll",marginBottom:"30px"}}>
+
+
+
         <table class="styled-table">
           <thead>
             <tr>
@@ -120,7 +124,7 @@ const DashboardTwo = () => {
           </thead>
           <tbody>
             {deliveredOrders.length ? (
-              deliveredOrders.map((order) => {
+              deliveredOrders.slice(0,10).map((order) => {
                 return (
                   <tr key={order?.id} className="active-row">
                     <td>
@@ -143,9 +147,15 @@ const DashboardTwo = () => {
             )}
           </tbody>
         </table>
+        </div>
+
+      
 
         <div className="viewAllOngoingVdendor">
-          <button>View all on going delivery</button>
+          <Link to={`orders`}>
+        
+          <button>View all orders</button>
+          </Link>
         </div>
       </div>
       <div className="dashboardCo2">
@@ -165,7 +175,7 @@ const DashboardTwo = () => {
         </div>
 
         {deliveredOrders.length ? (
-          deliveredOrders.map((order) => {
+          deliveredOrders.slice(0,4).map((order) => {
             return (
               <div className="notifcardDashboard" key={order?.id}>
                 <div className="notifcardDashboardHeader">
@@ -191,13 +201,13 @@ const DashboardTwo = () => {
           <p>No data found</p>
         )}
 
-        <div className="notdatesjhd" style={{ marginTop: "50px" }}>
+        {/* <div className="notdatesjhd" style={{ marginTop: "50px" }}>
           <p className="notdatesjhdHeader">
             <img src={clock} alt="" /> Tomorrow
           </p>
-        </div>
+        </div> */}
 
-        <div className="notifcardDashboard">
+        {/* <div className="notifcardDashboard">
           <div className="notifcardDashboardHeader">
             <p>Item Name</p>
             <img src={checkImg} alt="" />
@@ -214,9 +224,12 @@ const DashboardTwo = () => {
               <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="showAllSchdDashboard">
-          <button>See all scheduled orders</button>
+        <Link to={`orders`}>
+        
+        <button>View all orders</button>
+        </Link>
         </div>
       </div>
       <AddNewBike />

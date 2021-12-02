@@ -18,7 +18,6 @@ import { httpGet, httpPost } from "../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
 import moment from "moment";
 import { swal } from "sweetalert";
- 
 
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
@@ -65,7 +64,7 @@ const Orders = () => {
         label: `${firstName} ${lastName}`,
         value: id,
       }));
-      alert("Got here");
+      // alert("Got here");
       setRider(transformed);
       setOrders(ordersRes.data);
       console.log(ordersRes);
