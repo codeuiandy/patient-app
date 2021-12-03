@@ -124,7 +124,7 @@ const Orders = () => {
               <th>Date</th>
               <th>Rider name</th>
               <th>Delivery amount</th>
-              <th>Assign</th>
+              <th>Status</th>
               <th>Assign</th>
             </tr>
           </thead>
@@ -325,12 +325,12 @@ const Orders = () => {
             </header>
             <p className="assign-rider__text">Rider</p>
             <div className="assign-rider__select">
-              {/* <Select
+              <Select
                 value={selectedOption}
                 placeholder="Enter rider name"
                 onChange={handleSelect}
                 options={riders}
-              /> */}
+              />
             </div>
             <div className="assign-rider__cta">
               <Button

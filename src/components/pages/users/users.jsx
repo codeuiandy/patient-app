@@ -18,11 +18,24 @@ import { useHistory } from "react-router-dom";
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
+  const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   console.log(users);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  const getSingleUser = async (id) => {
+    const response = await httpGet(`admin/single/user/${id}`);
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      setUser(response.data);
+    }
+    console.log(response);
+  };
 
   useEffect(() => {
     (async () => {
@@ -84,11 +97,11 @@ const Orders = () => {
                   lastName,
                   phoneNumber,
                   email,
-                  isOnline,
+                  status,
                   countryCode,
                 } = user;
                 return (
-                  <tr>
+                  <tr key={id} onClick={() => getSingleUser(id)}>
                     <td>
                       <img
                         class="userProfileImg"
@@ -102,7 +115,7 @@ const Orders = () => {
                     <td>{`50`}</td>
                     <td onClick={onOpenModal}>
                       <img
-                        src={isOnline ? greenEllipse : redEllipse}
+                        src={status === "active" ? greenEllipse : redEllipse}
                         alt="online status"
                         className="user--isOnline img--ellipse"
                       />
@@ -135,6 +148,7 @@ const Orders = () => {
           <img className="tabsdkshSt" src={arrowR} alt="" />
         </div>
       </div>
+
       <Modal open={open} onClose={onCloseModal} center>
         <div className="viewUserModalWrap">
           <div className="modalHeader">
@@ -150,38 +164,54 @@ const Orders = () => {
           <div className="viewUserModalInfod">
             <div className="viewUserModalInfodCol1">
               <div className="userImgwrapViwp">
-                <img src={userImg} alt="" />
+                <img src={user?.avatar || userImg} alt="" />
               </div>
-              <p>Okeke Andrew</p>
+              <p> {`${user.firstName} ${user.lastName}` || "Okeke Andrew"}</p>
               <p className="viewUserModalInfodCol1Status">
-                <span>Status </span> <span>Active</span>
+                <span>Status </span>{" "}
+                <span
+                  className={`${
+                    user.status === "active" ? "active" : "inActive"
+                  }`}
+                >
+                  {user.status === "active" ? "Active" : "Deactivated"}
+                </span>
               </p>
-              <button>Deactivate user</button>
+              <button
+                className={`${
+                  user.status === "active" ? "deActivate" : "activate"
+                }`}
+              >
+                {user.status === "active" ? "Deactivate user" : "Activate user"}
+              </button>
             </div>
             <div className="viewUserModalInfodCol2">
               <div className="userDetailsCol2">
                 <p>Phone number</p>
-                <p>+234 9045 345 7865</p>
+                <p>
+                  {`${user.countryCode} ${user.phoneNumber}` ||
+                    "+234 9045 345 7865"}
+                </p>
               </div>
 
               <div className="userDetailsCol2">
                 <p>Email address</p>
-                <p>frostandy41@gmail.com</p>
+                <p>{user.email || "frostandy41@gmail.com"}</p>
               </div>
 
               <div className="userDetailsCol2">
                 <p>Country</p>
-                <p>Nigeria</p>
+                <p>{user.country || "Nigeria"}</p>
               </div>
 
               <div className="userDetailsCol2">
                 <p>State</p>
-                <p>Lagos</p>
+                <p>{user.state || "Lagos"}</p>
               </div>
 
               <div className="userDetailsCol2">
                 <p>Address</p>
-                <p>Off Alausa, Obafemi awolowo road</p>
+                <p>{user.address || "Off Alausa, Obafemi awolowo road"}</p>
               </div>
 
               <div className="userDetailsCol2 ">

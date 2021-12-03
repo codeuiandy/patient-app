@@ -30,7 +30,7 @@
 
   & > * + * {
     --flow: 1em;
-    margin-top: var(--flow, 1em);
+    margin-top: var(--flow-content, 1em) !important;
   }
 
   &__heading {

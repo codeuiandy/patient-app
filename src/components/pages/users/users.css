@@ -177,17 +177,28 @@
   margin-right: 50px;
 }
 
-.viewUserModalInfodCol1Status span:nth-of-type(2) {
+.viewUserModalInfodCol1Status span.active {
   color: #499f68;
 }
 
-.viewUserModalInfodCol1 button {
+.viewUserModalInfodCol1Status span.inActive {
   color: #cc5148;
+}
+
+.viewUserModalInfodCol1 button {
   background: #cc514826;
   border-radius: 5px;
   padding: 10px 20px 10px 20px;
   margin-top: 30px;
   font-size: 12px;
+}
+
+.viewUserModalInfodCol1 button.activate {
+  color: #499f68;
+}
+
+.viewUserModalInfodCol1 button.deActivate{
+  color: #cc5148;
 }
 
 .viewUserModalInfodCol2 {
