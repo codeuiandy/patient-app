@@ -24,23 +24,28 @@ import { hideLoader, showLoader } from "../../helpers/loader";
 import { useHistory } from "react-router-dom";
 import redEllipse from "./../../../assets/imgF/red_ellipse.png";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
+import yourLocationIcon from "./../../../assets/imgF/your_location.png";
+import riderLocationIcon from "./../../../assets/imgF/rider_location.png";
+import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
+import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import swal from "sweetalert";
 import Select from "react-select";
 
 const Bikes = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showTrackBikeModal, setShowTrackBikeModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [tab, setTab] = useState("tab1");
-  const [riders, setRiders] = useState([]);
+  const [showModal3, setShowModal3] = useState(false);
+
   const [selectedRider, setSelectedRider] = useState({
     riderId: "",
   });
-  const [bike, setBike] = useState({
-    brand: "",
-    license: "",
-  });
+  const [riders, setRiders] = useState([]);
+  const [bike, setBike] = useState({});
   const [bikes, setBikes] = useState([]);
+
+  const [tab, setTab] = useState("tab1");
   const [selectedOption, setSelectedOption] = useState(null);
 
   const history = useHistory();
@@ -49,17 +54,24 @@ const Bikes = () => {
     setTab(index);
   };
 
-  const openModal1 = () => setShowModal1(true);
-  const closeModal1 = () => setShowModal1(false);
+  const toggleTrackBikeModal = () => setShowTrackBikeModal(!showTrackBikeModal);
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+  const openModal1 = () => setShowModal1(true);
+  const closeModal1 = () => setShowModal1(false);
   const openModal2 = (data) => {
     setShowModal2(true);
     console.log(data);
     setSelectedRider({ ...selectedRider, bikeId: data.id });
   };
   const closeModal2 = () => setShowModal2(false);
+  const openModal3 = (id) => {
+    getSingleBikeInfo(id);
+    setShowModal3(true);
+  };
+  const closeModal3 = () => setShowModal3(false);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -162,6 +174,18 @@ const Bikes = () => {
     console.log(response);
   };
 
+  const getSingleBikeInfo = async (id) => {
+    const response = await httpGet(`bike/single/${id}`);
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      setBike(response.data);
+    }
+    console.log(response);
+  };
+
   useEffect(() => {
     getRidersAndBikes();
   }, []);
@@ -204,10 +228,10 @@ const Bikes = () => {
           </thead>
           <tbody>
             {bikes.length ? (
-              bikes.map((bike) => {
+              bikes.map((bike, idx) => {
                 return (
-                  <tr key={bike?.id}>
-                    <td>{bike?.brand}</td>
+                  <tr key={bike.id}>
+                    <td onClick={() => openModal3(bike.id)}>{bike?.brand}</td>
                     <td>{bike?.license}</td>
                     <td>
                       <img
@@ -219,7 +243,7 @@ const Bikes = () => {
                         ? `${bike.assigned.rider.firstName} ${bike.assigned.rider.lastName}`
                         : "Chuka Nduka"}
                     </td>
-                    <td>{`50`}</td>
+                    <td onClick={toggleTrackBikeModal}>{`50`}</td>
                     <td onClick={() => openModal2(bike)}>Pick Rider</td>
                   </tr>
                 );
@@ -450,6 +474,142 @@ const Bikes = () => {
                 onClick={() => assignBikeToRider("fromAssign", null, null)}
               />
             </div>
+          </section>
+        </div>
+      </Modal>
+
+      {/* MODAL: SHOW BIKE INFO  */}
+      <Modal open={showModal3} onClose={closeModal3} center>
+        <div className="viewUserModalWrap">
+          <div className="modalHeader">
+            <p>Bike Info</p>{" "}
+            <img
+              onClick={closeModal3}
+              style={{ cursor: "pointer" }}
+              src={cancelIcon}
+              alt=""
+            />
+          </div>
+
+          <div className="viewUserModalInfod">
+            <div className="viewUserModalInfodCol1">
+              <div className="userImgwrapViwp">
+                <img src={userImg} alt="" />
+              </div>
+              <p> {"Okeke Andrew"}</p>
+              <p className="viewUserModalInfodCol1Status">
+                <span>Status </span> <span>{"Deactivated"}</span>
+              </p>
+              <button>{"Activate user"}</button>
+            </div>
+            <div className="viewUserModalInfodCol2">
+              <div className="userDetailsCol2">
+                <p>Brand</p>
+                <p>{bike.brand}</p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>License</p>
+                <p>{bike.license}</p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>Added</p>
+                <p>{bike.createdAt}</p>
+              </div>
+
+              <div className="userDetailsCol2 ">
+                <p>Deliveries made by rider</p>
+                <p className=" userDetailsCol2lasdf">
+                  50
+                  <span>
+                    {" "}
+                    <img src={check} alt="" /> (45)
+                  </span>
+                  <span>
+                    {" "}
+                    <img src={cancelIcon} alt="" /> (15)
+                  </span>
+                  <a href="">View all</a>
+                </p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>
+                  <Button
+                    width="100%"
+                    text="Change rider"
+                    background="#0087ff"
+                    fontSize="12px"
+                    color="white"
+                    onClick={openModal1}
+                  />
+                </p>
+
+                <p>
+                  <Button
+                    width="100%"
+                    text="Track bike"
+                    background="#61696F26"
+                    fontSize="12px"
+                    color="#00101d"
+                    onClick={closeModal3}
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      {/* MODAL: TRACK BIKE PROGRESS ON MAP  */}
+      <Modal open={showTrackBikeModal} onClose={toggleTrackBikeModal} center>
+        <div className="order-details-modal">
+          <section className="bike-tracker-modal">
+            <div className="bike-tracker__bike">
+              <h2 className="bike-tracker__heading">Tracking bike</h2>
+              <figure className="bike-tracker__rider">
+                <div className="bike-tracker__rider-img">
+                  <img src={userImg} alt="" />
+                </div>
+
+                <div className="bike-tracker__rider-info">
+                  <p className="bike-tracker__rider-name">Chuka Nduka</p>
+                  <p className="bike-tracker__rider-type">Rider</p>
+                </div>
+              </figure>
+
+              <figure className="bike-tracker__location">
+                <header className="bike-tracker__location-header">
+                  <div className="bike-tracker__location-icon">
+                    <img src={yourLocationIcon} alt="" />
+                  </div>
+                  <p className="bike-tracker__location-heading">
+                    Your current location
+                  </p>
+                </header>
+
+                <p className="bike-tracker__location-details">
+                  Alausa round about, Lagos state
+                </p>
+              </figure>
+              
+              <figure className="bike-tracker__location">
+                <header className="bike-tracker__location-header">
+                  <div className="bike-tracker__location-icon">
+                    <img src={riderLocationIcon} alt="" />
+                  </div>
+                  <p className="bike-tracker__location-heading">
+                    Rider current location
+                  </p>
+                </header>
+
+                <p className="bike-tracker__location-details">
+                  Alausa round about, Lagos state
+                </p>
+              </figure>
+            </div>
+            <div className="bike-tracker__map">MAP</div>
           </section>
         </div>
       </Modal>
