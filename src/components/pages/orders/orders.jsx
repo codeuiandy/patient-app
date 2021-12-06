@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
-import "./orders.css";
-import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { NotificationManager } from "react-notifications";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import Select from "react-select";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import arrowL from "../../../assets/imgF/arrow_back_ios_new_black_24dp-2@2x.png";
-import "react-responsive-modal/styles.css";
-import userImg from "../../../assets/imgF/codeuiandyimg.png";
-import checkImg from "../../../assets/imgF/check_circle_black_24dp@2x.png";
 import cancelImg from "../../../assets/imgF/cancel_black_24dp@2x.png";
-import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
+import checkImg from "../../../assets/imgF/check_circle_black_24dp@2x.png";
+import userImg from "../../../assets/imgF/codeuiandyimg.png";
 import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
-import "../dashboard/dashboard.scss";
-import { Modal } from "react-responsive-modal";
+import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
+import { httpGet, httpPost } from "../../../helpers/httpMethods";
 import { Button } from "../../buttons";
+import { hideLoader, showLoader } from "../../helpers/loader";
+import "../dashboard/dashboard.scss";
 import img from "./../../../assets/imgF/update_rider_success.png";
 import "./../../modals/modal.scss";
+import "./orders.css";
 
-import Select from "react-select";
-import { hideLoader, showLoader } from "../../helpers/loader";
-import { httpGet, httpPost } from "../../../helpers/httpMethods";
-import { NotificationManager } from "react-notifications";
-import moment from "moment";
-import swal from "sweetalert";
 
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Modal from "react-responsive-modal";
 import img from "../../assets/imgF/update_rider_success.png";
-import "./modal.scss";
 import { Button } from "../../components/buttons";
-import styles from "./modal.scss";
+import "./modal.scss";
 
 const ChangedBikeRider = () => {
   const [showModal, setShowModal] = useState(false);

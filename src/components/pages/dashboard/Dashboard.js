@@ -1,22 +1,23 @@
-import "./dashboard.scss";
-import "./../orders/orders.css";
+import { useEffect, useState } from "react";
 import { FaRedoAlt } from "react-icons/fa";
-import clipBoardImg from "../../../assets/imgF/pending_actions_black_24dp@2x.png";
-import userImg from "../../../assets/imgF/codeuiandyimg.png";
+import { NotificationManager } from "react-notifications";
+import { Modal } from "react-responsive-modal";
+import { Link } from "react-router-dom";
 import checkImg from "../../../assets/imgF/check_circle_black_24dp@2x.png";
-import cancelImg from "../../../assets/imgF/cancel_black_24dp@2x.png";
-import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
-import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
-import walletImg from "../../../assets/imgF/payments_black_24dp@2x.png";
+import {
+  default as codeuiandy,
+  default as userImg,
+} from "../../../assets/imgF/codeuiandyimg.png";
 import FilterImg from "../../../assets/imgF/filter_list_black_24dp@2x.png";
 import clock from "../../../assets/imgF/notifications_active_black_24dp@2x.png";
-import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
-import { useEffect, useState } from "react";
-import { httpPost, httpGet } from "./../../../helpers/httpMethods";
-import { NotificationManager } from "react-notifications";
+import walletImg from "../../../assets/imgF/payments_black_24dp@2x.png";
+import clipBoardImg from "../../../assets/imgF/pending_actions_black_24dp@2x.png";
+import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
+import tripStart from "../../../assets/imgF/trip_origin_black_24dp@2x.png";
+import { httpGet } from "./../../../helpers/httpMethods";
 import { hideLoader, showLoader } from "./../../helpers/loader";
-import { Link, useHistory } from "react-router-dom";
-import { Modal } from "react-responsive-modal";
+import "./../orders/orders.css";
+import "./dashboard.scss";
 
 const DashboardTwo = () => {
   const [showModal1, setShowModal1] = useState(false);

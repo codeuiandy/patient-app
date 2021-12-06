@@ -111,3 +111,7 @@
   width: 0.8rem;
   height: 0.8rem;
 }
+
+.riderInputWrapMain label {
+  font-weight: bold;
+}
