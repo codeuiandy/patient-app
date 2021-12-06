@@ -17,7 +17,7 @@ import { hideLoader, showLoader } from "../../helpers/loader";
 import { httpGet, httpPost } from "../../../helpers/httpMethods";
 import { NotificationManager } from "react-notifications";
 import moment from "moment";
-import { swal } from "sweetalert";
+import swal from "sweetalert";
 
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
@@ -86,7 +86,7 @@ const Orders = () => {
     if (response.code === 200) {
       closeModal2();
       getRiderAndOrders();
-      swal("success", "Order assinged successfully");
+      swal("success", "Order assinged successfully", "success");
     }
     console.log(response);
   };
@@ -123,7 +123,7 @@ const Orders = () => {
               <th>Sender name</th>
               <th>Date</th>
               <th>Rider name</th>
-              <th>Delivery amount</th>
+              <th> Amount</th>
               <th>Status</th>
               <th>Assign</th>
             </tr>
@@ -141,7 +141,7 @@ const Orders = () => {
                     <td>{data?.senderName}</td>
                     <td>{moment(data?.createdAt).format("DD-MM-YYYY")}</td>
                     <td>Chuka Nduka</td>
-                    <td>3,500</td>
+                    <td>{data.cost}</td>
                     <td>
                       {" "}
                       <img
