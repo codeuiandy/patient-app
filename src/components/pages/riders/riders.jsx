@@ -1,44 +1,31 @@
-import React, { useState, useEffect } from "react";
-import "./riders.css";
-import "./../users/users.css";
-import userImg from "../../../assets/imgF/codeuiandyimg.png";
-import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
-
-import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
-import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
-import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
-import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
+import React, { useEffect, useState } from "react";
+import { NotificationManager } from "react-notifications";
 import Modal from "react-responsive-modal";
-import pen from "../../../assets/imgF/pen.png";
+import { useHistory } from "react-router-dom";
 import Image from "../../../assets/getImageUrl";
-import { Input, Select } from "../../input/Input";
+import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
+import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
+import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
+import {
+  default as codeuiandy,
+  default as userImg,
+} from "../../../assets/imgF/codeuiandyimg.png";
+import pen from "../../../assets/imgF/pen.png";
 import { Button } from "../../buttons/index";
 import ValidatePassword from "../../helpers/validatePassword";
-import EmailAuth from "./../../helpers/emailAuth";
-import { httpPost, httpGet } from "./../../../helpers/httpMethods";
-import { NotificationManager } from "react-notifications";
-import { hideLoader, showLoader } from "./../../helpers/loader";
-import { useHistory } from "react-router-dom";
-import redEllipse from "./../../../assets/imgF/red_ellipse.png";
+import { Input, Select } from "../../input/Input";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
+import redEllipse from "./../../../assets/imgF/red_ellipse.png";
+import { httpGet, httpPost } from "./../../../helpers/httpMethods";
+import EmailAuth from "./../../helpers/emailAuth";
+import { hideLoader, showLoader } from "./../../helpers/loader";
+import "./../users/users.css";
+import "./riders.css";
 
 const Orders = () => {
   const [showModal, setShowModal] = useState(false);
   const [showRiderInfoModal, setShowRiderInfoModal] = useState(false);
   const [tab, setTab] = useState("tab1");
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [countryCode, setCountryCode] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [state, setState] = useState("");
-  // const [lga, setLga] = useState("");
-  // const [fireToken, setFireToken] = useState("");
-  // const [emailOpt, setEmailOpt] = useState("");
-  // const [plateNumber, setPlateNumber] = useState("");
 
   const [rider, setRider] = useState({
     firstName: "",
@@ -46,14 +33,14 @@ const Orders = () => {
     password: "",
     email: "",
     phoneNumber: "",
-    countryCode: "234",
+    countryCode: "",
     address: "",
     country: "",
     state: "",
     lga: "",
     fireToken: null,
     emailOpt: true,
-    plateNumber: "7bws63ser",
+    plateNumber: "",
   });
   const [riders, setRiders] = useState([]);
 
@@ -253,10 +240,10 @@ const Orders = () => {
               <ul>
                 <li
                   className={`${
-                    (tab == tab) == "tab1" ||
-                    tab == "tab2" ||
-                    tab == "tab3" ||
-                    tab == "tab4"
+                    tab === "tab1" ||
+                    tab === "tab2" ||
+                    tab === "tab3" ||
+                    tab === "tab4"
                       ? "activeBTab"
                       : ""
                   }`}
@@ -264,10 +251,10 @@ const Orders = () => {
                   <div
                     className="tabPositionRider"
                     style={
-                      tab == "tab1" ||
-                      tab == "tab2" ||
-                      tab == "tab3" ||
-                      tab == "tab4"
+                      tab === "tab1" ||
+                      tab === "tab2" ||
+                      tab === "tab3" ||
+                      tab === "tab4"
                         ? { background: "orange" }
                         : {}
                     }
@@ -278,7 +265,7 @@ const Orders = () => {
                 </li>
                 <li
                   className={`${
-                    tab == "tab2" || tab == "tab3" || tab == "tab4"
+                    tab === "tab2" || tab === "tab3" || tab === "tab4"
                       ? "activeBTab"
                       : ""
                   }`}
@@ -286,7 +273,7 @@ const Orders = () => {
                   <div
                     className="tabPositionRider"
                     style={
-                      tab == "tab2" || tab == "tab3" || tab == "tab4"
+                      tab === "tab2" || tab === "tab3" || tab === "tab4"
                         ? { background: "orange" }
                         : {}
                     }
@@ -297,13 +284,13 @@ const Orders = () => {
                 </li>{" "}
                 <li
                   className={`${
-                    tab == "tab3" || tab == "tab4" ? "activeBTab" : ""
+                    tab === "tab3" || tab === "tab4" ? "activeBTab" : ""
                   }`}
                 >
                   <div
                     className="tabPositionRider"
                     style={
-                      tab == "tab3" || tab == "tab4"
+                      tab === "tab3" || tab === "tab4"
                         ? { background: "orange" }
                         : {}
                     }
@@ -312,10 +299,10 @@ const Orders = () => {
                   </div>
                   <span>Password</span>
                 </li>{" "}
-                {/* <li className={`${tab == "tab4" ? "activeBTab" : ""}`}>
+                {/* <li className={`${tab==="tab4" ? "activeBTab" : ""}`}>
                   <div
                     className="tabPositionRider"
-                    style={tab == "tab4" ? { background: "orange" } : {}}
+                    style={tab==="tab4" ? { background: "orange" } : {}}
                   >
                     <Image path="person.png" />
                   </div>
@@ -324,7 +311,7 @@ const Orders = () => {
               </ul>
             </div>
 
-            {tab == "tab1" ? (
+            {tab === "tab1" ? (
               <div className="col2Rider">
                 <div className="addprofileRiderWrap">
                   <p>Add a profile picture</p>
@@ -416,7 +403,7 @@ const Orders = () => {
               ""
             )}
 
-            {tab == "tab2" ? (
+            {tab === "tab2" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
@@ -505,7 +492,7 @@ const Orders = () => {
               ""
             )}
 
-            {tab == "tab3" ? (
+            {tab === "tab3" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">
@@ -553,7 +540,7 @@ const Orders = () => {
               ""
             )}
 
-            {/* {tab == "tab4" ? (
+            {/* {tab==="tab4" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
                   <div className="riderInputWrapMain">

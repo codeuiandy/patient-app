@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import "./users.css";
-import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
-import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
-import userImg from "../../../assets/imgF/codeuiandyimg.png";
-import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
-
-import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
-import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
-import { Modal } from "react-responsive-modal";
-import redEllipse from "./../../../assets/imgF/red_ellipse.png";
-import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
-import { httpPost, httpGet } from "./../../../helpers/httpMethods";
+import React, { useEffect, useState } from "react";
 import { NotificationManager } from "react-notifications";
+import { Modal } from "react-responsive-modal";
+import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
+import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
+import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
+import {
+  default as codeuiandy,
+  default as userImg
+} from "../../../assets/imgF/codeuiandyimg.png";
+import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
+import redEllipse from "./../../../assets/imgF/red_ellipse.png";
+import { httpGet } from "./../../../helpers/httpMethods";
 import { hideLoader, showLoader } from "./../../helpers/loader";
-import { useHistory } from "react-router-dom";
+import "./users.css";
 
 const Orders = () => {
   const [open, setOpen] = useState(false);
