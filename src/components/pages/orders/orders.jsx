@@ -181,7 +181,7 @@ const Orders = () => {
 
       <Modal open={showModal1} onClose={closeModal1} center>
         <div className="order-details-modal">
-          <div className="rder-details-modalMain">
+          <div className="order-details-modalMain">
             <div className="order-details-modalCol1">
               <div className="orderStatus">
                 <div className="orderStatusCol1">
