@@ -118,13 +118,13 @@
   box-sizing: border-box;
 }
 
-.rder-details-modalMain {
+.order-details-modalMain {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.rder-details-modalMain .order-details-modalCol1 {
+.order-details-modalMain .order-details-modalCol1 {
   width: 30%;
   height: 100%;
   overflow: hidden;
@@ -133,7 +133,7 @@
   padding-right: 20px;
 }
 
-.rder-details-modalMain .order-details-modalCol2 {
+.order-details-modalMain .order-details-modalCol2 {
   width: 40%;
   height: 100%;
   background: #f5faff;
@@ -142,7 +142,7 @@
   overflow-y: scroll;
 }
 
-.rder-details-modalMain .order-details-modalCol3 {
+.order-details-modalMain .order-details-modalCol3 {
   width: 30%;
   height: 100%;
   padding: 10px 20px 10px 20px;

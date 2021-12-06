@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./riders.css";
+import "./../users/users.css";
+import userImg from "../../../assets/imgF/codeuiandyimg.png";
+import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
+
+import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
+import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import codeuiandy from "../../../assets/imgF/codeuiandyimg.png";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import Modal from "react-responsive-modal";
@@ -18,6 +24,7 @@ import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
 
 const Orders = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showRiderInfoModal, setShowRiderInfoModal] = useState(false);
   const [tab, setTab] = useState("tab1");
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
@@ -53,21 +60,6 @@ const Orders = () => {
   const history = useHistory();
   const handleTabSwitch = (index) => {
     setTab(index);
-    // if (index == "tab1") {
-    //   setTab("tab2");
-    // }
-
-    // if (index == "tab2") {
-    //   setTab("tab3");
-    // }
-
-    // if (index == "tab3") {
-    //   setTab("tab4");
-    // }
-
-    // if (index == "tab4") {
-    //   setTab("tab4");
-    // }
   };
 
   const openModal = () => {
@@ -76,6 +68,10 @@ const Orders = () => {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const toggleRiderInfoModal = () => {
+    setShowRiderInfoModal(!showRiderInfoModal);
   };
 
   const onChange = (e) => {
@@ -94,21 +90,6 @@ const Orders = () => {
     if (!ValidatePassword(rider.password)) {
       return;
     } else {
-      // if (
-      //   rider.firstName &&
-      //   rider.lastName &&
-      //   rider.password &&
-      //   rider.email &&
-      //   rider.phoneNumber &&
-      //   rider.countryCode &&
-      //   rider.address &&
-      //   rider.country &&
-      //   rider.state &&
-      //   rider.lga &&
-      //   rider.plateNumber
-      // ) {
-
-      // }
       closeModal();
       showLoader();
       const response = await httpPost(`admin/create_rider`, rider);
@@ -120,42 +101,42 @@ const Orders = () => {
         NotificationManager.success("Rider Added Succesfully");
         const newRider = rider;
         setRiders([...riders, newRider]);
-        setRider({
-          firstName: "",
-          lastName: "",
-          password: "",
-          email: "",
-          phoneNumber: "",
-          countryCode: "",
-          address: "",
-          country: "",
-          state: "",
-          lga: "",
-          fireToken: null,
-          emailOpt: true,
-          plateNumber: "",
-        });
-        // // localStorage.setItem("token", response.data.token);
+        setRider({});
         history.push("/riders");
       }
       console.log(response);
     }
   };
+  const getAllRiders = async () => {
+    showLoader();
+    const response = await httpGet(`admin/all_users?type=rider`);
+    hideLoader();
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      setRiders(response.data);
+    }
+    console.log(response);
+  };
+
+  const getSingleRider = async (id) => {
+    showLoader();
+    const response = await httpGet(`admin/all_users?type=rider`);
+    hideLoader();
+    console.log("RESPONSE>>>", response);
+    if (!response?.success) {
+      return NotificationManager.error(response.message);
+    }
+    if (response.code === 200) {
+      setRider(response.data);
+    }
+    console.log(response);
+  };
 
   useEffect(() => {
-    (async () => {
-      showLoader();
-      const response = await httpGet(`admin/all_users?type=rider`);
-      hideLoader();
-      console.log("RESPONSE>>>", response);
-      if (!response?.success) {
-        return NotificationManager.error(response.message);
-      }
-      if (response.code === 200) {
-        setRiders(response.data);
-      }
-      console.log(response);
-    })();
+    getAllRiders();
   }, []);
 
   return (
@@ -165,7 +146,14 @@ const Orders = () => {
         <p>List of riders</p>
       </div>
       <div className="createNewRyderBtn">
-        <button onClick={openModal}>Create new rider</button>
+        <button
+          onClick={() => {
+            openModal();
+            setTab("tab1");
+          }}
+        >
+          Create new rider
+        </button>
       </div>
 
       <div className="tableHeader2">
@@ -209,7 +197,7 @@ const Orders = () => {
                   countryCode,
                 } = rider;
                 return (
-                  <tr key={id}>
+                  <tr key={id} onClick={toggleRiderInfoModal}>
                     <td>
                       <img
                         class="userProfileImg"
@@ -595,6 +583,103 @@ const Orders = () => {
             ) : (
               ""
             )} */}
+          </div>
+        </div>
+      </Modal>
+
+      <Modal open={showRiderInfoModal} onClose={toggleRiderInfoModal} center>
+        <div className="viewUserModalWrap">
+          <div className="modalHeader">
+            <p>Rider Info</p>{" "}
+            <img
+              onClick={toggleRiderInfoModal}
+              style={{ cursor: "pointer" }}
+              src={cancelIcon}
+              alt=""
+            />
+          </div>
+
+          <div className="viewUserModalInfod">
+            <div className="viewUserModalInfodCol1">
+              <div className="userImgwrapViwp">
+                <img src={rider?.avatar || userImg} alt="" />
+              </div>
+              <p> {`${rider.firstName} ${rider.lastName}` || "Okeke Andrew"}</p>
+              <p className="viewUserModalInfodCol1Status">
+                <span>Status </span>{" "}
+                <span
+                  className={`${
+                    rider.status === "active" ? "active" : "inActive"
+                  }`}
+                >
+                  {rider.status === "active" ? "Active" : "Deactivated"}
+                </span>
+              </p>
+              <button
+                className={`${
+                  rider.status === "active" ? "deActivate" : "activate"
+                }`}
+              >
+                {rider.status === "active"
+                  ? "Deactivate user"
+                  : "Activate user"}
+              </button>
+            </div>
+            <div className="viewUserModalInfodCol2">
+              <div className="userDetailsCol2">
+                <p>Phone number</p>
+                <p>
+                  {`${rider?.countryCode} ${rider?.phoneNumber}` ||
+                    "+234 9045 345 7865"}
+                </p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>Country</p>
+                <p>{rider.country || "Nigeria"}</p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>State</p>
+                <p>{rider.state || "Lagos"}</p>
+              </div>
+
+              <div className="userDetailsCol2">
+                <p>Address</p>
+                <p>{rider.address || "Off Alausa, Obafemi awolowo road"}</p>
+              </div>
+
+              <div className="userDetailsCol2 ">
+                <p>Deliveries made</p>
+                <p className=" userDetailsCol2lasdf">
+                  50
+                  <span>
+                    {" "}
+                    <img src={check} alt="" /> (45)
+                  </span>
+                  <span>
+                    {" "}
+                    <img src={cancelIcon} alt="" /> (15)
+                  </span>
+                  <a href="">View all</a>
+                </p>
+              </div>
+              <div className="userDetailsCol2 ">
+                <p>Average rating</p>
+                <p className=" userDetailsCol2lasdf">
+                  50
+                  <span>
+                    {" "}
+                    <img src={check} alt="" /> (45)
+                  </span>
+                  <span>
+                    {" "}
+                    <img src={cancelIcon} alt="" /> (15)
+                  </span>
+                  <a href="">View all</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Modal>

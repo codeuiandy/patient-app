@@ -186,7 +186,6 @@
 }
 
 .viewUserModalInfodCol1 button {
-  background: #cc514826;
   border-radius: 5px;
   padding: 10px 20px 10px 20px;
   margin-top: 30px;
@@ -195,10 +194,12 @@
 
 .viewUserModalInfodCol1 button.activate {
   color: #499f68;
+  background-color: #499f6826;
 }
 
-.viewUserModalInfodCol1 button.deActivate{
+.viewUserModalInfodCol1 button.deActivate {
   color: #cc5148;
+  background: #cc514826;
 }
 
 .viewUserModalInfodCol2 {
