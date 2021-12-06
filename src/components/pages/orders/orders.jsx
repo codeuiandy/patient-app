@@ -12,6 +12,9 @@ import locationIcon from "../../../assets/imgF/place_black_24dp-2@2x.png";
 import "../dashboard/dashboard.scss";
 import { Modal } from "react-responsive-modal";
 import { Button } from "../../buttons";
+import img from "./../../../assets/imgF/update_rider_success.png";
+import "./../../modals/modal.scss";
+
 import Select from "react-select";
 import { hideLoader, showLoader } from "../../helpers/loader";
 import { httpGet, httpPost } from "../../../helpers/httpMethods";
@@ -22,6 +25,8 @@ import swal from "sweetalert";
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [assignOrderToRiderSuccessModal, setAssignOrderToRiderSuccessModal] =
+    useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [riders, setRider] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -29,13 +34,14 @@ const Orders = () => {
     orderId: "",
     riderId: "",
   });
-  useEffect(() => {
-    getRiderAndOrders();
-  }, []);
   console.log(selectedOption);
 
   const openModal1 = () => setShowModal1(true);
   const closeModal1 = () => setShowModal1(false);
+
+  const toggleAssignOrderToRiderSuccessModal = () => {
+    setAssignOrderToRiderSuccessModal(!assignOrderToRiderSuccessModal);
+  };
 
   const openModal2 = (data) => {
     console.log(data);
@@ -86,10 +92,14 @@ const Orders = () => {
     if (response.code === 200) {
       closeModal2();
       getRiderAndOrders();
-      swal("success", "Order assinged successfully", "success");
+      toggleAssignOrderToRiderSuccessModal();
     }
     console.log(response);
   };
+
+  useEffect(() => {
+    getRiderAndOrders();
+  }, []);
 
   return (
     <div>
@@ -352,6 +362,47 @@ const Orders = () => {
               />
             </div>
           </section>
+        </div>
+      </Modal>
+
+      <Modal
+        open={assignOrderToRiderSuccessModal}
+        onClose={toggleAssignOrderToRiderSuccessModal}
+        center
+      >
+        <div className="modal-wrapper">
+          <div className="modal-container">
+            <section className="modal-info success ta-c">
+              <h3 className="success__heading">
+                Successfully assigned order to rider
+              </h3>
+              <p className="success__note">
+                An email will be sent to update them
+              </p>
+              <div className="success__img--wrapper">
+                <img
+                  src={img}
+                  alt="assign order to rider success"
+                  className="success__img"
+                />
+              </div>
+              {/* <Button
+                width="100%"
+                text="Create another rider"
+                background="#0087ff"
+                fontSize="14px"
+                color="white"
+              /> */}
+              <Button
+                width="100%"
+                text="Go Back"
+                background="#61696F26"
+                fontSize="14px"
+                color="#00101d"
+                onClick={toggleAssignOrderToRiderSuccessModal}
+              />
+            </section>
+          </div>
         </div>
       </Modal>
     </div>
