@@ -43,7 +43,7 @@ const DashboardTwo = () => {
 
     (async () => {
       showLoader();
-      const response = await httpGet(`admin/recent/orders`);
+      const response = await httpGet(`admin/orders?status=all`);
       hideLoader();
       console.log("RESPONSE>>>", response);
       if (!response?.success) {
