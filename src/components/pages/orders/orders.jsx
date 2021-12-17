@@ -19,7 +19,6 @@ import img from "./../../../assets/imgF/update_rider_success.png";
 import "./../../modals/modal.scss";
 import "./orders.css";
 
-
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -28,12 +27,12 @@ const Orders = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [riders, setRider] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [filterOrdersSt, setFilterOrders] = useState([]);
   const [selectedRider, setSelectedRider] = useState({
     orderId: "",
     riderId: "",
   });
-  console.log(selectedOption);
-
+  const [orderType, setOrderType] = useState("all");
   const openModal1 = () => setShowModal1(true);
   const closeModal1 = () => setShowModal1(false);
 
@@ -71,6 +70,7 @@ const Orders = () => {
       // alert("Got here");
       setRider(transformed);
       setOrders(ordersRes.data);
+      setFilterOrders(ordersRes.data);
       console.log(ordersRes);
     }
     console.log(riderRes);
@@ -88,6 +88,7 @@ const Orders = () => {
       return NotificationManager.error(response.message);
     }
     if (response.code === 200) {
+      setOrderType("all");
       closeModal2();
       getRiderAndOrders();
       toggleAssignOrderToRiderSuccessModal();
@@ -99,6 +100,62 @@ const Orders = () => {
     getRiderAndOrders();
   }, []);
 
+  const filterOrders = (type) => {
+    switch (type) {
+      case "pending":
+        let filterPendingOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filterPendingOrders);
+        console.log(filterPendingOrders);
+        break;
+
+      case "paid":
+        let filterpaidOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filterpaidOrders);
+        console.log(filterpaidOrders);
+        break;
+
+      case "pickup":
+        let filterpickupOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filterpickupOrders);
+        console.log(filterpickupOrders);
+        break;
+
+      case "arrived":
+        let filterarrivedOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filterarrivedOrders);
+        console.log(filterarrivedOrders);
+        break;
+
+      case "delivered":
+        let filterdeliveredOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filterdeliveredOrders);
+        console.log(filterdeliveredOrders);
+        break;
+
+      case "cancelled":
+        let filtercancelledOrders = orders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterOrders(filtercancelledOrders);
+        console.log(filtercancelledOrders);
+        break;
+
+      default:
+        setFilterOrders(orders);
+        break;
+    }
+  };
+
   return (
     <div>
       <div className="tableHeader1">
@@ -108,11 +165,99 @@ const Orders = () => {
 
       <div className="tableHeader2">
         <div className="col1H2">
-          <p>All</p>
-          <p>On-going</p>
-          <p>Scheduled</p>
-          <p>Failed</p>
-          <p>Completed</p>
+          <p
+            style={
+              orderType == "all"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("");
+              setOrderType("all");
+            }}
+          >
+            All
+          </p>
+          <p
+            style={
+              orderType == "pending"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("pending");
+              setOrderType("pending");
+            }}
+          >
+            Pending
+          </p>
+          <p
+            style={
+              orderType == "pickup"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("pickup");
+              setOrderType("pickup");
+            }}
+          >
+            Pickup
+          </p>
+          <p
+            style={
+              orderType == "arrived"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("arrived");
+              setOrderType("arrived");
+            }}
+          >
+            Arrived
+          </p>
+          <p
+            style={
+              orderType == "cancelled"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("cancelled");
+              setOrderType("cancelled");
+            }}
+          >
+            Cancelled
+          </p>
+
+          <p
+            style={
+              orderType == "paid"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("paid");
+              setOrderType("paid");
+            }}
+          >
+            Paid
+          </p>
+
+          <p
+            style={
+              orderType == "delivered"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterOrders("delivered");
+              setOrderType("delivered");
+            }}
+          >
+            Delivered
+          </p>
         </div>
 
         <div className="col2H2">
@@ -137,29 +282,72 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.length === 0 || orders === undefined ? (
-              <p style={{ fontSize: "18px", width: "100%", marginTop: "30px" }}>
-                No order found at the moment
+            {filterOrdersSt.length == 0 ||
+            filterOrdersSt === undefined ||
+            filterOrdersSt === null ? (
+              <p style={{ fontSize: "15px", width: "100%", marginTop: "30px" }}>
+                No result found at the moment.
               </p>
             ) : (
-              orders.map((data) => {
+              filterOrdersSt.map((data, index) => {
                 return (
-                  <tr class="active-row">
+                  <tr key={index} class="active-row">
                     <td>{data?.itemName}</td>
                     <td>{data?.senderName}</td>
                     <td>{moment(data?.createdAt).format("DD-MM-YYYY")}</td>
-                    <td>Chuka Nduka</td>
-                    <td>{data.cost}</td>
                     <td>
+                      {data.assigned == null
+                        ? "Not assinged to a rider"
+                        : `${data.assigned.rider.firstName} ${data.assigned.rider.lastName}`}
+                    </td>
+                    <td>{data.cost}</td>
+                    <td
+                      style={{ textTransform: "capitalize" }}
+                      onClick={openModal1}
+                    >
                       {" "}
-                      <img
+                      {/* <img
                         onClick={openModal1}
                         style={{ width: "20px" }}
                         src={checkImg}
                         alt=""
-                      />
+                      /> */}
+                      {data.status}
                     </td>{" "}
-                    <td onClick={() => openModal2(data)}>Pick Rider</td>
+                    <td
+                      onClick={
+                        data.assigned == null
+                          ? () => openModal2(data)
+                          : () => {}
+                      }
+                    >
+                      <button
+                        style={
+                          data.assigned == null
+                            ? {
+                                padding: "10px",
+                                background: "#0087ff",
+                                color: "white",
+                                color: "white",
+                                borderRadius: "5px",
+                              }
+                            : {
+                                padding: "10px",
+                                background: "rgba(128, 128, 128, 0.308)",
+                                color: "white",
+                                color: "white",
+                                borderRadius: "5px",
+                              }
+                        }
+                        onClick={
+                          data.assigned == null
+                            ? () => openModal2(data)
+                            : () => {}
+                        }
+                      >
+                        Pick Rider
+                      </button>
+                    </td>
                   </tr>
                 );
               })
@@ -387,7 +575,7 @@ const Orders = () => {
               {/* <Button
                 width="100%"
                 text="Create another rider"
-                background="#0087ff"
+                background="#0087ff",color:"white"
                 fontSize="14px"
                 color="white"
               /> */}

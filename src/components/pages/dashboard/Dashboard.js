@@ -33,7 +33,7 @@ const DashboardTwo = () => {
       hideLoader();
       console.log("RESPONSE>>>", response);
       if (!response?.success) {
-        return NotificationManager.error(response.message);
+        return 
       }
       if (response.code === 200) {
         setStats(response.data);

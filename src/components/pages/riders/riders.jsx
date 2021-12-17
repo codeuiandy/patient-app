@@ -26,7 +26,8 @@ const Orders = () => {
   const [showModal, setShowModal] = useState(false);
   const [showRiderInfoModal, setShowRiderInfoModal] = useState(false);
   const [tab, setTab] = useState("tab1");
-
+  const [filterridersSt, setFilterriders] = useState([]);
+  const [orderType, setOrderType] = useState("all");
   const [rider, setRider] = useState({
     firstName: "",
     lastName: "",
@@ -126,6 +127,54 @@ const Orders = () => {
     getAllRiders();
   }, []);
 
+  const filterriders = (type) => {
+    switch (type) {
+      case "active":
+        let filteractiveriders = riders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterriders(filteractiveriders);
+        console.log(filteractiveriders);
+        break;
+
+      case "inactive":
+        let filterinactiveriders = riders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterriders(filterinactiveriders);
+        console.log(filterinactiveriders);
+        break;
+
+      case "unverified":
+        let filterunverifiedriders = riders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterriders(filterunverifiedriders);
+        console.log(filterunverifiedriders);
+        break;
+
+      case "suspended":
+        let filtersuspendedriders = riders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterriders(filtersuspendedriders);
+        console.log(filtersuspendedriders);
+        break;
+
+      case "deleted":
+        let filterdeletedriders = riders.filter((data) => {
+          return data.status == type;
+        });
+        setFilterriders(filterdeletedriders);
+        console.log(filterdeletedriders);
+        break;
+
+      default:
+        setFilterriders(riders);
+        break;
+    }
+  };
+
   return (
     <div>
       <div className="tableHeader1">
@@ -145,9 +194,86 @@ const Orders = () => {
 
       <div className="tableHeader2">
         <div className="col1H2">
-          <p>All</p>
-          <p>Activated</p>
-          <p>Deactivated</p>
+          <p
+            style={
+              orderType == "all"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("");
+              setOrderType("all");
+            }}
+          >
+            All
+          </p>
+
+          <p
+            style={
+              orderType == "active"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("active");
+              setOrderType("active");
+            }}
+          >
+            Active
+          </p>
+          <p
+            style={
+              orderType == "inactive"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("inactive");
+              setOrderType("inactive");
+            }}
+          >
+            Inactive
+          </p>
+          <p
+            style={
+              orderType == "unverified"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("unverified");
+              setOrderType("unverified");
+            }}
+          >
+            Unverified
+          </p>
+          <p
+            style={
+              orderType == "suspended"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("suspended");
+              setOrderType("suspended");
+            }}
+          >
+            Suspended
+          </p>
+
+          <p
+            style={
+              orderType == "deleted"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("deleted");
+              setOrderType("deleted");
+            }}
+          >
+            Deleted
+          </p>
         </div>
 
         <div className="col2H2">
@@ -171,8 +297,8 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {riders.length ? (
-              riders.map((rider) => {
+            {filterridersSt.length ? (
+              filterridersSt.map((rider) => {
                 const {
                   id,
                   avatar,

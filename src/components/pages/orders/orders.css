@@ -27,6 +27,7 @@
   font-size: 12px;
   padding: 10px 20px 10px 20px;
   border-radius: 5px;
+  cursor: pointer !important;
 }
 
 .col2H2 {
@@ -42,11 +43,6 @@
   color: #00101d;
   font-size: 12px;
   cursor: pointer;
-}
-
-.col1H2 p:nth-of-type(1) {
-  background-color: #0087ff;
-  color: white;
 }
 
 .col2H2 select {

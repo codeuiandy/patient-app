@@ -6,7 +6,7 @@ import cancelIcon from "../../../assets/imgF/cancel_black_24dp@2x.png";
 import check from "../../../assets/imgF/check_circle_black_24dp@2x.png";
 import {
   default as codeuiandy,
-  default as userImg
+  default as userImg,
 } from "../../../assets/imgF/codeuiandyimg.png";
 import greenEllipse from "./../../../assets/imgF/green_ellipse.png";
 import redEllipse from "./../../../assets/imgF/red_ellipse.png";
@@ -19,6 +19,8 @@ const Orders = () => {
   const [isOnline, setIsOnline] = useState(false);
   const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
+  const [filterUsersSt, setFilterUsers] = useState([]);
+  const [orderType, setOrderType] = useState("all");
   console.log(users);
 
   const onOpenModal = () => setOpen(true);
@@ -47,10 +49,59 @@ const Orders = () => {
       }
       if (response.code === 200) {
         setUsers(response.data);
+        setFilterUsers(response.data);
       }
       console.log(response);
     })();
   }, []);
+
+  const filterusers = (type) => {
+    switch (type) {
+      case "active":
+        let filteractiveusers = users.filter((data) => {
+          return data.status == type;
+        });
+        setFilterUsers(filteractiveusers);
+        console.log(filteractiveusers);
+        break;
+
+      case "inactive":
+        let filterinactiveusers = users.filter((data) => {
+          return data.status == type;
+        });
+        setFilterUsers(filterinactiveusers);
+        console.log(filterinactiveusers);
+        break;
+
+      case "unverified":
+        let filterunverifiedusers = users.filter((data) => {
+          return data.status == type;
+        });
+        setFilterUsers(filterunverifiedusers);
+        console.log(filterunverifiedusers);
+        break;
+
+      case "suspended":
+        let filtersuspendedusers = users.filter((data) => {
+          return data.status == type;
+        });
+        setFilterUsers(filtersuspendedusers);
+        console.log(filtersuspendedusers);
+        break;
+
+      case "deleted":
+        let filterdeletedusers = users.filter((data) => {
+          return data.status == type;
+        });
+        setFilterUsers(filterdeletedusers);
+        console.log(filterdeletedusers);
+        break;
+
+      default:
+        setFilterUsers(users);
+        break;
+    }
+  };
 
   return (
     <div>
@@ -61,9 +112,86 @@ const Orders = () => {
 
       <div className="tableHeader2">
         <div className="col1H2">
-          <p>All</p>
-          <p>Activated</p>
-          <p>Deactivated</p>
+          <p
+            style={
+              orderType == "all"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("");
+              setOrderType("all");
+            }}
+          >
+            All
+          </p>
+
+          <p
+            style={
+              orderType == "active"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("active");
+              setOrderType("active");
+            }}
+          >
+            Active
+          </p>
+          <p
+            style={
+              orderType == "inactive"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("inactive");
+              setOrderType("inactive");
+            }}
+          >
+            Inactive
+          </p>
+          <p
+            style={
+              orderType == "unverified"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("unverified");
+              setOrderType("unverified");
+            }}
+          >
+            Unverified
+          </p>
+          <p
+            style={
+              orderType == "suspended"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("suspended");
+              setOrderType("suspended");
+            }}
+          >
+            Suspended
+          </p>
+
+          <p
+            style={
+              orderType == "deleted"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterusers("deleted");
+              setOrderType("deleted");
+            }}
+          >
+            Deleted
+          </p>
         </div>
 
         <div className="col2H2">
@@ -87,8 +215,8 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {users.length ? (
-              users.map((user) => {
+            {filterUsersSt.length ? (
+              filterUsersSt.map((user) => {
                 const {
                   id,
                   avatar,

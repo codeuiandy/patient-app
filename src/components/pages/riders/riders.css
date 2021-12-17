@@ -44,11 +44,6 @@
   cursor: pointer;
 }
 
-.col1H2 p:nth-of-type(1) {
-  background-color: #0087ff;
-  color: white;
-}
-
 .col2H2 select {
   background: #ffefd3;
   border-radius: 5px;

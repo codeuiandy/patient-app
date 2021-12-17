@@ -48,6 +48,9 @@ const Bikes = () => {
   const [tab, setTab] = useState("tab1");
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const [filterridersSt, setFilterriders] = useState([]);
+  const [orderType, setOrderType] = useState("all");
+
   const history = useHistory();
 
   const handleTabSwitch = (index) => {
@@ -119,6 +122,7 @@ const Bikes = () => {
           license: "",
         });
         setTab("tab1");
+        getRidersAndBikes();
         history.push("/bikes");
       }
       console.log(response);
@@ -144,6 +148,7 @@ const Bikes = () => {
       );
       setRiders(transformed);
       setBikes(bikeResponse.data);
+      setFilterriders(bikeResponse.data);
       console.log(bikeResponse);
     }
     console.log(riderResponse);
@@ -186,6 +191,34 @@ const Bikes = () => {
     console.log(response);
   };
 
+  const filterriders = (type) => {
+    setFilterriders([]);
+    switch (type) {
+      case "with":
+        let filteractiveriders = bikes.filter((data) => {
+          return data.assigned !== null;
+        });
+        setFilterriders(filteractiveriders);
+        // setFilterriders([]);
+        console.log(filteractiveriders);
+        return;
+
+      case "ttwithout":
+        let filterinactiveriders = bikes.filter((data) => {
+          return data.assigned == null;
+        });
+        setFilterriders(filterinactiveriders);
+        // setFilterriders([]);
+        console.log(filterinactiveriders);
+        return;
+      // break;
+
+      default:
+        setFilterriders(bikes);
+        break;
+    }
+  };
+
   useEffect(() => {
     getRidersAndBikes();
   }, []);
@@ -202,9 +235,45 @@ const Bikes = () => {
 
       <div className="tableHeader2">
         <div className="col1H2">
-          <p>All</p>
-          <p>With a rider </p>
-          <p>Without a rider </p>
+          <p
+            style={
+              orderType == "all"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("");
+              setOrderType("all");
+            }}
+          >
+            All
+          </p>
+          <p
+            style={
+              orderType == "with"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("with");
+              setOrderType("with");
+            }}
+          >
+            With a rider{" "}
+          </p>
+          <p
+            style={
+              orderType == "without"
+                ? { background: "#0087ff", color: "white" }
+                : { background: "" }
+            }
+            onClick={() => {
+              filterriders("ttwithout");
+              setOrderType("without");
+            }}
+          >
+            Without a rider{" "}
+          </p>
         </div>
 
         <div className="col2H2">
@@ -227,10 +296,10 @@ const Bikes = () => {
             </tr>
           </thead>
           <tbody>
-            {bikes.length ? (
-              bikes.map((bike, idx) => {
+            {filterridersSt.length ? (
+              filterridersSt.map((bike, idx) => {
                 return (
-                  <tr key={bike.id}>
+                  <tr key={idx}>
                     <td onClick={() => openModal3(bike.id)}>{bike?.brand}</td>
                     <td>{bike?.license}</td>
                     <td>
@@ -244,7 +313,42 @@ const Bikes = () => {
                         : "Chuka Nduka"}
                     </td>
                     <td onClick={toggleTrackBikeModal}>{`50`}</td>
-                    <td onClick={() => openModal2(bike)}>Pick Rider</td>
+                    {/* <td onClick={() => openModal2(bike)}>Pick Rider</td> */}
+
+                    <td
+                      onClick={
+                        bike.assigned == null
+                          ? () => openModal2(bike)
+                          : () => {}
+                      }
+                    >
+                      <button
+                        style={
+                          bike.assigned == null
+                            ? {
+                                padding: "10px",
+                                background: "#0087ff",
+                                color: "white",
+                                color: "white",
+                                borderRadius: "5px",
+                              }
+                            : {
+                                padding: "10px",
+                                background: "rgba(128, 128, 128, 0.308)",
+                                color: "white",
+                                color: "white",
+                                borderRadius: "5px",
+                              }
+                        }
+                        onClick={
+                          bike.assigned == null
+                            ? () => openModal2(bike)
+                            : () => {}
+                        }
+                      >
+                        Pick Rider
+                      </button>
+                    </td>
                   </tr>
                 );
               })
@@ -593,7 +697,7 @@ const Bikes = () => {
                   Alausa round about, Lagos state
                 </p>
               </figure>
-              
+
               <figure className="bike-tracker__location">
                 <header className="bike-tracker__location-header">
                   <div className="bike-tracker__location-icon">
