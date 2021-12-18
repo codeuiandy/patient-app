@@ -79,9 +79,9 @@ export default function Navbar({
             }`}
           >
             <div className="navbar-content">
-              <div className="navbar-right-content align-items-center d-flex gap-3">
-                <form>
-                  <div>
+              <div className="navbar-left-content align-items-center d-flex gap-3">
+                <form style={{ width: "100%" }}>
+                  <div style={{ width: "100%" }}>
                     <input
                       placeholder="Enter here to search the table"
                       type="text"

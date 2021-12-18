@@ -84,7 +84,7 @@ button:focus {
 }
 .section-wrap {
   /* padding: 6px 52px 10px 240px; */
-  padding-left: 50px;
+  padding-left: 32px;
   position: relative;
   left: 194px;
 }
@@ -320,27 +320,11 @@ hr {
 
 @media (max-width: 539px) {
   .section-wrap {
-    padding-left: 15px;
+    padding-left: 10px;
   }
 
   .navbar-content {
     padding: 0px 16px 0 16px !important;
-  }
-  .app-container {
-    width: calc(100vw - 65px) !important;
-  }
-}
-
-@media (max-width: 414px) {
-  .section-wrap {
-    padding-left: 15px;
-  }
-
-  .navbar-content {
-    padding: 0px 36px 0 16px !important;
-  }
-  .app-container {
-    width: calc(100vw - 85px) !important;
   }
 }
 

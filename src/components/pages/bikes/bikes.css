@@ -13,10 +13,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 
 .col1H2 {
   display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 .col1H2 p {
@@ -27,6 +30,7 @@
   font-size: 12px;
   padding: 10px 20px 10px 20px;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 .col2H2 {
@@ -42,6 +46,7 @@
   color: #00101d;
   font-size: 12px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .col2H2 select {
@@ -58,6 +63,9 @@
   padding: 50px;
   margin-top: 20px;
   border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 .ordersYTableWrap .styled-table tbody tr {
@@ -370,4 +378,29 @@
 
 .bike-tracker__map {
   grid-column: 2 / span -1;
+}
+
+@media (max-width: 907px) {
+  .col2H2 {
+    margin-top: 20px;
+  }
+  .ordersYTableWrap {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .createRiderModal {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 596px) {
+  .col1RiderBike {
+    display: none;
+  }
+
+  .col2Rider {
+    width: 100%;
+  }
 }

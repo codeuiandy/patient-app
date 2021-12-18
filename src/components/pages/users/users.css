@@ -53,24 +53,6 @@
   font-size: 13px;
 }
 
-.ordersYTableWrap {
-  background-color: #f5faff;
-  padding: 50px;
-  margin-top: 20px;
-  border-radius: 10px;
-}
-
-.ordersYTableWrap .styled-table tbody tr {
-  background: #ffffff;
-}
-
-.ordersYTableWrap .styled-table tbody tr:hover {
-  -webkit-filter: drop-shadow(10px 5px 10px rgba(128, 128, 128, 0.205));
-  filter: drop-shadow(10px 5px 10px rgba(128, 128, 128, 0.205));
-  cursor: pointer;
-  border-radius: 10px;
-}
-
 .tableControls {
   display: flex;
   align-items: center;
@@ -238,4 +220,26 @@
 .user--isOnline {
   width: 0.8rem;
   height: 0.8rem;
+}
+
+@media (max-width: 634px) {
+  .viewUserModalWrap {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 484px) {
+  .viewUserModalInfod {
+    flex-direction: column;
+  }
+  .viewUserModalInfodCol1 {
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding-bottom: 20px;
+  }
+  .viewUserModalInfodCol2 {
+    width: 100%;
+  }
 }
