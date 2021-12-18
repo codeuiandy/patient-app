@@ -1,4 +1,3 @@
-import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { NotificationManager } from "react-notifications";
 import { Modal } from "react-responsive-modal";
@@ -18,6 +17,7 @@ import "../dashboard/dashboard.scss";
 import img from "./../../../assets/imgF/update_rider_success.png";
 import "./../../modals/modal.scss";
 import "./orders.css";
+import moment from "moment";
 
 const Orders = () => {
   const [showModal1, setShowModal1] = useState(false);
@@ -27,6 +27,7 @@ const Orders = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [riders, setRider] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [singleOrder, setSingleOrder] = useState({});
   const [filterOrdersSt, setFilterOrders] = useState([]);
   const [selectedRider, setSelectedRider] = useState({
     orderId: "",
@@ -303,7 +304,18 @@ const Orders = () => {
                     <td>{data.cost}</td>
                     <td
                       style={{ textTransform: "capitalize" }}
-                      onClick={openModal1}
+                      onClick={
+                        data.assigned == null
+                          ? () =>
+                              NotificationManager.info(
+                                "You need to assign a rider to continue"
+                              )
+                          : () => {
+                              openModal1();
+                              setSingleOrder(data);
+                              console.log(data);
+                            }
+                      }
                     >
                       {" "}
                       {/* <img
@@ -375,132 +387,140 @@ const Orders = () => {
         </div>
       </div>
 
-      <Modal open={showModal1} onClose={closeModal1} center>
-        <div className="order-details-modal">
-          <div className="order-details-modalMain">
-            <div className="order-details-modalCol1">
-              <div className="orderStatus">
-                <div className="orderStatusCol1">
-                  <p>Status</p>
-                  <p>Completed</p>
-                </div>
-                <div className="orderStatusCol2">
-                  <p>Tracking ID</p>
-                  <p>12323jerjker343</p>
-                </div>
-              </div>
-
-              <div className="senderInfomdwe">
-                <h2>Sender Info.</h2>
-                <div className="senderInfoDetailsdf">
-                  <div className="senderInfoDetailsdfImg">
-                    <img src={userImg} alt="" />
+      {showModal1 ? (
+        <Modal open={showModal1} onClose={closeModal1} center>
+          <div className="order-details-modal">
+            <div className="order-details-modalMain">
+              <div className="order-details-modalCol1">
+                <div className="orderStatus">
+                  <div className="orderStatusCol1">
+                    <p>Status</p>
+                    <p style={{ textTransform: "capitalize" }}>
+                      {singleOrder.status}
+                    </p>
                   </div>
-
-                  <div className="senderInfoDetailsdfImgIngdf">
-                    <p>Nelson Logistics</p>
-                    <p>+234 9045 345 7865</p>
+                  <div className="orderStatusCol2">
+                    <p>Tracking ID</p>
+                    <p> {singleOrder.id.slice(0, 10)}</p>
                   </div>
                 </div>
-              </div>
 
-              <div className="senderInfomdwe">
-                <h2>Reciever Info.</h2>
-                <div className="senderInfoDetailsdf">
-                  <div className="senderInfoDetailsdfImg">
-                    <img src={userImg} alt="" />
+                <div className="senderInfomdwe">
+                  <h2>Sender Info.</h2>
+                  <div className="senderInfoDetailsdf">
+                    <div className="senderInfoDetailsdfImg">
+                      <img src={userImg} alt="" />
+                    </div>
+
+                    <div className="senderInfoDetailsdfImgIngdf">
+                      <p>{singleOrder.senderName}</p>
+                      <p>{singleOrder.senderPhone}</p>
+                    </div>
                   </div>
+                </div>
 
-                  <div className="senderInfoDetailsdfImgIngdf">
-                    <p>Nelson Logistics</p>
-                    <p>+234 9045 345 7865</p>
+                <div className="senderInfomdwe">
+                  <h2>Reciever Info.</h2>
+                  <div className="senderInfoDetailsdf">
+                    <div className="senderInfoDetailsdfImg">
+                      <img src={userImg} alt="" />
+                    </div>
+
+                    <div className="senderInfoDetailsdfImgIngdf">
+                      <p>{singleOrder.receiverName}</p>
+                      <p>{singleOrder.receiverPhone}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="order-details-modalCol2">
-              <div className="order-details-modalCol2Header">
-                <p></p>
-                <p>Order info</p>
-                <p>27/02/2021</p>
-              </div>
-              <div className="listcol2jduedqd">
-                <div className="listcol2jduedqdCol1">
-                  <p>Name</p>
-                  <p>Jollof Rice</p>
+              <div className="order-details-modalCol2">
+                <div className="order-details-modalCol2Header">
+                  <p></p>
+                  <p>Order info</p>
+                  <p>{moment(singleOrder.createdAt).format("DD-MM-YYYY")}</p>
                 </div>
-              </div>
+                <div className="listcol2jduedqd">
+                  <div className="listcol2jduedqdCol1">
+                    <p>Name</p>
+                    <p>{singleOrder.itemName}</p>
+                  </div>
+                </div>
 
-              <div className="listcol2jduedqd">
-                <div className="listcol2jduedqdCol1">
-                  <p>Category</p>
-                  <p>Food</p>
+                <div className="listcol2jduedqd">
+                  <div className="listcol2jduedqdCol1">
+                    <p>Category</p>
+                    <p>Goods</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="listcol2jduedqd">
-                <div className="listcol2jduedqdCol1">
-                  <p>Weight</p>
-                  <p>0 - 2kg</p>
+                <div className="listcol2jduedqd">
+                  <div className="listcol2jduedqdCol1">
+                    <p>Weight</p>
+                    <p>{singleOrder.itemWeight}</p>
+                  </div>
+                  <div className="listcol2jduedqdCol2">
+                    {" "}
+                    <p>Quantity</p>
+                    <p>{singleOrder.quantity}</p>
+                  </div>
                 </div>
-                <div className="listcol2jduedqdCol2">
-                  {" "}
-                  <p>Quantity</p>
-                  <p>6</p>
-                </div>
-              </div>
 
-              <div className="listcol2jduedqd">
-                <div className="listcol2jduedqdCol1">
-                  <p>Price per item</p>
-                  <p>5000</p>
+                <div className="listcol2jduedqd">
+                  <div className="listcol2jduedqdCol1">
+                    <p>Price per item</p>
+                    <p>₦{singleOrder.itemPrice}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="listcol2jduedqd">
-                <div className="listcol2jduedqdCol1">
+                <div className="listcol2jduedqd">
+                  {/* <div className="listcol2jduedqdCol1">
                   <p>Media</p>
                   <img src={userImg} alt="" /> <img src={userImg} alt="" />{" "}
                   <img src={userImg} alt="" />
+                </div> */}
                 </div>
               </div>
-            </div>
-            <div className="order-details-modalCol3">
-              <div className="riderInfoModal">
-                <h2 className="riderInfoModaImgPHeader">Rider Info</h2>
-                <img className="riderInfoModaImgP" src={userImg} alt="" />
-                <p>Okeke Andrew</p>
-                <p className="riderInfoModalNum">+234 9038 234 3456</p>
-                <div className="riderpriceModal">
-                  <p>Delivery Price</p>
-                  <p>3,500</p>
-                </div>
-              </div>
-              <div className="ordertracajdl">
-                <div className="ordertracajdlHeader">
-                  <p>Pick Up</p>
-                </div>
-
-                <div className="dashboardnotTrack">
-                  <div className="dashboardnotTrackMai">
-                    <img src={tripStart} alt="" />
-                    <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
+              <div className="order-details-modalCol3">
+                <div className="riderInfoModal">
+                  <h2 className="riderInfoModaImgPHeader">Rider Info</h2>
+                  <img className="riderInfoModaImgP" src={userImg} alt="" />
+                  <p>{`${singleOrder.assigned.rider.firstName} ${singleOrder.assigned.rider.lastName}`}</p>
+                  <p className="riderInfoModalNum">
+                    {singleOrder?.phoneNumber}
+                  </p>
+                  <div className="riderpriceModal">
+                    <p>Delivery Price</p>
+                    <p>₦{singleOrder.cost}</p>
                   </div>
-                  <div className="dashboardnsswotTrackColLine"></div>
-
+                </div>
+                <div className="ordertracajdl">
                   <div className="ordertracajdlHeader">
-                    <p>Drop off</p>
+                    <p>Pick Up</p>
                   </div>
-                  <div className="dashboardnotTrackMai">
-                    <img src={locationIcon} alt="" />
-                    <p>Alausa round about, 1 mko, Ikeja, Lagos S..</p>
+
+                  <div className="dashboardnotTrack">
+                    <div className="dashboardnotTrackMai">
+                      <img src={tripStart} alt="" />
+                      <p>{singleOrder?.pickUpAddress.slice(0, 35)}</p>
+                    </div>
+                    <div className="dashboardnsswotTrackColLine"></div>
+
+                    <div className="ordertracajdlHeader">
+                      <p>Drop off</p>
+                    </div>
+                    <div className="dashboardnotTrackMai">
+                      <img src={locationIcon} alt="" />
+                      <p>{singleOrder.deliveryAddress.slice(0, 35)}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      ) : (
+        ""
+      )}
 
       <Modal open={showModal2} onClose={closeModal2} center>
         <div className="assign-rider__modal-wrapper">

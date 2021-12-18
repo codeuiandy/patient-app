@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-responsive-modal";
 import arrowR from "../../../assets/imgF/arrow_back_ios_black_24dp@2x.png";
 import { Button } from "../../buttons/index";
+import { hideLoader, showLoader } from "../../helpers/loader";
 import { Input, Select } from "../../input/Input";
 import checkCancel from "./../../../assets/imgF/cancel_black_24dp@2x.png";
 import "./../../modals/modal.scss";
 import "./payments.css";
+import { httpGet } from "../../../helpers/httpMethods";
+import moment from "moment";
+import { NotificationManager } from "react-notifications";
 
 const Orders = () => {
   const [createRefundReceiptModal, setCreateRefundReceiptModal] =
     useState(false);
 
+  useEffect(() => {
+    getPaymentHistory();
+  }, []);
+
   const [createDiscountModal, setCreateDiscountModal] = useState(false);
+  const [payments, setpayment] = useState([]);
 
   const toggleCreateReceiptModal = () => {
     setCreateRefundReceiptModal(!createRefundReceiptModal);
@@ -21,6 +30,20 @@ const Orders = () => {
     setCreateDiscountModal(!createDiscountModal);
   };
 
+  const getPaymentHistory = async () => {
+    showLoader();
+    const paymentRes = await httpGet(`admin/payment_histories`);
+    hideLoader();
+    console.log("paymentRes>>>", paymentRes);
+    if (paymentRes?.success == false) {
+      return NotificationManager.error(paymentRes.message);
+    }
+    if (paymentRes.code === 200) {
+      setpayment(paymentRes.data);
+      console.log(paymentRes);
+    }
+  };
+
   return (
     <div>
       <div className="tableHeader1">
@@ -28,7 +51,7 @@ const Orders = () => {
         <p>List of receipt</p>
       </div>
 
-      <div className="createNewRyderBtn">
+      {/* <div className="createNewRyderBtn">
         <button
           // onClick={() => {
           //   toggleCreateReceiptModal();
@@ -39,13 +62,13 @@ const Orders = () => {
         >
           Create
         </button>
-      </div>
+      </div> */}
 
       <div className="tableHeader2">
         <div className="col1H2">
           <p>All</p>
-          <p>Completed Delivery</p>
-          <p>Failed Delivery</p>
+          {/* <p>Completed Delivery</p>
+          <p>Failed Delivery</p> */}
         </div>
 
         <div className="col2H2">
@@ -60,87 +83,32 @@ const Orders = () => {
         <table class="styled-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>User</th>
+              <th>Transaction Id</th>
+              <th>Customer email</th>
               <th>Date</th>
               <th>Delivery amount</th>
               <th>Delivery status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Reciept_03jan2021</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>3,500</td>
-              <td>
-                <img
-                  src={checkCancel}
-                  className="payment--isSuccess img-ellipse"
-                  alt=""
-                />
-                Completed
-              </td>
-            </tr>
-            <tr class="active-row">
-              <td>Reciept_03jan2021</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>3,500</td>
-              <td>
-                <img
-                  src={checkCancel}
-                  className="payment--isSuccess img-ellipse"
-                  alt=""
-                />
-                Completed
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>Reciept_03jan2021</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>3,500</td>
-              <td>
-                <img
-                  src={checkCancel}
-                  className="payment--isSuccess img-ellipse"
-                  alt=""
-                />
-                Completed
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>Reciept_03jan2021</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>3,500</td>
-              <td>
-                <img
-                  src={checkCancel}
-                  className="payment--isSuccess img-ellipse"
-                  alt=""
-                />
-                Completed
-              </td>
-            </tr>
-
-            <tr class="active-row">
-              <td>Reciept_03jan2021</td>
-              <td>Lola Jesu</td>
-              <td>27/03/2021</td>
-              <td>3,500</td>
-              <td>
-                <img
-                  src={checkCancel}
-                  className="payment--isSuccess img-ellipse"
-                  alt=""
-                />
-                Completed
-              </td>
-            </tr>
+            {payments.map((data, index) => {
+              return (
+                <tr key={index}>
+                  <td>{data.transactionId}</td>
+                  <td>{data?.customerEmail}</td>
+                  <td>{moment(data?.createdAt).format("DD-MM-YYYY")}</td>
+                  <td>₦{data.amount}</td>
+                  <td style={{ textTransform: "capitalize" }}>
+                    {/* <img
+                    src={checkCancel}
+                    className="payment--isSuccess img-ellipse"
+                    alt=""
+                  /> */}
+                    {data.paymentStatus}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className="tableControls">
@@ -217,7 +185,7 @@ const Orders = () => {
           <div className="modal-container">
             <section className="modal-info discount">
               <h3 className="modal__heading">Discount</h3>
-              <p className='discount__text'>Creating discount</p>
+              <p className="discount__text">Creating discount</p>
 
               <div className="select-user__btns">
                 <button className="select-btn active">All users</button>

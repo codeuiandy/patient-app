@@ -417,6 +417,23 @@
   cursor: pointer;
 }
 
+@media (max-width: 1031px) {
+  .order-details-modal {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 727px) {
+  .order-details-modalMain {
+    flex-direction: column;
+  }
+  .order-details-modalCol1,
+  .order-details-modalCol2,
+  .order-details-modalCol3 {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 524px) {
   .assign-rider__modal-wrapper {
     width: 90vw;
