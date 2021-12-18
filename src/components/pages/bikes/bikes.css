@@ -399,7 +399,9 @@
   .col1RiderBike {
     display: none;
   }
-
+  .col1Rider {
+    display: none;
+  }
   .col2Rider {
     width: 100%;
   }
