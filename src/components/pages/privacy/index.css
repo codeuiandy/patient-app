@@ -1,0 +1,11 @@
+.privacyWrap {
+  padding: 40px;
+}
+
+.privacyWrap p {
+  margin-bottom: 30px !important;
+}
+
+.privacyWrap b {
+  margin-right: 20px;
+}

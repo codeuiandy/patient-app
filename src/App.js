@@ -16,6 +16,7 @@ import Riders from "./components/pages/riders/riders.jsx";
 import Payment from "./components/pages/payments/payments";
 import Bikes from "./components/pages/bikes/bikes.jsx";
 import Login from "./components/pages/auth/login";
+import Privacy from './components/pages/privacy/index'
 const SiteRouter = () => {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ const SiteRouter = () => {
 
       <Switch>
         <Route exact path="/" component={Login} />
+        <Route exact path="/privacy_policy" component={Privacy} />
 
         {/* help pages end */}
         <UserDataProvider>
