@@ -24,7 +24,7 @@ const SiteRouter = () => {
 
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route exact path="/privacy_policy" component={Privacy} />
+        <Route exact path="/policy" component={Privacy} />
 
         {/* help pages end */}
         <UserDataProvider>
