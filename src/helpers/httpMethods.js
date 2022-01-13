@@ -4,9 +4,10 @@ import axios from "axios";
 // import { hideLoader } from '../helpers/loader';
 import { NotificationManager } from "react-notifications";
 
-export let baseUrl = "https://e-rider-app.herokuapp.com/api";
+export let baseUrl = process.env.REACT_APP_BASE_URL;
 // export let baseUrlMain = "https://d3437b953f42.ngrok.io/v1";
-export let baseUrlMain = "https://e-rider-app.herokuapp.com/api";
+// export let baseUrlMain = "https://e-rider-app.herokuapp.com/api";
+export let baseUrlMain = process.env.REACT_APP_BASE_URL;
 let token = localStorage.getItem("token");
 // const token = localStorage.getItem("DomainToken")
 

@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b483b80c.chunk.css",
+    "main.js": "/static/js/main.a996cf2f.chunk.js",
+    "main.js.map": "/static/js/main.a996cf2f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.08c7d6a8.js",
+    "runtime-main.js.map": "/static/js/runtime-main.08c7d6a8.js.map",
+    "static/css/2.56e754c6.chunk.css": "/static/css/2.56e754c6.chunk.css",
+    "static/js/2.722c0ea5.chunk.js": "/static/js/2.722c0ea5.chunk.js",
+    "static/js/2.722c0ea5.chunk.js.map": "/static/js/2.722c0ea5.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.56e754c6.chunk.css.map": "/static/css/2.56e754c6.chunk.css.map",
+    "static/css/main.b483b80c.chunk.css.map": "/static/css/main.b483b80c.chunk.css.map",
+    "static/js/2.722c0ea5.chunk.js.LICENSE.txt": "/static/js/2.722c0ea5.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/Roboto-Regular.a8d6ac03.ttf",
+    "static/media/login.css": "/static/media/authBackground.94fdb73e.png",
+    "static/media/codeuiandyimg.4fae4de6.png": "/static/media/codeuiandyimg.4fae4de6.png",
+    "static/media/logo.4ce8bb12.png": "/static/media/logo.4ce8bb12.png",
+    "static/media/notifications.css": "/static/media/notification.c5d9251e.ttf",
+    "static/media/layout.css": "/static/media/sidebarImg.196c117e.png",
+    "static/media/symbolAuth.d9f47277.png": "/static/media/symbolAuth.d9f47277.png",
+    "static/media/symbolAuth2.abbad8ca.png": "/static/media/symbolAuth2.abbad8ca.png",
+    "static/media/update_rider_success.3ee4738c.png": "/static/media/update_rider_success.3ee4738c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.08c7d6a8.js",
+    "static/css/2.56e754c6.chunk.css",
+    "static/js/2.722c0ea5.chunk.js",
+    "static/css/main.b483b80c.chunk.css",
+    "static/js/main.a996cf2f.chunk.js"
+  ]
+}

@@ -39,7 +39,7 @@ export default function Login() {
       console.log(res);
     }
   };
-  
+
   return (
     <div className="authWrap">
       <div className="authWrapCol2">
@@ -88,11 +88,11 @@ export default function Login() {
             <button onClick={handleSubmit}>Login into Account</button>
           </div>
 
-          <div className="dontHavvAccAuth">
+          {/* <div className="dontHavvAccAuth">
             <p>
               Dont have an account? <a> Register for one now</a>
             </p>
-          </div>
+          </div> */}
         </form>
       </div>
 
