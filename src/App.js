@@ -34,7 +34,7 @@ const SiteRouter = () => {
                 exact
                 path="/home"
                 pageName="Dashboard"
-                component={Dashboard}
+                component={Riders}
               />
 
               <DefaultLayoutRoute

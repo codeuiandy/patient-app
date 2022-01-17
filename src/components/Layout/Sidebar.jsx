@@ -27,11 +27,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import UserImg from "../../assets/imgF/codeuiandyimg.png";
 export default function Sidebar({ browserRouter, currentRoute }) {
-  const {
-    setreduceSidebarWidth,
-    appReduceSidebarWidth,
-    reduceSidebarWidth,
-  } = useContext(LayoutContext);
+  const { setreduceSidebarWidth, appReduceSidebarWidth, reduceSidebarWidth } =
+    useContext(LayoutContext);
 
   const [PublicationShow, SetPublicationShow] = useState(true);
   const [CategoriesShow, SetCategoriesShow] = useState(false);
@@ -54,7 +51,7 @@ export default function Sidebar({ browserRouter, currentRoute }) {
   const Logout = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You are about to logout from the E-Ride service!",
+      text: "You are about to logout from the Chimaobi service!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#006298",
@@ -149,115 +146,6 @@ export default function Sidebar({ browserRouter, currentRoute }) {
               )}
             </span>
             Dashboard
-          </li>
-
-          <li
-            style={
-              currentRoute === "/user_transations"
-                ? { color: "#e3b451" }
-                : { color: "#00101D" }
-            }
-            onClick={() => browserRouter(`/orders`)}
-            className={`${
-              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
-            }`}
-          >
-            {" "}
-            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
-              {currentRoute !== "/orders" ? (
-                <img className="sidebarImgIcon" src={reciptImg} alt="" />
-              ) : (
-                <img className="sidebarImgIcon" src={reciptImgActive} alt="" />
-              )}
-            </span>
-            Orders
-          </li>
-
-          <li
-            style={
-              currentRoute === "/user_cards"
-                ? { color: "#e3b451" }
-                : { color: "#00101D" }
-            }
-            // onClick={() => browserRouter("/user_cards")}
-            className={`${
-              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
-            }`}
-            onClick={() => browserRouter(`/users`)}
-          >
-            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
-              {currentRoute !== "/orders" ? (
-                <img className="sidebarImgIcon" src={personImgIcon} alt="" />
-              ) : (
-                <img className="sidebarImgIcon" src={personImgIcon} alt="" />
-              )}
-            </span>
-            Users
-          </li>
-
-          <li
-            style={
-              currentRoute === "/more"
-                ? { color: "#e3b451" }
-                : { color: "#00101D" }
-            }
-            className={`${
-              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
-            }`}
-            onClick={() => browserRouter(`/riders`)}
-          >
-            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
-              {currentRoute !== "/orders" ? (
-                <img className="sidebarImgIcon" src={ridersImgIcon} alt="" />
-              ) : (
-                <img className="sidebarImgIcon" src={ridersImgIcon} alt="" />
-              )}
-            </span>
-            Riders
-          </li>
-
-          <li
-            style={
-              currentRoute === "/more"
-                ? { color: "#e3b451" }
-                : { color: "#00101D" }
-            }
-            className={`${
-              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
-            }`}
-            onClick={() => browserRouter(`/payments`)}
-          >
-            {" "}
-            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
-              {currentRoute !== "/orders" ? (
-                <img className="sidebarImgIcon" src={paymentImgIcon} alt="" />
-              ) : (
-                <img className="sidebarImgIcon" src={paymentImgIcon} alt="" />
-              )}
-            </span>
-            Payments
-          </li>
-
-          <li
-            style={
-              currentRoute === "/more"
-                ? { color: "#e3b451" }
-                : { color: "#00101D" }
-            }
-            className={`${
-              appReduceSidebarWidth === true ? "" : "moveAppLinksToCenter"
-            }`}
-            onClick={() => browserRouter(`/bikes`)}
-          >
-            {" "}
-            <span style={{ marginRight: "20px", marginTop: "-4px" }}>
-              {currentRoute !== "/orders" ? (
-                <img className="sidebarImgIcon" src={bikeImageIcon} alt="" />
-              ) : (
-                <img className="sidebarImgIcon" src={bikeImageIcon} alt="" />
-              )}
-            </span>
-            Bikes
           </li>
         </ul>
         <ul className="sidebar-list">

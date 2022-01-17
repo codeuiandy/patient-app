@@ -73,11 +73,7 @@ export const httpPost = async (url, postBody) => {
         5000
       );
     }
-    if (error.response.data.message === "Validation Error!") {
-      NotificationManager.error(
-        Object.values(error.response.data.data).join("  ")
-      );
-    }
+  
     return { er: error.response.data };
   }
 };

@@ -21,6 +21,7 @@ import EmailAuth from "./../../helpers/emailAuth";
 import { hideLoader, showLoader } from "./../../helpers/loader";
 import "./../users/users.css";
 import "./riders.css";
+import moment from "moment";
 
 const Orders = () => {
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +45,13 @@ const Orders = () => {
     plateNumber: "",
   });
   const [riders, setRiders] = useState([]);
-
+  const [userP, setUserP] = useState({
+    patientID: "",
+    dueDate: new Date(),
+    procedure: "",
+    nurseID: "",
+    doctorID: "",
+  });
   const history = useHistory();
   const handleTabSwitch = (index) => {
     setTab(index);
@@ -70,42 +77,51 @@ const Orders = () => {
     setRider({ ...rider, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
-    if (!EmailAuth(rider.email)) {
-      return;
+    if (
+      userP.patientID == "" ||
+      userP.procedure == "" ||
+      userP.nurseID == "" ||
+      userP.doctorID == ""
+    ) {
+      return NotificationManager.error("All field is required to continue ");
     }
-    if (!ValidatePassword(rider.password)) {
-      return;
+    closeModal();
+    showLoader();
+
+    const data = {
+      patientID: userP.patientID,
+      dueDate: moment(userP.dueDate).format("YYYY-MM-DD"),
+      procedure: userP.procedure,
+      nurseID: userP.nurseID,
+      doctorID: userP.doctorID,
+    };
+    console.log(data);
+    const response = await httpPost(`/book_appointment`, data);
+    hideLoader();
+    console.log("RESPONSE>>>", response);
+    if (!response?.responsecode == "200") {
+      return NotificationManager.error("Server down");
     } else {
-      closeModal();
-      showLoader();
-      const response = await httpPost(`admin/create_rider`, rider);
-      hideLoader();
-      console.log("RESPONSE>>>", response);
-      if (!response?.success) {
-        return NotificationManager.error(response.message);
-      } else {
-        NotificationManager.success("Rider Added Succesfully");
-        const newRider = rider;
-        setRiders([...riders, newRider]);
-        setRider({});
-        history.push("/riders");
-      }
-      console.log(response);
+      NotificationManager.success("Patient Added Succesfully");
+      const newRider = rider;
+      getAllRiders();
+      // setRider({});
+      // history.push("/riders");
     }
+    console.log(response);
   };
   const getAllRiders = async () => {
     showLoader();
-    const response = await httpGet(`admin/all_users?type=rider`);
+    const response = await httpPost(`/reports`);
     hideLoader();
     console.log("RESPONSE>>>", response);
-    if (!response?.success) {
-      return NotificationManager.error(response.message);
+    if (response.responsecode == "200") {
+      setRiders(response.patientreport);
+      console.log("response.patientreport", response.patientreport);
     }
-    if (response.code === 200) {
-      setRiders(response.data);
-    }
+
     console.log(response);
   };
 
@@ -178,8 +194,8 @@ const Orders = () => {
   return (
     <div>
       <div className="tableHeader1">
-        <h2>Riders</h2>
-        <p>List of riders</p>
+        <h2>Patient report</h2>
+        <p>List of patient</p>
       </div>
       <div className="createNewRyderBtn">
         <button
@@ -188,7 +204,7 @@ const Orders = () => {
             setTab("tab1");
           }}
         >
-          Create new rider
+          Create new patient
         </button>
       </div>
 
@@ -200,79 +216,8 @@ const Orders = () => {
                 ? { background: "#0087ff", color: "white" }
                 : { background: "" }
             }
-            onClick={() => {
-              filterriders("");
-              setOrderType("all");
-            }}
           >
             All
-          </p>
-
-          <p
-            style={
-              orderType == "active"
-                ? { background: "#0087ff", color: "white" }
-                : { background: "" }
-            }
-            onClick={() => {
-              filterriders("active");
-              setOrderType("active");
-            }}
-          >
-            Active
-          </p>
-          <p
-            style={
-              orderType == "inactive"
-                ? { background: "#0087ff", color: "white" }
-                : { background: "" }
-            }
-            onClick={() => {
-              filterriders("inactive");
-              setOrderType("inactive");
-            }}
-          >
-            Inactive
-          </p>
-          <p
-            style={
-              orderType == "unverified"
-                ? { background: "#0087ff", color: "white" }
-                : { background: "" }
-            }
-            onClick={() => {
-              filterriders("unverified");
-              setOrderType("unverified");
-            }}
-          >
-            Unverified
-          </p>
-          <p
-            style={
-              orderType == "suspended"
-                ? { background: "#0087ff", color: "white" }
-                : { background: "" }
-            }
-            onClick={() => {
-              filterriders("suspended");
-              setOrderType("suspended");
-            }}
-          >
-            Suspended
-          </p>
-
-          <p
-            style={
-              orderType == "deleted"
-                ? { background: "#0087ff", color: "white" }
-                : { background: "" }
-            }
-            onClick={() => {
-              filterriders("deleted");
-              setOrderType("deleted");
-            }}
-          >
-            Deleted
           </p>
         </div>
 
@@ -289,16 +234,15 @@ const Orders = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-              <th>Deliveries</th>
+              <th>Last visit</th>
+              <th>level</th>
               <th>Status</th>
               {/* <th></th> */}
             </tr>
           </thead>
           <tbody>
-            {filterridersSt.length ? (
-              filterridersSt.map((rider) => {
+            {riders.length ? (
+              riders.map((rider) => {
                 const {
                   id,
                   avatar,
@@ -308,32 +252,42 @@ const Orders = () => {
                   email,
                   isOnline,
                   countryCode,
+                  customerID,
+                  lastVisit,
+                  level,
+                  active,
                 } = rider;
                 return (
-                  <tr key={id} onClick={toggleRiderInfoModal}>
+                  <tr key={id}>
+                    <td>{`${customerID} `}</td>
+                    <td>{moment(lastVisit).format("llll")}</td>
+                    <td>{level}</td>
                     <td>
-                      <img
-                        class="userProfileImg"
-                        src={avatar || codeuiandy}
-                        alt=""
-                      />
-                      {`${firstName} ${lastName}`}
-                    </td>
-                    <td>{`${countryCode} ${phoneNumber}`}</td>
-                    <td>{email}</td>
-                    <td>{`50`}</td>
-                    <td>
-                      <img
-                        src={isOnline ? greenEllipse : redEllipse}
-                        alt="online status"
-                        className="rider--isOnline img--ellipse"
-                      />
+                      {active == true ? (
+                        <div
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                            borderRadius: "50%",
+                            background: "green",
+                          }}
+                        ></div>
+                      ) : (
+                        <div
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                            borderRadius: "50%",
+                            background: "red",
+                          }}
+                        ></div>
+                      )}
                     </td>
                   </tr>
                 );
               })
             ) : (
-              <p>No rider found</p>
+              <p>No data found</p>
             )}
           </tbody>
         </table>
@@ -361,82 +315,6 @@ const Orders = () => {
       <Modal open={showModal} onClose={closeModal} center>
         <div className="createRiderModal">
           <div className="riderModalContainer">
-            <div className="col1Rider">
-              <h2>Create new rider</h2>
-              <ul>
-                <li
-                  className={`${
-                    tab === "tab1" ||
-                    tab === "tab2" ||
-                    tab === "tab3" ||
-                    tab === "tab4"
-                      ? "activeBTab"
-                      : ""
-                  }`}
-                >
-                  <div
-                    className="tabPositionRider"
-                    style={
-                      tab === "tab1" ||
-                      tab === "tab2" ||
-                      tab === "tab3" ||
-                      tab === "tab4"
-                        ? { background: "orange" }
-                        : {}
-                    }
-                  >
-                    <Image path="person.png" />
-                  </div>
-                  <span>Profile</span>
-                </li>
-                <li
-                  className={`${
-                    tab === "tab2" || tab === "tab3" || tab === "tab4"
-                      ? "activeBTab"
-                      : ""
-                  }`}
-                >
-                  <div
-                    className="tabPositionRider"
-                    style={
-                      tab === "tab2" || tab === "tab3" || tab === "tab4"
-                        ? { background: "orange" }
-                        : {}
-                    }
-                  >
-                    <Image path="person.png" />
-                  </div>
-                  <span>Contact</span>
-                </li>{" "}
-                <li
-                  className={`${
-                    tab === "tab3" || tab === "tab4" ? "activeBTab" : ""
-                  }`}
-                >
-                  <div
-                    className="tabPositionRider"
-                    style={
-                      tab === "tab3" || tab === "tab4"
-                        ? { background: "orange" }
-                        : {}
-                    }
-                  >
-                    <Image path="person.png" />
-                  </div>
-                  <span>Password</span>
-                </li>{" "}
-                {/* <li className={`${tab==="tab4" ? "activeBTab" : ""}`}>
-                  <div
-                    className="tabPositionRider"
-                    style={tab==="tab4" ? { background: "orange" } : {}}
-                  >
-                    <Image path="person.png" />
-                  </div>
-                  <span>Assign a bike</span>
-                </li> */}
-              </ul>
-            </div>
-
             {tab === "tab1" ? (
               <div className="col2Rider">
                 <div className="addprofileRiderWrap">
@@ -450,63 +328,85 @@ const Orders = () => {
                 </div>
 
                 <form className="inputWrapRider">
-                  <div className="riderInputWrapMain">
-                    <Input
-                      label="First name"
-                      name="firstName"
-                      value={rider.firstName}
-                      onChange={onChange}
-                      placeholder="Andrew"
+                  <div className="riderInputWrapMain appInputWrap ">
+                    <label htmlFor=""> Patient ID</label>
+                    <select
+                      onChange={(e) => {
+                        setUserP({ ...userP, patientID: e.target.value });
+                        console.log(userP);
+                      }}
+                      value={userP.patientID}
+                    >
+                      <option value="">Select</option>
+                      <option value="higikaya">higikaya</option>
+                      <option value="hachima">hachima</option>
+                      <option value="shitachi">shitachi</option>
+                    </select>
+                  </div>
+
+                  <div className="riderInputWrapMain appInputWrap ">
+                    <label htmlFor=""> Doctor ID</label>
+                    <select
+                      onChange={(e) => {
+                        setUserP({ ...userP, doctorID: e.target.value });
+                        console.log(userP);
+                      }}
+                      value={userP.doctorID}
+                    >
+                      <option value="">Select</option>
+                      <option value="yasemin">yasemin</option>
+                    </select>
+                  </div>
+
+                  <div className="riderInputWrapMain appInputWrap ">
+                    <label htmlFor=""> Nurse ID</label>
+                    <select
+                      onChange={(e) => {
+                        setUserP({ ...userP, nurseID: e.target.value });
+                        console.log(userP);
+                      }}
+                      value={userP.nurseID}
+                    >
+                      <option value="">Select</option>
+                      <option value="suo">suo</option>
+                    </select>
+                  </div>
+
+                  <div className="riderInputWrapMain appInputWrap ">
+                    <label htmlFor=""> procedure ID</label>
+                    <select
+                      onChange={(e) => {
+                        setUserP({ ...userP, procedure: e.target.value });
+                        console.log(userP);
+                      }}
+                      value={userP.procedure}
+                    >
+                      <option value="">Select</option>
+                      <option value="Checkup">Checkup</option>
+                      <option value="surgery">surgery</option>
+                    </select>
+                  </div>
+
+                  <div
+                    className="riderInputWrapMain   appInputWrap"
+                    style={{ width: "100%" }}
+                  >
+                    <label htmlFor=""> Due date</label>
+                    <input
+                      type="date"
+                      style={{ width: "100%" }}
+                      onChange={(e) => {
+                        setUserP({ ...userP, dueDate: e.target.value });
+                        console.log(userP);
+                      }}
+                      value={userP.dueDate}
                     />
                   </div>
 
-                  <div className="riderInputWrapMain">
-                    <Input
-                      label="Last name"
-                      name="lastName"
-                      value={rider.lastName}
-                      onChange={onChange}
-                      placeholder="Okeke"
-                    />
-                  </div>
-
-                  {/* <div className="riderInputWrapMain">
+                  {/* <div className="riderInputWrapMain appInputWrap ">
                     <Input label="Middle name"  placeholder="Miracle" />
                   </div> */}
 
-                  <div className="getRiderGender">
-                    <p>Gender</p>
-
-                    <label>
-                      <input
-                        style={{ Width: "20px" }}
-                        type="radio"
-                        name="gender"
-                        id=""
-                      />
-                      <span>Male</span>
-                    </label>
-
-                    <label>
-                      <input
-                        style={{ Width: "20px" }}
-                        type="radio"
-                        name="gender"
-                        id=""
-                      />
-                      <span>Female</span>
-                    </label>
-
-                    <label>
-                      <input
-                        style={{ Width: "20px" }}
-                        type="radio"
-                        name="gender"
-                        id=""
-                      />
-                      <span>Other</span>
-                    </label>
-                  </div>
                   <div className="subRiderBtnWrap">
                     <Button
                       text="Cancel"
@@ -515,8 +415,8 @@ const Orders = () => {
                       color="black"
                     />
                     <Button
-                      onClick={() => {
-                        handleTabSwitch("tab2");
+                      onClick={(e) => {
+                        submitData(e);
                       }}
                       text="Next"
                       color="white"
@@ -532,7 +432,7 @@ const Orders = () => {
             {tab === "tab2" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Input
                       name="phoneNumber"
                       value={rider.phoneNumber}
@@ -542,7 +442,7 @@ const Orders = () => {
                     />
                   </div>
 
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Input
                       name="email"
                       value={rider.email}
@@ -552,7 +452,7 @@ const Orders = () => {
                     />
                   </div>
 
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Select
                       name="country"
                       value={rider.country}
@@ -562,7 +462,7 @@ const Orders = () => {
                       onChange={onChange}
                     />
                   </div>
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Select
                       name="state"
                       value={rider.state}
@@ -572,7 +472,7 @@ const Orders = () => {
                       onChange={onChange}
                     />
                   </div>
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Select
                       name="lga"
                       value={rider.lga}
@@ -583,7 +483,7 @@ const Orders = () => {
                     />
                   </div>
 
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Input
                       name="address"
                       value={rider.address}
@@ -621,7 +521,7 @@ const Orders = () => {
             {tab === "tab3" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Input
                       name="password"
                       value={rider.password}
@@ -632,7 +532,7 @@ const Orders = () => {
                     />
                   </div>
 
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Input
                       name="password"
                       value={rider.password}
@@ -654,7 +554,7 @@ const Orders = () => {
                       color="black"
                     />
                     <Button
-                      onClick={handleSubmit}
+                      onClick={submitData}
                       text="Create rider"
                       color="white"
                       fontSize="14px"
@@ -669,7 +569,7 @@ const Orders = () => {
             {/* {tab==="tab4" ? (
               <div className="col2Rider">
                 <form action="" className="inputWrapRider">
-                  <div className="riderInputWrapMain">
+                  <div className="riderInputWrapMain appInputWrap ">
                     <Select
                       options={["Okada", "Moto"]}
                       defaultValue="Select bike"

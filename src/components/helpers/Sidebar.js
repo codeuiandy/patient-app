@@ -28,34 +28,7 @@ const Sidebar = () => {
                             <DashboardSvg/>
                         </Link>
                     </li>
-                    <li className="nav-item py-3 px-3">
-                        <Link
-                            className="nav-link active p-0 py-2 rounded-1"
-                            aria-current="page"
-                            to="#">
-                            <ConversationSvg/>
-                        </Link>
-                    </li>
-                    <li className="nav-item py-3 px-3">
-                        <Link className="nav-link p-0 py-2 rounded-1" to="#">
-                            <TicketStarSvg/>
-                        </Link>
-                    </li>
-                    <li className="nav-item py-3 px-3">
-                        <Link className="nav-link p-0 py-2 rounded-1" to="#">
-                            <ProfileSvg/>
-                        </Link>
-                    </li>
-                    <li className="nav-item py-3 px-3">
-                        <Link className="nav-link p-0 py-2 rounded-1" to="#">
-                            <GraphSvg/>
-                        </Link>
-                    </li>
-                    <li className="nav-item py-3 px-3">
-                        <Link className="nav-link p-0 py-2 rounded-1" to="#">
-                            <SettingSvg/>
-                        </Link>
-                    </li>
+                  
                     <li className="nav-item py-3 px-3 mt-auto mb-4">
                         <Link className="nav-link p-0 py-2 rounded-1" to="#">
                             <LogoutWhiteSvg/>

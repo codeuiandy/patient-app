@@ -15,29 +15,29 @@ export default function Login() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-
+  const data = {
+    username: authDetails.email,
+    password: authDetails.password,
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (EmailAuth(authDetails.email) == false) {
-      return;
-    }
+
     // if (Validatepassword(authDetails.password) == false) {
     //   return;
     // }
-    else {
-      showLoader();
-      const res = await httpPost("auth/admin_login", authDetails);
-      hideLoader();
-      console.log("RES>>>", res);
-      if (!res?.success) {
-        return NotificationManager.error(res.message);
-      } else {
-        NotificationManager.success("Login successful");
-        localStorage.setItem("token", res.data.token);
-        window.location.href = "/home";
-      }
-      console.log(res);
+
+    showLoader();
+    const res = await httpPost("felogin", data);
+    hideLoader();
+    console.log("RES>>>", res);
+    if (!res?.responseMessage == "success") {
+      return NotificationManager.error(res.message);
+    } else {
+      NotificationManager.success("Login successful");
+      localStorage.setItem("token", res.data.token);
+      window.location.href = "/home";
     }
+    console.log(res);
   };
 
   return (
